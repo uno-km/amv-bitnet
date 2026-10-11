@@ -14,6 +14,7 @@ from termux_bitnet.engine import BitNetEngine
 from termux_bitnet.hardware import print_hardware_summary, detect_hardware
 from termux_bitnet.downloader import download_model, AVAILABLE_MODELS
 from termux_bitnet.server import run_server
+from termux_bitnet.exceptions import RuntimeRequiredError
 
 
 def print_catalog_help():
@@ -211,6 +212,8 @@ def cmd_run(args):
             print(f"  Inference Speed: {metrics.tokens_per_second:.2f} tokens/sec")
             print(f"  Total Duration:  {(t1 - t0)*1000:.1f} ms")
             print("---------------------------------------------------------")
+    except RuntimeRequiredError:
+        raise
     except Exception as e:
         print(f"\n[termux-bitnet ERROR] Execution failed: {e}", file=sys.stderr)
         sys.exit(1)
@@ -270,6 +273,8 @@ def cmd_chat(args):
                 except KeyboardInterrupt:
                     print("\nSession interrupted.")
                     break
+    except RuntimeRequiredError:
+        raise
     except Exception as e:
         print(f"[termux-bitnet ERROR] Chat initialization failed: {e}", file=sys.stderr)
         sys.exit(1)
@@ -330,12 +335,29 @@ def cmd_benchmark(args):
                 print(f"  Elapsed Time:  {dur:.2f} sec")
                 print(f"  Estimated TPS: {tps:.2f} tokens/sec")
         print("\nBenchmark successfully completed.")
+    except RuntimeRequiredError:
+        raise
     except Exception as e:
         print(f"[termux-bitnet ERROR] Benchmark failed: {e}", file=sys.stderr)
         sys.exit(1)
 
 
 def main():
+    """CLI entry point.
+
+    A GPU request without a usable ameva-runtime ends here with the shared explanation on stderr
+    and exit status 69, whichever sub-command raised it.
+    """
+    from termux_bitnet.exceptions import RuntimeRequiredError
+    try:
+        return _main_impl()
+    except RuntimeRequiredError as err:
+        sys.stderr.write(str(err))
+        sys.stderr.flush()
+        return 69
+
+
+def _main_impl():
     parser = argparse.ArgumentParser(
         prog="termux-bitnet",
         description="High-performance 1.58-bit BitNet Inference SDK & CLI for Android Termux / ARM64."

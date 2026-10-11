@@ -26,6 +26,15 @@ BitNetError = AmevaTermuxError
 class PlatformNotSupportedError(AmevaTermuxError):
     DEFAULT_CODE = "E002_PLATFORM_NOT_SUPPORTED"
 
+class RuntimeRequiredError(PlatformNotSupportedError):
+    """A GPU request needs ameva-runtime (AMUDA), which is missing or too old.
+
+    The message is the shared AMU_ERR_RUNTIME_REQUIRED explanation. The CLI exits with status 69;
+    nothing is run and there is no CPU fallback.
+    """
+
+    runtime_required = True
+
 
 class HardwareCompatibilityError(AmevaTermuxError):
     DEFAULT_CODE = "E003_HARDWARE_INCOMPATIBLE"

@@ -214,7 +214,7 @@ class TestTermuxBitNet(unittest.TestCase):
             self.assertEqual(backend_gpu, "vulkan")
             self.assertEqual(ngl_gpu, 33)
         except PlatformNotSupportedError as e:
-            self.assertIn("AMEVA-BITNET-E00", str(e))
+            self.assertTrue("AMEVA-BITNET-E00" in str(e) or "AMU_ERR_RUNTIME_REQUIRED" in str(e))
 
     def test_16_adapter_cli_args_completeness(self):
         """Verify BitnetAdapter.build_cli_args preserves all flags."""

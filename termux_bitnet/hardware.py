@@ -162,6 +162,46 @@ def _resolve_ameva_runtime() -> Optional[Any]:
     return None
 
 
+GPU_RUNTIME_MIN_VERSION = "2.0.0"
+
+
+def _require_gpu_runtime(requested_device: str) -> None:
+    """Stop with the shared AMU_ERR_RUNTIME_REQUIRED explanation unless ameva-runtime is usable.
+
+    Every explicit GPU request goes through here. There is no CPU fallback: the caller gets
+    RuntimeRequiredError and the CLI exits with status 69.
+    """
+    from termux_bitnet.exceptions import RuntimeRequiredError
+    try:
+        from ameva_device import AmevaRuntimeRequiredError, require_ameva_runtime
+    except ImportError as exc:
+        raise RuntimeRequiredError(
+            "[AMU_ERR_RUNTIME_REQUIRED] termux-bitnet: GPU execution (device='%s') needs ameva-runtime (AMUDA), "
+            "and the shared check library 'ameva-device-sdk' is missing from this installation.\n"
+            "Nothing was run, and no CPU fallback was used.\n"
+            "Install:\n"
+            "  pip install \"ameva-runtime>=%s\"\n"
+            "  npm install -g @ameva/runtime\n"
+            "  Releases and documentation: https://github.com/uno-km/ameva-runtime-releases\n"
+            "To run on the CPU instead, use --device cpu.\n" % (requested_device, GPU_RUNTIME_MIN_VERSION)
+        ) from exc
+    try:
+        require_ameva_runtime(
+            "termux-bitnet", "GPU execution (device='%s')" % requested_device,
+            min_version=GPU_RUNTIME_MIN_VERSION,
+        )
+    except AmevaRuntimeRequiredError as exc:
+        raise RuntimeRequiredError(str(exc)) from exc
+
+
+def _note_cpu_instead(reason: str) -> None:
+    """auto mode: say on stderr that the GPU was not used, so the CPU run is never silent."""
+    import sys
+    sys.stderr.write("[termux-bitnet] GPU not used: %s. This run uses the CPU. "
+                     "To enable the GPU: pip install ameva-runtime (https://github.com/uno-km/ameva-runtime-releases)\n" % reason)
+    sys.stderr.flush()
+
+
 def resolve_device_backend(requested_device: str, requested_ngl: Optional[int] = None) -> Tuple[str, int]:
     """Resolve the user's device= argument to an actual backend and ngl count.
 
@@ -194,20 +234,14 @@ def resolve_device_backend(requested_device: str, requested_ngl: Optional[int] =
             backend_norm = "vulkan" if plan.backend in ("vulkan", "gpu") else "cpu"
             ngl_val = (plan.ngl if requested_ngl is None else requested_ngl) if backend_norm == "vulkan" else 0
             return backend_norm, ngl_val
-        except Exception:
-            # If router evaluation cannot find GPU, default to CPU
+        except Exception as router_err:
+            # The router found no usable GPU: run on the CPU and say so.
+            _note_cpu_instead("GPU routing failed (%s)" % router_err)
             return "cpu", 0
 
     if req in ("vulkan", "gpu"):
-        if ameva_mod is None:
-            raise PlatformNotSupportedError(
-                "[ERROR: AMEVA-BITNET-E001] GPU acceleration requires 'ameva-runtime'.\n"
-                "Cause: Hardware abstraction provider 'ameva-runtime' is not installed.\n"
-                "Action Required: Install the hardware acceleration package via:\n"
-                "  - Python: pip install ameva-runtime\n"
-                "  - Node.js: npm install @unokm/ameva-runtime\n"
-                "Documentation: https://uno-km.vercel.app/lib/bitnet/"
-            )
+        # Every explicit GPU request needs ameva-runtime (AMUDA); no CPU fallback.
+        _require_gpu_runtime(req)
 
         # Check native Vulkan availability via ameva-runtime Doctor probe
         try:
