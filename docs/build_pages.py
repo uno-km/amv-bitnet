@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
 Official AMEVA Library Documentation Site Generator for termux-bitnet.
 100% Aligned with uno-km Library Template Design System, 6-Language i18n, Full API & Benchmarks.

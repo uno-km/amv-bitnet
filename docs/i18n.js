@@ -1,4 +1,8 @@
 /**
+ * Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0 OR Commercial-License
+ */
+/**
  * AMEVA Ecosystem - Master Universal Multilingual (i18n) Core Engine (SSOT v2.1)
  * 100% Full-Page Body, Table, Heading, and Alert Dynamic Translation across 13 Languages.
  */

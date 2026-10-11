@@ -1,4 +1,8 @@
 /**
+ * Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0 OR Commercial-License
+ */
+/**
  * AMEVA Ecosystem - Standard 13-Language Fallback Translation Dictionary (SSOT)
  * Languages: en, ko, ja, zh, ar, fr, de, es, hi, ru, vi, pl, la
  */

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 # ==============================================================================
 # termux-bitnet: Universal Dynamic One-Line Bootstrap Installer (v1.4.4)
 # Open-Source under Apache License 2.0 (AMEVA Foundation)

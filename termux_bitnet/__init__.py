@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """termux-bitnet: High-performance 1.58-bit BitNet Inference SDK for Android Termux & ARM64."""
 
 __version__ = "2.1.0"

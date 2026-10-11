@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """High-level Python SDK Engine for BitNet 1.58-bit (i2_s) inference (Strict Fail-Fast Architecture)."""
 
 import os
