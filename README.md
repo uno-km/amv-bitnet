@@ -15,6 +15,15 @@
 
 ---
 
+## What's New in v2.2.0 — Zero-Compilation Prebuilt Provisioning & Unified Runtime
+
+- Added instant-on auto-provisioning of prebuilt libtermux_bitnet.so on first load without local compilation.
+- Unified 1.58-bit ternary GPU shader dispatch through ameva-runtime HAL.
+- Verified compatibility with Microsoft BitNet b1.58 PR #633 ternary weight formats.
+- Enforced OpenSSF REUSE v3.0 SPDX license headers across all source files.
+
+---
+
 ### 🏛️ Executive Engineering Disclosure: v2.0.1 Generational Breakthroughs
 
 `termux-bitnet v2.0.1` extends the sovereign ternary architecture with **hallucination-prevention prompt wrapping**, **hardware-level GPU watchdog defense**, and **dynamic LM Head memory slicing**, delivering fully calibrated conversational generation across diverse 1.58-bit models.

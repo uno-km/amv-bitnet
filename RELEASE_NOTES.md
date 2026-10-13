@@ -1,3 +1,15 @@
+# v2.2.0 (2026-10-13) — Zero-Compilation Prebuilt Provisioning & Unified Runtime
+
+Added zero-compilation auto-provisioning of prebuilt ARM64 native binaries on first load, aligned with Microsoft BitNet PR #633, and unified GPU dispatch via ameva-runtime HAL.
+
+### Key Changes
+- Added instant-on auto-provisioning of prebuilt libtermux_bitnet.so on first load without local compilation.
+- Unified 1.58-bit ternary GPU shader dispatch through ameva-runtime HAL.
+- Verified compatibility with Microsoft BitNet b1.58 PR #633 ternary weight formats.
+- Enforced OpenSSF REUSE v3.0 SPDX license headers across all source files.
+
+---
+
 # Release Notes - Termux-BitNet v2.0.1 (Mobile GPU Slicing & Chunked Dispatch)
 
 **Release Tag**: `v2.0.1`  
