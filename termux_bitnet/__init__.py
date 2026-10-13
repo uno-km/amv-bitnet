@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """termux-bitnet: High-performance 1.58-bit BitNet Inference SDK for Android Termux & ARM64."""
 
-__version__ = "2.1.0"
+__version__ = "2.2.0"
 
 from termux_bitnet.config import BitNetConfig, GenerationMetrics
 from termux_bitnet.engine import BitNetEngine
@@ -30,7 +30,7 @@ from termux_bitnet.cluster import (
     verify_rpc_cluster_health,
 )
 
-__version__ = "2.0.2"
+__version__ = "2.2.0"
 __author__ = "uno-km"
 
 __all__ = [

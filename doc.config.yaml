@@ -2,8 +2,8 @@ name: Termux-BitNet
 lib_slug: bitnet
 package_name_pypi: termux-bitnet
 package_name_npm: termux-bitnet
-version: v2.1.0
-release_name: Hallucination Prevention Prompt Wrapping & Mobile GPU Memory Slicing Architecture
+version: "v2.2.0"
+release_name: "Zero-Compilation Prebuilt Provisioning & Unified Runtime"
 license: Apache-2.0
 platform: Android ARM64 / NEON SIMD & Adreno/Mali Vulkan
 github_repo_url: https://github.com/uno-km/termux-bitnet

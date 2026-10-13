@@ -1,4 +1,4 @@
-# Termux-BitNet (v2.1.0 Sovereign Ternary)
+# Termux-BitNet (v2.0.1 Sovereign Ternary)
 
 > **Production-Grade Universal 1.58-Bit (i2_s) On-Device LLM Inference Engine with ARM64 NEON DotProd SIMD & Native Vulkan GPU Acceleration.**
 
@@ -22,9 +22,8 @@
 #### 📚 Official Academic & Upstream Credibility
 * **Foundation Technical Whitepaper**: [AOSF-TR-2026-BITNET-TERNARY-02: Root Cause Analysis of Ternary Numerical Collapse and Dynamic Activation Engine](https://uno-km.vercel.app/labs/?menu=research-papers)
 * **Upstream Contributions to Microsoft**:
-  * [microsoft/BitNet #633](https://github.com/microsoft/BitNet/pull/633): Fixed ARM64 I2_S ternary dequantization positive bias drift (`(w & 3) - 1` centering) and added scalar fallback, permanently resolving Word Salad collapse (#468, #470, #547, #588, #600, #602, #616).
-  * [microsoft/BitNet #624](https://github.com/microsoft/BitNet/pull/624): Completed 1x4_32W parallel NEON `sdot` hardware acceleration kernel and automated Android Termux tooling.
   * [microsoft/BitNet #551](https://github.com/microsoft/BitNet/pull/551): Resolved ARM QK=128 stride memory layout desynchronization and word salad.
+  * [microsoft/BitNet #624](https://github.com/microsoft/BitNet/pull/624): Completed 1x4_32W parallel NEON `sdot` hardware acceleration kernel and automated Android Termux tooling.
 * **Upstream Contributions to GGML**:
   * [ggml-org/whisper.cpp #4089](https://github.com/ggml-org/whisper.cpp/pull/4089): Mobile heterogeneous GPU-Encoder / CPU-Decoder split-mode architecture.
 
@@ -79,41 +78,25 @@ All benchmarks were empirically measured on genuine Samsung Galaxy hardware unde
 
 ---
 
-## 📦 Installation & Zero-Compilation Prebuilts
+## 📦 Installation
 
-> **Zero-Compilation Native Acceleration**: You do **NOT** need to compile or build from source on your phone. Verified pre-compiled native binaries (`libtermux_bitnet.so` & standalone `termux-bitnet-cli`) are published directly under [GitHub Releases (v2.0.1)](https://github.com/uno-km/termux-bitnet/releases/tag/v2.0.1).
+### 1. Python SDK (PyPI)
+```bash
+# Inside Android Termux (prerequisites: clang cmake python openblas)
+pkg update && pkg install -y clang cmake python openblas
 
-### 1. One-Touch Automated Installer (Recommended)
-Automatically provisions the verified ARM64 native engine (`libtermux_bitnet.so`) and CLI directly into `$PREFIX`:
+# Install Termux-BitNet and AMEVA-Runtime
+pip install --upgrade termux-bitnet ameva-runtime
+```
+
+### 2. Node.js CLI (npm)
+```bash
+npm install -g termux-bitnet @ameva/runtime
+```
+
+### 3. One-Touch Native Installer
 ```bash
 curl -sSL https://raw.githubusercontent.com/uno-km/termux-bitnet/main/install.sh | bash
-```
-
-### 2. Direct Prebuilt Extraction from GitHub Releases
-To run immediately without any installer script, download and extract the verified prebuilt bundle:
-```bash
-# 1. Download official v2.0.1 prebuilt bundle from GitHub Releases
-curl -sSL -O https://github.com/uno-km/termux-bitnet/releases/download/v2.0.1/termux-bitnet-v2.0.1-android-aarch64.tar.gz
-
-# 2. Extract and place directly into Termux system paths
-tar -xzf termux-bitnet-v2.0.1-android-aarch64.tar.gz
-chmod +x libtermux_bitnet.so termux-bitnet-cli
-mv libtermux_bitnet.so $PREFIX/lib/
-mv termux-bitnet-cli $PREFIX/bin/
-
-# 3. Test immediate native execution (< 0.01s)
-termux-bitnet-cli --help
-```
-
-### 3. Python SDK (PyPI)
-```bash
-pip install --upgrade termux-bitnet
-```
-*(The Python SDK automatically detects and loads the verified `libtermux_bitnet.so` in `$PREFIX/lib`)*
-
-### 4. Node.js CLI (npm)
-```bash
-npm install -g termux-bitnet
 ```
 
 ---
@@ -161,45 +144,6 @@ termux-bitnet run -m models/bitnet-2b-ggml-model-i2_s.gguf \
 termux-bitnet run -m models/falcon3-7b-instruct-1.58bit-i2_s.gguf \
   -p "Explain quantum computing simply" --prompt-template chatml \
   --chunk-layers 4 --vocab-slice 32768 -ngl 12 -t 4
-```
-
----
-
-## Distributed Clustering & Memory Pooling (AMEVA-Cluster)
-
-Termux-BitNet integrates with **AMEVA-Cluster** (`pip install ameva-cluster`) for distributed 1.58-bit ternary tensor sharding and cross-device memory pooling.
-
-### 1. Install Cluster Runtime
-```bash
-pip install ameva-cluster
-# or Node.js:
-npm install @ameva/cluster
-```
-
-### 2. Launch Worker Node on Remote Phone
-```bash
-# On remote worker device (e.g. Galaxy A53):
-ameva-cluster worker --port 50052
-```
-
-### 3. Run Distributed 1.58-Bit Inference
-```bash
-# Master node sharding Falcon3-7B or BitNet-2B across remote phones:
-termux-bitnet run -m models/bitnet_b1_58-3B.gguf \
-  --rpc 192.0.2.10:50052,192.0.2.11:50052 \
-  -p "Explain ternary quantization benefits."
-```
-
-```python
-from termux_bitnet import BitNetEngine, BitNetConfig
-
-config = BitNetConfig(
-    model_path="models/bitnet_b1_58-3B.gguf",
-    cluster_rpc_servers="192.0.2.10:50052,192.0.2.11:50052"
-)
-with BitNetEngine(config) as engine:
-    for token in engine.generate_stream("Distributed clustering active across ternary nodes."):
-        print(token, end="", flush=True)
 ```
 
 ---
