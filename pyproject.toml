@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "termux-bitnet"
+name = "amv-bitnet"
 version = "2.2.0"
 description = "1.58-bit (i2_s) BitNet on-device inference SDK with verified ARM NEON & DotProd kernels for Android Termux & ARM64"
 readme = "README.md"

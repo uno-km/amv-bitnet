@@ -1,11 +1,15 @@
-# Termux-BitNet (v2.0.1 Sovereign Ternary)
+# AMV-BitNet (v2.0.1 Sovereign Ternary)
+
+> **마이그레이션 안내**: 이 패키지는 `termux-bitnet`에서 `amv-bitnet`로 이름이 바뀌었습니다. 기존 `termux-bitnet` 배포본(PyPI/npm)은 호환을 위해 당분간 유지되나 deprecated 상태이며 더 이상 갱신되지 않습니다. `pip install amv-bitnet` / `npm install amv-bitnet`로 전환하십시오.
+>
+> Android **Termux 환경** 또는 **안드로이드 Linux 커널(루팅 없이 Linux 환경이 구동되는 모든 디바이스)** 에서 동작합니다 — Termux 전용이 아닙니다.
 
 > **Production-Grade Universal 1.58-Bit (i2_s) On-Device LLM Inference Engine with ARM64 NEON DotProd SIMD & Native Vulkan GPU Acceleration.**
 
 <p align="center">
-  <a href="https://pypi.org/project/termux-bitnet/"><img src="https://img.shields.io/pypi/v/termux-bitnet?color=3775A9&logo=pypi&logoColor=white&label=PyPI" alt="PyPI Version"></a>
-  <a href="https://www.npmjs.com/package/termux-bitnet"><img src="https://img.shields.io/npm/v/termux-bitnet?color=CB3837&logo=npm&logoColor=white&label=npm" alt="npm Version"></a>
-  <a href="https://github.com/uno-km/termux-bitnet/releases/tag/v2.0.1"><img src="https://img.shields.io/github/v/release/uno-km/termux-bitnet?color=0969da&logo=github&logoColor=white&label=Release" alt="GitHub Release"></a>
+  <a href="https://pypi.org/project/amv-bitnet/"><img src="https://img.shields.io/pypi/v/amv-bitnet?color=3775A9&logo=pypi&logoColor=white&label=PyPI" alt="PyPI Version"></a>
+  <a href="https://www.npmjs.com/package/amv-bitnet"><img src="https://img.shields.io/npm/v/amv-bitnet?color=CB3837&logo=npm&logoColor=white&label=npm" alt="npm Version"></a>
+  <a href="https://github.com/uno-km/amv-bitnet/releases/tag/v2.0.1"><img src="https://img.shields.io/github/v/release/uno-km/amv-bitnet?color=0969da&logo=github&logoColor=white&label=Release" alt="GitHub Release"></a>
   <a href="https://uno-km.vercel.app/lib/bitnet/"><img src="https://img.shields.io/badge/Docs-Official%20Portal-004499.svg?logo=googlechrome&logoColor=white" alt="Documentation Portal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?logo=apache&logoColor=white" alt="License"></a>
   <img src="https://img.shields.io/badge/Core-ARM64%20NEON%20%7C%20DotProd%20%7C%20Vulkan-brightgreen.svg?logo=cplusplus&logoColor=white" alt="Core Acceleration">
@@ -26,7 +30,7 @@
 
 ### 🏛️ Executive Engineering Disclosure: v2.0.1 Generational Breakthroughs
 
-`termux-bitnet v2.0.1` extends the sovereign ternary architecture with **hallucination-prevention prompt wrapping**, **hardware-level GPU watchdog defense**, and **dynamic LM Head memory slicing**, delivering fully calibrated conversational generation across diverse 1.58-bit models.
+`amv-bitnet v2.0.1` extends the sovereign ternary architecture with **hallucination-prevention prompt wrapping**, **hardware-level GPU watchdog defense**, and **dynamic LM Head memory slicing**, delivering fully calibrated conversational generation across diverse 1.58-bit models.
 
 #### 📚 Official Academic & Upstream Credibility
 * **Foundation Technical Whitepaper**: [AOSF-TR-2026-BITNET-TERNARY-02: Root Cause Analysis of Ternary Numerical Collapse and Dynamic Activation Engine](https://uno-km.vercel.app/labs/?menu=research-papers)
@@ -73,7 +77,8 @@ All benchmarks were empirically measured on genuine Samsung Galaxy hardware unde
 | Target Model | Test Device & Hardware | Offload Mode | Token Generation Speed | Verified Semantic Output String | Status |
 |---|---|:---:|:---:|---|:---:|
 | **BitNet-2B** | **Galaxy S25** (Snapdragon 8 Elite) | GPU (30/30) | **19.37 tok/s** | `"Paris. The Eiffel Tower, located in the heart of Paris,"` | **PASS** |
-| **BitNet-2B** | **Galaxy S20** (Turnip Adreno 650) | GPU (30/30) | **7.71 tok/s** | `"Paris.\nIt is located in the region of Île-de-France,"` | **PASS** |
+| **BitNet-2B** | **Galaxy S20** (Turnip Adreno 650) | GPU (30/30) | **7.71 tok/s** | `"Paris.
+It is located in the region of Île-de-France,"` | **PASS** |
 | **BitNet-2B** | **Galaxy A35** (Exynos 1380 Mali-G68) | GPU (30/30) | **4.22 tok/s** | `" Paris. London has a very long name, but its people are friendly and"` | **PASS** |
 | **BitNet-2B** | **Galaxy A53** (Exynos 1280 Mali-G68) | GPU (30/30) | **3.26 tok/s** | `" Paris. Cathy has a lot more money than David does. The new"` | **PASS** |
 | **Falcon-E-1B** | **Galaxy S25** (Snapdragon 8 Elite) | GPU (24/24) | **34.35 tok/s** | `"situated in Paris, a city known for its rich history and cul"` | **PASS** |
@@ -95,17 +100,17 @@ All benchmarks were empirically measured on genuine Samsung Galaxy hardware unde
 pkg update && pkg install -y clang cmake python openblas
 
 # Install Termux-BitNet and AMEVA-Runtime
-pip install --upgrade termux-bitnet ameva-runtime
+pip install --upgrade amv-bitnet ameva-runtime
 ```
 
 ### 2. Node.js CLI (npm)
 ```bash
-npm install -g termux-bitnet @ameva/runtime
+npm install -g amv-bitnet @ameva/runtime
 ```
 
 ### 3. One-Touch Native Installer
 ```bash
-curl -sSL https://raw.githubusercontent.com/uno-km/termux-bitnet/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/uno-km/amv-bitnet/main/install.sh | bash
 ```
 
 ---
@@ -118,10 +123,11 @@ from termux_bitnet import BitNetEngine, BitNetConfig
 
 # Configure for real-time Falcon-E-1B or BitNet-2B with template wrapping
 config = BitNetConfig(
-    model_path="~/.cache/termux-bitnet/models/falcon-e-1b-instruct-i2_s.gguf",
+    model_path="~/.cache/amv-bitnet/models/falcon-e-1b-instruct-i2_s.gguf",
     device="gpu",           # "auto", "cpu", or "gpu"
     n_gpu_layers=24,        # 100% GPU offload
-    chat_template="falcon", # Formats with <|im_start|>user\n...
+    chat_template="falcon", # Formats with <|im_start|>user
+...
     chunk_layers=4,         # Prevent Mali watchdog timeouts
     vocab_slice=32768,      # Slashing LM Head VRAM
     n_threads=4,
@@ -142,15 +148,15 @@ with BitNetEngine(config) as engine:
 ### 2. Standalone CLI Usage
 ```bash
 # 1. Run 1B real-time conversational model with Falcon wrapping
-termux-bitnet run -m models/falcon-e-1b-instruct-i2_s.gguf \
+amv-bitnet run -m models/falcon-e-1b-instruct-i2_s.gguf \
   -p "What is the capital of France?" --prompt-template falcon -ngl 24 -t 4
 
 # 2. Run Microsoft BitNet 2B with Squared ReLU
-termux-bitnet run -m models/bitnet-2b-ggml-model-i2_s.gguf \
+amv-bitnet run -m models/bitnet-2b-ggml-model-i2_s.gguf \
   -p "What is the capital of France?" --act-fn relu2 --prompt-template raw -ngl 30 -t 4
 
 # 3. Run 7.45B model on 6GB RAM device with GPU Chunking and Vocab Slicing
-termux-bitnet run -m models/falcon3-7b-instruct-1.58bit-i2_s.gguf \
+amv-bitnet run -m models/falcon3-7b-instruct-1.58bit-i2_s.gguf \
   -p "Explain quantum computing simply" --prompt-template chatml \
   --chunk-layers 4 --vocab-slice 32768 -ngl 12 -t 4
 ```
