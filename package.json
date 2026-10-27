@@ -5,11 +5,11 @@
   "main": "index.js",
   "types": "index.d.ts",
   "bin": {
-    "termux-bitnet": "bin/cli.js",
-    "termux-bitnet-js": "bin/cli.js"
+    "amv-bitnet": "bin/cli.js",
+    "amv-bitnet-js": "bin/cli.js"
   },
   "scripts": {
-    "test": "node -e \"console.log('termux-bitnet npm package OK');\""
+    "test": "node -e \"console.log('amv-bitnet npm package OK');\""
   },
   "keywords": [
     "bitnet",
@@ -27,10 +27,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uno-km/termux-bitnet.git"
+    "url": "git+https://github.com/uno-km/amv-bitnet.git"
   },
   "bugs": {
-    "url": "https://github.com/uno-km/termux-bitnet/issues"
+    "url": "https://github.com/uno-km/amv-bitnet/issues"
   },
   "homepage": "https://uno-km.vercel.app/lib/bitnet/",
   "engines": {
