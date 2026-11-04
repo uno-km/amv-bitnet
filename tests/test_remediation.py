@@ -8,11 +8,11 @@ import sys
 from pathlib import Path
 from unittest.mock import patch
 
-from termux_bitnet.engine import BitNetEngine, BitNetConfig
-from termux_bitnet.exceptions import BitNetEngineNotFound
-from termux_bitnet.cli import validate_model_path_or_exit
-from termux_bitnet.downloader import download_model
-from termux_bitnet.server import OpenAIHandler
+from amv_bitnet.engine import BitNetEngine, BitNetConfig
+from amv_bitnet.exceptions import BitNetEngineNotFound
+from amv_bitnet.cli import validate_model_path_or_exit
+from amv_bitnet.downloader import download_model
+from amv_bitnet.server import OpenAIHandler
 
 
 class TestTermuxBitNetRemediation(unittest.TestCase):
@@ -38,7 +38,7 @@ class TestTermuxBitNetRemediation(unittest.TestCase):
             
         err = str(ctx.exception)
         self.assertIn("Model file not found", err)
-        self.assertIn("termux-bitnet download", err)
+        self.assertIn("amv-bitnet download", err)
         self.assertIn("huggingface.co/1bitLLM", err)
 
     def test_empty_prompt_raises_value_error(self):
@@ -189,10 +189,10 @@ class TestTermuxBitNetRemediation(unittest.TestCase):
 
     def test_korean_multibyte_token_counting_accuracy(self):
         """Verify Korean/multibyte text token counting produces valid positive count without byte division heuristic."""
-        from termux_bitnet import BitNetEngine, BitNetConfig
+        from amv_bitnet import BitNetEngine, BitNetConfig
         
         engine = BitNetEngine(BitNetConfig())
-        korean_text = "안녕하세요! termux-bitnet 1.58비트 고성능 온디바이스 엔진입니다."
+        korean_text = "안녕하세요! amv-bitnet 1.58비트 고성능 온디바이스 엔진입니다."
         
         if not engine._lib:
             with self.assertRaises(BitNetEngineNotFound):
@@ -226,7 +226,7 @@ class TestTermuxBitNetRemediation(unittest.TestCase):
         with patch("setuptools.setup"):
             spec.loader.exec_module(setup_mod)
 
-        cmake_ext = setup_mod.CMakeExtension("termux_bitnet._libtermux_bitnet", sourcedir="non_existent_dir")
+        cmake_ext = setup_mod.CMakeExtension("amv_bitnet._libtermux_bitnet", sourcedir="non_existent_dir")
         builder = setup_mod.CMakeBuild.__new__(setup_mod.CMakeBuild)
         builder.build_temp = str(Path(__file__).parent / "_test_build_temp")
         builder.get_ext_fullpath = lambda name: str(Path(__file__).parent / "_test_build_temp" / "libtermux_bitnet.so")
@@ -234,7 +234,7 @@ class TestTermuxBitNetRemediation(unittest.TestCase):
         # Verify that CMakeBuild.build_extension raises RuntimeError unconditionally
         with self.assertRaises(RuntimeError) as cm:
             builder.build_extension(cmake_ext)
-        self.assertIn("[termux-bitnet] Native build failed", str(cm.exception))
+        self.assertIn("[amv-bitnet] Native build failed", str(cm.exception))
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="termux-bitnet",
+    name="amv-bitnet",
     version="2.0.1",
     packages=find_packages(),
     install_requires=[
@@ -13,10 +13,10 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "termux-bitnet = termux_bitnet.cli:main",
+            "amv-bitnet = amv_bitnet.cli:main",
         ],
         "ameva.components": [
-            "termux-bitnet = termux_bitnet.adapter:create_adapter",
+            "amv-bitnet = amv_bitnet.adapter:create_adapter",
         ],
     },
 )

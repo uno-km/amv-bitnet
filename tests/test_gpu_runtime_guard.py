@@ -10,9 +10,9 @@ from unittest.mock import patch
 
 import pytest
 
-import termux_bitnet.cli as cli_main_module
-from termux_bitnet import hardware
-from termux_bitnet.exceptions import PlatformNotSupportedError, RuntimeRequiredError
+import amv_bitnet.cli as cli_main_module
+from amv_bitnet import hardware
+from amv_bitnet.exceptions import PlatformNotSupportedError, RuntimeRequiredError
 
 
 def _runtime(version):
@@ -26,7 +26,7 @@ def test_explicit_gpu_without_runtime_stops(device):
             hardware.resolve_device_backend(device)
     text = str(info.value)
     assert isinstance(info.value, PlatformNotSupportedError)
-    assert "[AMU_ERR_RUNTIME_REQUIRED] termux-bitnet:" in text
+    assert "[AMU_ERR_RUNTIME_REQUIRED] amv-bitnet:" in text
     assert "not installed" in text
     assert "no CPU fallback was used" in text
     assert "AMUDA" in text
@@ -58,7 +58,7 @@ def test_missing_sdk_is_an_explicit_error_not_a_fallback():
 
 
 def test_cli_exits_69_with_explanation_on_stderr(capsys):
-    err = RuntimeRequiredError("[AMU_ERR_RUNTIME_REQUIRED] termux-bitnet: test")
+    err = RuntimeRequiredError("[AMU_ERR_RUNTIME_REQUIRED] amv-bitnet: test")
     with patch.object(cli_main_module, "_main_impl", side_effect=err):
         code = cli_main_module.main()
     captured = capsys.readouterr()

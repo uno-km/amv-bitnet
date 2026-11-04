@@ -124,17 +124,17 @@ jobs:
           node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-            pkg.name = '@uno-km/termux-bitnet';
+            pkg.name = '@uno-km/amv-bitnet';
             pkg.publishConfig = {
               registry: 'https://npm.pkg.github.com'
             };
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
           PKG_VER=$(node -p "require('./package.json').version")
-          if [ "$(npm view @uno-km/termux-bitnet@${PKG_VER} version --registry=https://npm.pkg.github.com 2>/dev/null)" = "${PKG_VER}" ]; then
+          if [ "$(npm view @uno-km/amv-bitnet@${PKG_VER} version --registry=https://npm.pkg.github.com 2>/dev/null)" = "${PKG_VER}" ]; then
             echo "Version ${PKG_VER} already published to GitHub Packages. Skipping."
           else
-            echo "Publishing @uno-km/termux-bitnet@${PKG_VER} to GitHub Packages..."
+            echo "Publishing @uno-km/amv-bitnet@${PKG_VER} to GitHub Packages..."
             npm publish
           fi
 
@@ -152,7 +152,7 @@ jobs:
         with:
           name: "Release ${{ github.ref_name }} (ARM NEON & DotProd Verified)"
           body: |
-            ## 🚀 termux-bitnet ${{ github.ref_name }} Release
+            ## 🚀 amv-bitnet ${{ github.ref_name }} Release
 
             ### ⚠️ Engineering Disclosure & Resolution
             - **Resolved Upstream ARM Tensor Issue**: Linked to Upstream PR [#551](https://github.com/microsoft/BitNet/pull/551) and PR [#624](https://github.com/microsoft/BitNet/pull/624).
@@ -167,7 +167,7 @@ jobs:
             ### 📦 Installation
             ```bash
             # Termux One-Touch Installer
-            curl -sSL https://raw.githubusercontent.com/uno-km/termux-bitnet/main/install.sh | bash
+            curl -sSL https://raw.githubusercontent.com/uno-km/amv-bitnet/main/install.sh | bash
             ```
           files: |
             dist/*

@@ -99,7 +99,7 @@ It is located in the region of Île-de-France,"` | **PASS** |
 # Inside Android Termux (prerequisites: clang cmake python openblas)
 pkg update && pkg install -y clang cmake python openblas
 
-# Install Termux-BitNet and AMEVA-Runtime
+# Install AMV-BitNet and AMEVA-Runtime
 pip install --upgrade amv-bitnet ameva-runtime
 ```
 
@@ -119,7 +119,7 @@ curl -sSL https://raw.githubusercontent.com/uno-km/amv-bitnet/main/install.sh | 
 
 ### 1. Python Programmatic Inference
 ```python
-from termux_bitnet import BitNetEngine, BitNetConfig
+from amv_bitnet import BitNetEngine, BitNetConfig
 
 # Configure for real-time Falcon-E-1B or BitNet-2B with template wrapping
 config = BitNetConfig(

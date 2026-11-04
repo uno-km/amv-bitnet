@@ -1,24 +1,24 @@
-# termux-bitnet 기술 아키텍처 및 소스 코드 전수 분석 보고서
+# amv-bitnet 기술 아키텍처 및 소스 코드 전수 분석 보고서
 
 ---
 
 ## 1. 개요 및 시스템 아키텍처 (Overview & Architecture)
 
-`termux-bitnet`은 Android Termux 및 ARM64 환경에 최적화된 **1.58비트(Ternary Quantization $\{-1, 0, +1\}$, `i2_s`) 온디바이스 대형 언어 모델(LLM) 추론 SDK이자 런타임 엔진**입니다.
+`amv-bitnet`은 Android Termux 및 ARM64 환경에 최적화된 **1.58비트(Ternary Quantization $\{-1, 0, +1\}$, `i2_s`) 온디바이스 대형 언어 모델(LLM) 추론 SDK이자 런타임 엔진**입니다.
 
 본 프레임워크는 모바일 기기의 제한된 메모리 대역폭과 전력 예산 내에서 고속 추론을 달성하기 위해 **ARM NEON SIMD 및 ARMv8.2-A DotProd(`vdotq_s32`) 인트린직 기반의 저수준 C++ 연산 커널**을 내장하고 있으며, 이를 **C ABI, Python SDK, Node.js 게이트웨이, OpenAI 호환 로컬 HTTP 서버**의 다층 구조로 추상화하였습니다.
 
 ```
 +-------------------------------------------------------------------------------+
 |                             Application Layer                                 |
-|  * termux-bitnet CLI / Chat REPL / Benchmark / AMEVA Brain Orchestrator       |
+|  * amv-bitnet CLI / Chat REPL / Benchmark / AMEVA Brain Orchestrator       |
 |  * OpenAI-Compatible HTTP Server (http://0.0.0.0:8080/v1/chat/completions)    |
 +---------------------------------------+---------------------------------------+
 |              Python SDK               |             Node.js SDK               |
-|      (termux_bitnet.BitNetEngine)     |         (npm/lib/engine.js)           |
+|      (amv_bitnet.BitNetEngine)     |         (npm/lib/engine.js)           |
 +---------------------------------------+---------------------------------------+
 |                           C ABI Binding Layer                                 |
-|                   (include/termux_bitnet.h / src/c_api.cpp)                   |
+|                   (include/amv_bitnet.h / src/c_api.cpp)                   |
 +-------------------------------------------------------------------------------+
 |                       Native C++ Inference Core                               |
 |        (src/llama_bitnet_core.cpp / src/ggml_bitnet_mad.cpp)                  |
@@ -35,20 +35,20 @@
 ## 2. 디렉토리 구조 및 파일 맵 (Directory Map)
 
 ```
-termux-bitnet/
+amv-bitnet/
 ├── CMakeLists.txt              # Native C++ 빌드 정의 (ARM NEON/DotProd 컴파일 플래그)
 ├── setup.py                    # Python 패키징 및 CMake 빌드 자동화 스크립트
 ├── install.sh                  # Termux/PRoot 원터치 환경 구성 셸 스크립트
 ├── pyproject.toml              # 빌드 메타데이터
 ├── include/
-│   └── termux_bitnet.h         # C ABI 표준 공개 헤더
+│   └── amv_bitnet.h         # C ABI 표준 공개 헤더
 ├── src/
 │   ├── ggml_bitnet_mad.cpp     # 1.58비트 i2_s 행렬-벡터 점곱(Dot-Product) SIMD 커널
 │   ├── llama_bitnet_core.h     # C++ 내부 컨텍스트 및 어휘집(Vocab) 구조체 정의
 │   ├── llama_bitnet_core.cpp   # 엔진 초기화, 모델 로딩, 로짓 계산, 샘플링 로직
 │   ├── c_api.cpp               # C ABI 익스포트 및 원시 텐서 연산 인터페이스
 │   └── main.cpp                # 독립 실행형 네이티브 C++ CLI (termux-bitnet-cli)
-├── termux_bitnet/
+├── amv_bitnet/
 │   ├── __init__.py             # Python SDK 최상위 익스포트 정의
 │   ├── config.py               # BitNetConfig 하이퍼파라미터 및 모델 캐시 탐색
 │   ├── exceptions.py           # BitNetError, BitNetEngineNotFound 예외 정의
@@ -62,7 +62,7 @@ termux-bitnet/
 │   ├── package.json            # Node.js 패키지 정의
 │   ├── index.js                # Node.js 모듈 엔트리포인트
 │   ├── index.d.ts              # TypeScript 타입 선언
-│   ├── bin/termux-bitnet.js    # Node.js 전용 CLI 실행기
+│   ├── bin/amv-bitnet.js    # Node.js 전용 CLI 실행기
 │   └── lib/
 │       ├── engine.js           # Node.js Thin Gateway 엔진
 │       └── downloader.js       # Levenshtein 기반 모델 다운로더
@@ -180,7 +180,7 @@ int8x16_t y3 = vld1q_s8(py + k + 3*32);
 
 ---
 
-#### (2) C ABI 인터페이스: `include/termux_bitnet.h`
+#### (2) C ABI 인터페이스: `include/amv_bitnet.h`
 
 C/C++, Python(ctypes), Rust 등 다양한 언어와의 바인딩을 위한 표준 C ABI를 선언합니다.
 
@@ -210,7 +210,7 @@ C/C++, Python(ctypes), Rust 등 다양한 언어와의 바인딩을 위한 표�
 
 ### 4.2 Python SDK 및 실행 계층
 
-#### (1) 하드웨어 탐색 모듈: `termux_bitnet/hardware.py`
+#### (1) 하드웨어 탐색 모듈: `amv_bitnet/hardware.py`
 
 모바일 기기의 하드웨어 사양을 런타임에 진단하여 최적의 추론 스레드 수를 결정합니다.
 
@@ -226,7 +226,7 @@ def detect_hardware() -> HardwareProfile:
 
 ---
 
-#### (2) 모델 레지스트리 및 다운로더: `termux_bitnet/downloader.py`
+#### (2) 모델 레지스트리 및 다운로더: `amv_bitnet/downloader.py`
 
 검증된 1.58비트 GGUF 모델 레지스트리를 관리하며, 견고한 다운로드를 제공합니다.
 
@@ -242,7 +242,7 @@ def detect_hardware() -> HardwareProfile:
 
 ---
 
-#### (3) Python 엔진 및 실행 라우터: `termux_bitnet/engine.py`
+#### (3) Python 엔진 및 실행 라우터: `amv_bitnet/engine.py`
 
 1. **하드웨어 가속 위임**:
    - `import ameva_vulkan_runtime as avr`를 통해 Vulkan GPU 백엔드가 활성화되어 있는지 확인하고 GPU 오프로드(`n_gpu_layers = 33`)를 자동 적용합니다.
@@ -254,7 +254,7 @@ def detect_hardware() -> HardwareProfile:
 
 ---
 
-#### (4) OpenAI 호환 로컬 HTTP 서버: `termux_bitnet/server.py`
+#### (4) OpenAI 호환 로컬 HTTP 서버: `amv_bitnet/server.py`
 
 외부 의존성(FastAPI/Flask 등) 없이 Python 내장 `http.server.HTTPServer` 및 `BaseHTTPRequestHandler`만으로 구축된 초경량 OpenAI 규격 API 서버입니다.
 
@@ -268,7 +268,7 @@ def detect_hardware() -> HardwareProfile:
 
 ---
 
-#### (5) 통합 CLI 인터페이스: `termux_bitnet/cli.py`
+#### (5) 통합 CLI 인터페이스: `amv_bitnet/cli.py`
 
 다음의 6대 서브커맨드를 제공합니다:
 
@@ -301,7 +301,7 @@ def detect_hardware() -> HardwareProfile:
 User Shell
    │
    ▼
-termux-bitnet run -m model.gguf -p "Explain BitNet"
+amv-bitnet run -m model.gguf -p "Explain BitNet"
    │
    ├─► [1. Argument & Model Validation]
    │     - validate_model_path_or_exit() -> 파일 크기/GGUF 헤더 확인
@@ -334,25 +334,25 @@ termux-bitnet run -m model.gguf -p "Explain BitNet"
 ### 6.1 환경 진단 및 모델 다운로드
 ```bash
 # 1. 기기 하드웨어 SIMD/DotProd 기능 확인
-termux-bitnet info
+amv-bitnet info
 
 # 2. 공식 1.58비트 경량 모델 다운로드 (캐시 경로: ~/.cache/termux-bitnet/models/)
-termux-bitnet download bitnet-2b
+amv-bitnet download bitnet-2b
 ```
 
 ### 6.2 CLI 스트리밍 추론 및 대화
 ```bash
 # 1. 단일 프롬프트 실행 (8 스레드, 128 토큰)
-termux-bitnet run -m ~/.cache/termux-bitnet/models/bitnet-2b-bitnet-b1.58-2b-i1_s.gguf -p "Explain quantum computing in 2 sentences:" -t 8
+amv-bitnet run -m ~/.cache/termux-bitnet/models/bitnet-2b-bitnet-b1.58-2b-i1_s.gguf -p "Explain quantum computing in 2 sentences:" -t 8
 
 # 2. 대화형 터미널 REPL 시작
-termux-bitnet chat -m ~/.cache/termux-bitnet/models/bitnet-2b-bitnet-b1.58-2b-i1_s.gguf -t 4
+amv-bitnet chat -m ~/.cache/termux-bitnet/models/bitnet-2b-bitnet-b1.58-2b-i1_s.gguf -t 4
 ```
 
 ### 6.3 OpenAI 호환 로컬 API 서버 구동
 ```bash
 # 서버 시작 (기본 포트 8080)
-termux-bitnet serve -m ~/.cache/termux-bitnet/models/bitnet-2b-bitnet-b1.58-2b-i1_s.gguf --port 8080
+amv-bitnet serve -m ~/.cache/termux-bitnet/models/bitnet-2b-bitnet-b1.58-2b-i1_s.gguf --port 8080
 ```
 
 #### cURL을 통한 API 호출 테스트:
@@ -369,7 +369,7 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 ### 6.4 Python SDK 프로그래밍 연동 (`examples/01_simple_chat.py`)
 ```python
 import sys
-from termux_bitnet import BitNetEngine, BitNetConfig, detect_hardware
+from amv_bitnet import BitNetEngine, BitNetConfig, detect_hardware
 
 # 하드웨어 자동 감지 기반 스레드 설정
 hw = detect_hardware()
@@ -409,4 +409,4 @@ with BitNetEngine(config) as engine:
 ---
 
 ### 결론 요약
-`termux-bitnet`은 Android Termux 및 ARM64 모바일 디바이스 상에서 **1.58비트 Ternary 가중치 모델을 ARM NEON 및 DotProd 하드웨어 수준에서 초고속으로 가속**할 수 있도록 설계된 프로덕션 레디 툴체인입니다. C++ 네이티브 연산 코어, C ABI 브릿지, Python SDK, Node.js 게이트웨이 및 OpenAI 호환 서버가 완벽히 결합되어 모바일 온디바이스 AI 파이프라인을 온전히 로컬에서 구동할 수 있습니다.
+`amv-bitnet`은 Android Termux 및 ARM64 모바일 디바이스 상에서 **1.58비트 Ternary 가중치 모델을 ARM NEON 및 DotProd 하드웨어 수준에서 초고속으로 가속**할 수 있도록 설계된 프로덕션 레디 툴체인입니다. C++ 네이티브 연산 코어, C ABI 브릿지, Python SDK, Node.js 게이트웨이 및 OpenAI 호환 서버가 완벽히 결합되어 모바일 온디바이스 AI 파이프라인을 온전히 로컬에서 구동할 수 있습니다.

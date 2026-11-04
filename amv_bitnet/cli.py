@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""Command Line Interface for termux-bitnet (Strict Fail-Fast Protocol)."""
+"""Command Line Interface for amv-bitnet (Strict Fail-Fast Protocol)."""
 
 import os
 import sys
@@ -8,25 +8,25 @@ import argparse
 import time
 from pathlib import Path
 
-from termux_bitnet import __version__
-from termux_bitnet.config import BitNetConfig
-from termux_bitnet.engine import BitNetEngine
-from termux_bitnet.hardware import print_hardware_summary, detect_hardware
-from termux_bitnet.downloader import download_model, AVAILABLE_MODELS
-from termux_bitnet.server import run_server
-from termux_bitnet.exceptions import RuntimeRequiredError
+from amv_bitnet import __version__
+from amv_bitnet.config import BitNetConfig
+from amv_bitnet.engine import BitNetEngine
+from amv_bitnet.hardware import print_hardware_summary, detect_hardware
+from amv_bitnet.downloader import download_model, AVAILABLE_MODELS
+from amv_bitnet.server import run_server
+from amv_bitnet.exceptions import RuntimeRequiredError
 
 
 def print_catalog_help():
     print("\n[Available Official BitNet Models]", file=sys.stderr)
     print("  1. bitnet-2b    : Microsoft BitNet 2B-4T (1.13 GB, i2_s)", file=sys.stderr)
-    print("     Command      : termux-bitnet download bitnet-2b", file=sys.stderr)
+    print("     Command      : amv-bitnet download bitnet-2b", file=sys.stderr)
     print("  2. bitnet-large : BitNet b1.58 Large 0.7B (700 MB, i2_s)", file=sys.stderr)
-    print("     Command      : termux-bitnet download bitnet-large", file=sys.stderr)
+    print("     Command      : amv-bitnet download bitnet-large", file=sys.stderr)
     print("  3. bitnet-3b    : BitNet b1.58 3B (2.4 GB, i2_s)", file=sys.stderr)
-    print("     Command      : termux-bitnet download bitnet-3b", file=sys.stderr)
+    print("     Command      : amv-bitnet download bitnet-3b", file=sys.stderr)
     print("  4. bitnet-3b-q4 : BitNet b1.58 3B Q4_K_M (1.8 GB)", file=sys.stderr)
-    print("     Command      : termux-bitnet download bitnet-3b-q4", file=sys.stderr)
+    print("     Command      : amv-bitnet download bitnet-3b-q4", file=sys.stderr)
     print("\nOfficial Hugging Face Repositories:", file=sys.stderr)
     print("  - https://huggingface.co/1bitLLM/bitnet_b1_58-large-GGUF", file=sys.stderr)
     print("  - https://huggingface.co/1bitLLM/bitnet_b1_58-3B-GGUF", file=sys.stderr)
@@ -37,7 +37,7 @@ def validate_model_path_or_exit(model_path: str = None) -> str:
         expanded = os.path.abspath(os.path.expanduser(model_path))
         if os.path.isfile(expanded):
             return expanded
-        print(f"[termux-bitnet ERROR] Model file not found at path: '{expanded}'", file=sys.stderr)
+        print(f"[amv-bitnet ERROR] Model file not found at path: '{expanded}'", file=sys.stderr)
         print_catalog_help()
         sys.exit(10)
 
@@ -59,7 +59,7 @@ def validate_model_path_or_exit(model_path: str = None) -> str:
             ggufs.sort(key=lambda x: (0 if ("i2_s" in x.name or "i1_s" in x.name or "i1_m" in x.name) else 1, x.name))
             return str(ggufs[0])
 
-    print("[termux-bitnet ERROR] No model file specified and no cached models found. Use -m or run: termux-bitnet download", file=sys.stderr)
+    print("[amv-bitnet ERROR] No model file specified and no cached models found. Use -m or run: amv-bitnet download", file=sys.stderr)
     print_catalog_help()
     sys.exit(10)
 
@@ -70,10 +70,10 @@ def cmd_info(args):
 
 def cmd_doctor(args):
     """Run comprehensive pre-flight diagnostic checks."""
-    from termux_bitnet.hardware import doctor
+    from amv_bitnet.hardware import doctor
     rep = doctor()
     print("=========================================================")
-    print(f"       termux-bitnet Pre-flight Doctor (v{__version__})   ")
+    print(f"       amv-bitnet Pre-flight Doctor (v{__version__})   ")
     print("=========================================================")
     print(f"  Status:               {rep.get('status')}")
     print(f"  Recommended Backend:  {rep.get('recommended_backend')}")
@@ -92,7 +92,7 @@ def cmd_doctor(args):
 
 def cmd_models(args):
     """List available model catalog and locally cached weights."""
-    from termux_bitnet.downloader import list_available_models, DEFAULT_CACHE_DIR
+    from amv_bitnet.downloader import list_available_models, DEFAULT_CACHE_DIR
     list_available_models()
     print("\n--- [Locally Cached Models] ---")
     if DEFAULT_CACHE_DIR.exists():
@@ -102,7 +102,7 @@ def cmd_models(args):
                 sz_mb = cf.stat().st_size / (1024 * 1024)
                 print(f"  - {cf.name:35s} [{sz_mb:.1f} MB] -> {cf}")
         else:
-            print("  (No cached models found. Run 'termux-bitnet download bitnet-2b')")
+            print("  (No cached models found. Run 'amv-bitnet download bitnet-2b')")
     else:
         print("  (Cache directory does not exist yet.)")
     print()
@@ -118,14 +118,14 @@ def cmd_run(args):
     if args.file:
         file_path = os.path.abspath(os.path.expanduser(args.file))
         if not os.path.isfile(file_path):
-            print(f"[termux-bitnet ERROR] Prompt file not found: '{file_path}'", file=sys.stderr)
+            print(f"[amv-bitnet ERROR] Prompt file not found: '{file_path}'", file=sys.stderr)
             sys.exit(2)
         with open(file_path, "r", encoding="utf-8") as f:
             prompt_text = f.read()
 
     if not prompt_text or not prompt_text.strip():
-        print("[termux-bitnet ERROR] No input prompt specified. Use -p / --prompt \"<text>\" or -f / --file <path>.", file=sys.stderr)
-        print("Example:\n  termux-bitnet run -m ~/.cache/termux-bitnet/models/bitnet-2b.gguf -p \"Explain 1-bit LLM:\"", file=sys.stderr)
+        print("[amv-bitnet ERROR] No input prompt specified. Use -p / --prompt \"<text>\" or -f / --file <path>.", file=sys.stderr)
+        print("Example:\n  amv-bitnet run -m ~/.cache/termux-bitnet/models/bitnet-2b.gguf -p \"Explain 1-bit LLM:\"", file=sys.stderr)
         sys.exit(2)
 
     # Apply user-specified prompt wrapping / templates
@@ -193,7 +193,7 @@ def cmd_run(args):
     )
 
     print("=========================================================")
-    print(f"  termux-bitnet CLI (v{__version__})")
+    print(f"  amv-bitnet CLI (v{__version__})")
     print(f"  Model:  {resolved_model}")
     print(f"  Prompt: {prompt_text[:80]}...")
     print("=========================================================")
@@ -215,7 +215,7 @@ def cmd_run(args):
     except RuntimeRequiredError:
         raise
     except Exception as e:
-        print(f"\n[termux-bitnet ERROR] Execution failed: {e}", file=sys.stderr)
+        print(f"\n[amv-bitnet ERROR] Execution failed: {e}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -248,7 +248,7 @@ def cmd_chat(args):
     )
 
     print("=========================================================")
-    print(f"  termux-bitnet Interactive Chat (v{__version__})")
+    print(f"  amv-bitnet Interactive Chat (v{__version__})")
     print(f"  Model:  {resolved_model}")
     print(f"  Device: {config.device} (layers: {config.n_gpu_layers})")
     print("  Type 'exit' or 'quit' to end session.")
@@ -276,7 +276,7 @@ def cmd_chat(args):
     except RuntimeRequiredError:
         raise
     except Exception as e:
-        print(f"[termux-bitnet ERROR] Chat initialization failed: {e}", file=sys.stderr)
+        print(f"[amv-bitnet ERROR] Chat initialization failed: {e}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -301,7 +301,7 @@ def cmd_benchmark(args):
     resolved_model = validate_model_path_or_exit(args.model)
 
     print("=========================================================")
-    print("        termux-bitnet Comprehensive Benchmark            ")
+    print("        amv-bitnet Comprehensive Benchmark            ")
     print(f"  Model:  {resolved_model}")
     print(f"  Device: {getattr(args, 'device', 'auto')} (layers: {getattr(args, 'n_gpu_layers', 0)})")
     print("=========================================================")
@@ -338,7 +338,7 @@ def cmd_benchmark(args):
     except RuntimeRequiredError:
         raise
     except Exception as e:
-        print(f"[termux-bitnet ERROR] Benchmark failed: {e}", file=sys.stderr)
+        print(f"[amv-bitnet ERROR] Benchmark failed: {e}", file=sys.stderr)
         sys.exit(1)
 
 
@@ -348,7 +348,7 @@ def main():
     A GPU request without a usable ameva-runtime ends here with the shared explanation on stderr
     and exit status 69, whichever sub-command raised it.
     """
-    from termux_bitnet.exceptions import RuntimeRequiredError
+    from amv_bitnet.exceptions import RuntimeRequiredError
     try:
         return _main_impl()
     except RuntimeRequiredError as err:
@@ -359,17 +359,17 @@ def main():
 
 def _main_impl():
     parser = argparse.ArgumentParser(
-        prog="termux-bitnet",
+        prog="amv-bitnet",
         description="High-performance 1.58-bit BitNet Inference SDK & CLI for Android Termux / ARM64."
     )
-    parser.add_argument("-v", "--version", action="version", version=f"termux-bitnet {__version__}")
+    parser.add_argument("-v", "--version", action="version", version=f"amv-bitnet {__version__}")
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
 
     # install
     p_inst = subparsers.add_parser("install", help="1-Click installer and prebuilt engine dispatcher")
     p_inst.add_argument("--force", "-f", action="store_true", help="Force clean re-download and installation")
     p_inst.add_argument("--dedicate", action="store_true", help="Preserve AMEVA runtime symlinks")
-    p_inst.set_defaults(func=lambda args: sys.exit(0 if __import__("termux_bitnet.installer", fromlist=["install_prebuilt_library"]).install_prebuilt_library(force=getattr(args, "force", False), dedicate=getattr(args, "dedicate", False)) else 1))
+    p_inst.set_defaults(func=lambda args: sys.exit(0 if __import__("amv_bitnet.installer", fromlist=["install_prebuilt_library"]).install_prebuilt_library(force=getattr(args, "force", False), dedicate=getattr(args, "dedicate", False)) else 1))
 
     # info
     p_info = subparsers.add_parser("info", help="Inspect local CPU SIMD/DotProd capabilities")
@@ -505,7 +505,7 @@ def _main_impl():
         args.func(args)
     elif args.command in ("component", "model", "instance") and _protocol_available:
         from ameva_component.cli_support import dispatch_protocol
-        from termux_bitnet.control import BitNetControl
+        from amv_bitnet.control import BitNetControl
         dispatch_protocol(args, BitNetControl())
     elif args.command in ("component", "model", "instance"):
         import sys

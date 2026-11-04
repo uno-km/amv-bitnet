@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
-termux_bitnet.control.status — BitNet 상태 파일 Writer + Heartbeat
+amv_bitnet.control.status — BitNet 상태 파일 Writer + Heartbeat
 
 1.58-bit ARM64 추론 특화 동작:
   - notify_job_start() → Inference 시작

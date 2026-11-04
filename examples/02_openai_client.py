@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""OpenAI Python SDK integration example with termux-bitnet local server."""
+"""OpenAI Python SDK integration example with amv-bitnet local server."""
 
 import urllib.request
 import json
@@ -30,7 +30,7 @@ def test_local_server():
             print(f"[Assistant Response]:\n{content}")
     except Exception as e:
         print(f"[Client] Could not connect to local server: {e}")
-        print("  Make sure the server is running with: termux-bitnet serve --port 8080")
+        print("  Make sure the server is running with: amv-bitnet serve --port 8080")
 
 if __name__ == "__main__":
     test_local_server()

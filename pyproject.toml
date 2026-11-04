@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amv-bitnet"
-version = "2.2.0"
+version = "3.0.0"
 description = "1.58-bit (i2_s) BitNet on-device inference SDK with verified ARM NEON & DotProd kernels for Android Termux & ARM64"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -31,10 +31,10 @@ dependencies = ["requests>=2.28.0"]
 # To enable GPU: pip install https://github.com/uno-km/ameva-device-sdk/releases/download/v0.2.0/ameva_device_sdk-0.2.0-py3-none-any.whl
 
 [project.scripts]
-amv-bitnet = "termux_bitnet.cli:main"
+amv-bitnet = "amv_bitnet.cli:main"
 
 [project.entry-points."ameva.components"]
-amv-bitnet = "termux_bitnet.adapter:create_adapter"
+amv-bitnet = "amv_bitnet.adapter:create_adapter"
 
 
 [tool.pytest.ini_options]

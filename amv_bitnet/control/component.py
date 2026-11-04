@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
-termux_bitnet.control.component
+amv_bitnet.control.component
 AMEVA Component Protocol v1 — BitNetControl
 
 1.58-bit GGUF 모델 전용 (ARM64 네이티브 SO).
@@ -28,16 +28,16 @@ BITNET_AVAILABLE_MODELS = ["bitnet-2b", "bitnet-large", "bitnet-3b", "bitnet-3b-
 
 class BitNetControl(ComponentControl):
     """
-    termux-bitnet ComponentControl.
+    amv-bitnet ComponentControl.
     기존 hardware.detect_hardware() + engine.BitNetEngine Adapter.
     """
 
-    COMPONENT_ID   = "termux-bitnet"
+    COMPONENT_ID   = "amv-bitnet"
     COMPONENT_TYPE = "llm"
     CAPABILITIES   = ("llm.chat", "llm.completion")
 
     # DEFAULT_PID_FILE: COMPONENT_ID 기반 표준 경로
-    DEFAULT_PID_FILE: Path = Path.home() / ".local" / "run" / "termux-bitnet.pid"
+    DEFAULT_PID_FILE: Path = Path.home() / ".local" / "run" / "amv-bitnet.pid"
 
     def _check_pid(self) -> dict[str, Any]:
         """BLOCKER 1: PID 파일 및 상태 파일 기반 프로세스 생존 여부 확인.
@@ -137,7 +137,7 @@ class BitNetControl(ComponentControl):
             "reason": "pid_file_missing",
         }
 
-    DEFAULT_MODELS_DIR: Path = Path.home() / ".termux-bitnet" / "models"
+    DEFAULT_MODELS_DIR: Path = Path.home() / ".amv-bitnet" / "models"
 
     def __init__(self, models_dir: Path | None = None) -> None:
         self._models_dir = models_dir or self.DEFAULT_MODELS_DIR
@@ -146,12 +146,12 @@ class BitNetControl(ComponentControl):
         self._inst_reg   = InstanceRegistry(self.COMPONENT_ID)
         self._act_lock   = ActivationLock()
         # Phase 4: Heartbeat Writer
-        from termux_bitnet.control.status import BitNetStatusWriter
+        from amv_bitnet.control.status import BitNetStatusWriter
         self._heartbeat = BitNetStatusWriter(self)
 
     def _get_version(self) -> str:
         try:
-            from termux_bitnet import __version__; return __version__
+            from amv_bitnet import __version__; return __version__
         except Exception:
             return "1.4.0"
 
@@ -227,7 +227,7 @@ class BitNetControl(ComponentControl):
         PermissionError/OSError 발생 시 alive=None, verified=False, inspection_error 반환."""
         from ameva_component import log_stderr
 
-        pid_file = Path.home() / ".local" / "run" / "termux-bitnet.pid"
+        pid_file = Path.home() / ".local" / "run" / "amv-bitnet.pid"
         if pid_file.exists():
             try:
                 raw = pid_file.read_text().strip()
@@ -324,7 +324,7 @@ class BitNetControl(ComponentControl):
     def _check_hardware(self) -> dict:
         """ARM64 SIMD/DotProd 지원 여부 — 추론 실행 금지."""
         try:
-            from termux_bitnet.hardware import detect_hardware
+            from amv_bitnet.hardware import detect_hardware
             hw = detect_hardware()
             raw = hw.__dict__ if hasattr(hw, "__dict__") else {}
             return {
@@ -338,7 +338,7 @@ class BitNetControl(ComponentControl):
     def _check_engine_binary(self) -> bool:
         """Native C++ Shared Library / binary 실존 여부 확인."""
         try:
-            from termux_bitnet.engine import BitNetEngine
+            from amv_bitnet.engine import BitNetEngine
             engine = BitNetEngine.__new__(BitNetEngine)
             lib_path = engine._find_library_path()
             return bool(lib_path is not None and lib_path.exists())
@@ -350,7 +350,7 @@ class BitNetControl(ComponentControl):
     def doctor_full(self) -> dict:
         lite = self.doctor_lite()
         try:
-            from termux_bitnet.hardware import print_hardware_summary
+            from amv_bitnet.hardware import print_hardware_summary
             import io, contextlib
             buf = io.StringIO()
             with contextlib.redirect_stdout(buf):

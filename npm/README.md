@@ -1,21 +1,21 @@
-# Termux-BitNet (Node.js & TypeScript)
+# AMV-BitNet (Node.js & TypeScript)
 
-[![npm](https://img.shields.io/npm/v/termux-bitnet.svg?style=flat-square&color=b91c1c)](https://www.npmjs.com/package/termux-bitnet)
-[![npm downloads](https://img.shields.io/npm/dm/termux-bitnet.svg?style=flat-square&color=b91c1c)](https://www.npmjs.com/package/termux-bitnet)
-[![License](https://img.shields.io/badge/License-Apache_2.0-004499.svg?style=flat-square)](https://github.com/uno-km/termux-bitnet)
+[![npm](https://img.shields.io/npm/v/amv-bitnet.svg?style=flat-square&color=b91c1c)](https://www.npmjs.com/package/amv-bitnet)
+[![npm downloads](https://img.shields.io/npm/dm/amv-bitnet.svg?style=flat-square&color=b91c1c)](https://www.npmjs.com/package/amv-bitnet)
+[![License](https://img.shields.io/badge/License-Apache_2.0-004499.svg?style=flat-square)](https://github.com/uno-km/amv-bitnet)
 
 > Sovereign 1.58-Bit On-Device LLM Inference Engine with ARM64 NEON DotProd SIMD & Native Vulkan GPU Acceleration
 
 ## Installation
 
 ```bash
-npm install termux-bitnet
+npm install amv-bitnet
 ```
 
 ## Quickstart
 
 ```typescript
-const { createEngine } = require('termux-bitnet');
+const { createEngine } = require('amv-bitnet');
 
 async function main() {
   // 1. Initialize engine with model-specific wrapping & GPU chunking
@@ -49,7 +49,7 @@ Executes 1.58-bit ternary quantized weights {-1, 0, +1} directly via hand-vector
 
 ## Documentation
 - [Official Documentation & API Reference](https://uno-km.vercel.app/lib/bitnet/)
-- [GitHub Repository](https://github.com/uno-km/termux-bitnet)
+- [GitHub Repository](https://github.com/uno-km/amv-bitnet)
 
 ## License
 Apache-2.0 License. Copyright (c) 2026 Eunho Kim (@uno-km).

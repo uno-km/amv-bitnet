@@ -1,21 +1,21 @@
-# Termux-BitNet (Python)
+# AMV-BitNet (Python)
 
-[![PyPI](https://img.shields.io/pypi/v/termux-bitnet.svg?style=flat-square&color=0369a1)](https://pypi.org/project/termux-bitnet/)
-[![Python](https://img.shields.io/pypi/pyversions/termux-bitnet.svg?style=flat-square)](https://pypi.org/project/termux-bitnet/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-004499.svg?style=flat-square)](https://github.com/uno-km/termux-bitnet)
+[![PyPI](https://img.shields.io/pypi/v/amv-bitnet.svg?style=flat-square&color=0369a1)](https://pypi.org/project/amv-bitnet/)
+[![Python](https://img.shields.io/pypi/pyversions/amv-bitnet.svg?style=flat-square)](https://pypi.org/project/amv-bitnet/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-004499.svg?style=flat-square)](https://github.com/uno-km/amv-bitnet)
 
 > Sovereign 1.58-Bit On-Device LLM Inference Engine with ARM64 NEON DotProd SIMD & Native Vulkan GPU Acceleration
 
 ## Installation
 
 ```bash
-pip install termux-bitnet
+pip install amv-bitnet
 ```
 
 ## Quickstart
 
 ```python
-from termux_bitnet import BitNetEngine, BitNetConfig
+from amv_bitnet import BitNetEngine, BitNetConfig
 
 # 1. Initialize engine with model wrapping and GPU acceleration options
 config = BitNetConfig(
@@ -47,7 +47,7 @@ Executes 1.58-bit ternary quantized weights {-1, 0, +1} directly via hand-vector
 
 ## Documentation
 - [Official Documentation & API Reference](https://uno-km.vercel.app/lib/bitnet/)
-- [GitHub Repository](https://github.com/uno-km/termux-bitnet)
+- [GitHub Repository](https://github.com/uno-km/amv-bitnet)
 
 ## License
 Apache-2.0 License. Copyright (c) 2026 Eunho Kim (@uno-km).

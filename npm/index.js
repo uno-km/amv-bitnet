@@ -4,7 +4,7 @@
  */
 /**
  * @file index.js
- * @brief termux-bitnet Node.js / TypeScript Package Main Entry Point.
+ * @brief amv-bitnet Node.js / TypeScript Package Main Entry Point.
  */
 
 const { BitNetEngine, detectHardware } = require('./lib/engine');

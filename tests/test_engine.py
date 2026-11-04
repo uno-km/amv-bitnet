@@ -1,9 +1,9 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""Unit and integration test suite for termux-bitnet."""
+"""Unit and integration test suite for amv-bitnet."""
 
 import unittest
-from termux_bitnet import BitNetEngine, BitNetConfig, detect_hardware
+from amv_bitnet import BitNetEngine, BitNetConfig, detect_hardware
 
 
 class TestTermuxBitNet(unittest.TestCase):
@@ -77,7 +77,7 @@ class TestTermuxBitNet(unittest.TestCase):
 
     def test_09_model_registry_integrity(self):
         """Verify AVAILABLE_MODELS contains all valid aliases, HTTPS URLs, and metadata."""
-        from termux_bitnet.downloader import AVAILABLE_MODELS
+        from amv_bitnet.downloader import AVAILABLE_MODELS
         self.assertIn("bitnet-2b", AVAILABLE_MODELS)
         self.assertIn("bitnet-large", AVAILABLE_MODELS)
         self.assertIn("bitnet-3b", AVAILABLE_MODELS)
@@ -88,7 +88,7 @@ class TestTermuxBitNet(unittest.TestCase):
 
     def test_10_ctypes_struct_alignment(self):
         """Verify CBitNetParams ctypes structure fields match C ABI."""
-        from termux_bitnet.engine import CBitNetParams
+        from amv_bitnet.engine import CBitNetParams
         params = CBitNetParams()
         fields = [f[0] for f in CBitNetParams._fields_]
         expected_fields = [
@@ -105,7 +105,7 @@ class TestTermuxBitNet(unittest.TestCase):
         """Verify downloader uses wb for 200 OK and ab strictly for 206 Partial Content."""
         import tempfile
         from pathlib import Path
-        from termux_bitnet.downloader import verify_model_file
+        from amv_bitnet.downloader import verify_model_file
         
         with tempfile.NamedTemporaryFile(delete=False) as f:
             f.write(b"GGUF" + b"\x00" * 2048)
@@ -119,7 +119,7 @@ class TestTermuxBitNet(unittest.TestCase):
 
     def test_13_server_threading_lock_presence(self):
         """Verify server module defines and utilizes threading lock for engine execution."""
-        from termux_bitnet.server import ENGINE_LOCK
+        from amv_bitnet.server import ENGINE_LOCK
         import threading
         self.assertIsInstance(ENGINE_LOCK, type(threading.Lock()))
 
@@ -196,8 +196,8 @@ class TestTermuxBitNet(unittest.TestCase):
 
     def test_15_device_routing_protocol(self):
         """Verify strict adherence to device routing rules."""
-        from termux_bitnet.hardware import resolve_device_backend
-        from termux_bitnet.exceptions import PlatformNotSupportedError
+        from amv_bitnet.hardware import resolve_device_backend
+        from amv_bitnet.exceptions import PlatformNotSupportedError
 
         # 1. CPU explicit
         backend, ngl = resolve_device_backend("cpu", 10)
@@ -348,7 +348,7 @@ class TestTermuxBitNet(unittest.TestCase):
         """Verify doctor and models CLI command handlers run cleanly."""
         from unittest.mock import MagicMock
         import io
-        from termux_bitnet.cli import cmd_doctor, cmd_models
+        from amv_bitnet.cli import cmd_doctor, cmd_models
 
         # Capture output of cmd_doctor
         out = io.StringIO()
@@ -362,7 +362,7 @@ class TestTermuxBitNet(unittest.TestCase):
             sys.stdout = old_stdout
 
         output_str = out.getvalue()
-        self.assertIn("termux-bitnet Pre-flight Doctor", output_str)
+        self.assertIn("amv-bitnet Pre-flight Doctor", output_str)
         self.assertIn("Verified 1.58-bit GGUF Model Registry", output_str)
 
     def test_20_completions_streaming_sse(self):
@@ -370,7 +370,7 @@ class TestTermuxBitNet(unittest.TestCase):
         from unittest.mock import MagicMock
         import json
         import io
-        from termux_bitnet.server import OpenAIHandler
+        from amv_bitnet.server import OpenAIHandler
 
         mock_engine = MagicMock()
         mock_engine.generate_stream.return_value = iter(["Quantum", " ", "Computing"])

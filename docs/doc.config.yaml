@@ -1,19 +1,19 @@
-# termux-bitnet/docs/doc.config.yaml
-name: "Termux-BitNet"
-package_name_pypi: "termux-bitnet"
-package_name_npm: "termux-bitnet"
+# amv-bitnet/docs/doc.config.yaml
+name: "AMV-BitNet"
+package_name_pypi: "amv-bitnet"
+package_name_npm: "amv-bitnet"
 version: "v1.1.3"
 release_name: "Production Ready"
 license: "Apache-2.0"
 platform: "Android ARM64 / NEON SIMD"
-github_repo_url: "https://github.com/uno-km/termux-bitnet"
+github_repo_url: "https://github.com/uno-km/amv-bitnet"
 
 # 1줄 핵심 사명
 tagline_en: "ARM64 NEON DotProd SIMD Accelerated 1.58-bit On-Device LLM Inference Engine"
 tagline_ko: "ARM64 NEON DotProd SIMD 어셈블리 가속 1.58-bit 온디바이스 초고속 LLM 추론 엔진"
 
 # 빠른 설치 명령어
-quick_install_cmd: "pip install termux-bitnet\n# or: npm install -g termux-bitnet"
+quick_install_cmd: "pip install amv-bitnet\n# or: npm install -g amv-bitnet"
 
 # 기술 과제 및 혁신 설명
 why_challenge_en: "Standard FP16/INT4 LLM inference on mobile CPU architectures encounters extreme memory bandwidth bottlenecks, thermal throttling, and severe battery drain exceeding 15W."
@@ -50,7 +50,7 @@ matrix_table:
     operations: "Zero-Copy Safetensors mmap, Direct KV Cache Pooling"
     status: "Production"
   - category: "Language Bindings"
-    operations: "Python CFFI / ctypes (termux-bitnet), Node.js Gateway (termux-bitnet-js)"
+    operations: "Python CFFI / ctypes (amv-bitnet), Node.js Gateway (amv-bitnet-js)"
     status: "Production"
   - category: "Supported Models"
     operations: "BitNet b1.58 (0.7B / 1.5B / 2B / 3.3B), Llama-3-BitNet"
@@ -58,7 +58,7 @@ matrix_table:
 
 # 정석 실행 코드
 code_example_py: |
-  from termux_bitnet import BitNetEngine, BitNetConfig
+  from amv_bitnet import BitNetEngine, BitNetConfig
 
   # 1. Initialize engine with model & thread configuration
   config = BitNetConfig(
@@ -74,7 +74,7 @@ code_example_py: |
           print(token, end="", flush=True)
 
 code_example_js: |
-  const { createEngine } = require('termux-bitnet');
+  const { createEngine } = require('amv-bitnet');
 
   async function main() {
     const engine = createEngine({
@@ -106,25 +106,25 @@ installation_body: |
   # 2. Pre-provision Python build tools (Bypasses PyPI build-isolation bottleneck)
   pip install --upgrade setuptools wheel
 
-  # 3. Install termux-bitnet Python SDK &amp; CLI
-  pip install --no-build-isolation termux-bitnet</code></pre>
+  # 3. Install amv-bitnet Python SDK &amp; CLI
+  pip install --no-build-isolation amv-bitnet</code></pre>
 
   <h3>2. Node.js Dual Engine Gateway (npm)</h3>
   <p>Install the ultra-lightweight Node.js thin gateway with dedicated CLI namespace:</p>
-  <pre><code class="language-bash"># Global install without binary conflict (Provides termux-bitnet-js)
-  npm install -g termux-bitnet</code></pre>
+  <pre><code class="language-bash"># Global install without binary conflict (Provides amv-bitnet-js)
+  npm install -g amv-bitnet</code></pre>
 
   <h3>3. Hardware SIMD Diagnostics Verification</h3>
   <p>Execute the diagnostic CLI to confirm ARM NEON and DotProd (<code>vdotq_s32</code>) hardware acceleration:</p>
   <pre><code class="language-bash"># Python CLI check
-  termux-bitnet info
+  amv-bitnet info
 
   # Node.js CLI check
-  termux-bitnet-js info</code></pre>
+  amv-bitnet-js info</code></pre>
 
   <h3>4. Source Installation from GitHub</h3>
-  <pre><code class="language-bash">git clone https://github.com/uno-km/termux-bitnet.git
-  cd termux-bitnet
+  <pre><code class="language-bash">git clone https://github.com/uno-km/amv-bitnet.git
+  cd amv-bitnet
   chmod +x install.sh
   ./install.sh</code></pre>
 
@@ -133,19 +133,19 @@ quickstart_body: |
   <h3>Recipe 1: Model Hub Download &amp; CLI Inference</h3>
   <p>Query verified 1.58-bit GGUF models, download with HTTP Range resume support, and execute instant inference:</p>
   <pre><code class="language-bash"># 1. List official verified models
-  termux-bitnet models
+  amv-bitnet models
 
   # 2. Download Microsoft BitNet 2B-4T (1.13 GB)
-  termux-bitnet download bitnet-2b
+  amv-bitnet download bitnet-2b
 
   # 3. Run prompt inference with 4 CPU threads
-  termux-bitnet run -m ~/.cache/termux-bitnet/models/bitnet-2b-ggml-model-i2_s.gguf \
+  amv-bitnet run -m ~/.cache/termux-bitnet/models/bitnet-2b-ggml-model-i2_s.gguf \
     -p "Explain quantum computing in one sentence." \
     -t 4 -c 2048 -n 64 --temp 0.7 --top-p 0.95</code></pre>
 
   <h3>Recipe 2: Python SDK Token Streaming</h3>
   <p>Stream generated tokens asynchronously with context manager memory cleanup:</p>
-  <pre><code class="language-python">from termux_bitnet import BitNetEngine, BitNetConfig
+  <pre><code class="language-python">from amv_bitnet import BitNetEngine, BitNetConfig
 
   config = BitNetConfig(
       model_path="models/bitnet-2b.gguf",
@@ -164,7 +164,7 @@ quickstart_body: |
       print()</code></pre>
 
   <h3>Recipe 3: Node.js / TypeScript Gateway Streaming</h3>
-  <pre><code class="language-javascript">const { createEngine } = require('termux-bitnet');
+  <pre><code class="language-javascript">const { createEngine } = require('amv-bitnet');
 
   async function main() {
     const engine = createEngine({
@@ -191,7 +191,7 @@ quickstart_body: |
 
   <h3>Recipe 4: OpenAI-Compatible Local HTTP API Server</h3>
   <pre><code class="language-bash"># Start local API server on port 8080
-  termux-bitnet serve --port 8080 --model ~/.cache/termux-bitnet/models/bitnet-2b-ggml-model-i2_s.gguf
+  amv-bitnet serve --port 8080 --model ~/.cache/termux-bitnet/models/bitnet-2b-ggml-model-i2_s.gguf
 
   # Query via standard OpenAI client or curl
   curl http://localhost:8080/v1/chat/completions \
@@ -203,7 +203,7 @@ quickstart_body: |
 
 # 3. API 레퍼런스 본문
 api_body: |
-  <h3>1. Python Engine API (<code>termux_bitnet.BitNetEngine</code>)</h3>
+  <h3>1. Python Engine API (<code>amv_bitnet.BitNetEngine</code>)</h3>
   <table class="data-table">
     <thead>
       <tr><th>Method / Property</th><th>Signature</th><th>Description</th></tr>
@@ -218,7 +218,7 @@ api_body: |
     </tbody>
   </table>
 
-  <h3>2. Python Configuration Matrix (<code>termux_bitnet.BitNetConfig</code>)</h3>
+  <h3>2. Python Configuration Matrix (<code>amv_bitnet.BitNetConfig</code>)</h3>
   <table class="data-table">
     <thead>
       <tr><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
@@ -240,7 +240,7 @@ api_body: |
     </tbody>
   </table>
 
-  <h3>3. Node.js Gateway API (<code>termux-bitnet</code>)</h3>
+  <h3>3. Node.js Gateway API (<code>amv-bitnet</code>)</h3>
   <table class="data-table">
     <thead>
       <tr><th>Function / Class</th><th>Parameters</th><th>Return Type</th><th>Description</th></tr>
@@ -306,7 +306,7 @@ advanced_parameters_body: |
   <p>Matrix multiplication $Y = W \cdot X$ is converted into vectorized additions and subtractions of activation vectors. The ARM64 NEON Dot-Product engine executes these operations via <code>vdotq_s32</code> instructions, maximizing throughput while minimizing transistor switching energy.</p>
 
   <h3>2. Memory Footprint &amp; Android LMK Defense</h3>
-  <p>Android OS executes the <strong>Low Memory Killer (LMK)</strong> when free system memory falls below critical thresholds (typically 300MB ~ 500MB). Termux-BitNet protects against LMK aborts via:</p>
+  <p>Android OS executes the <strong>Low Memory Killer (LMK)</strong> when free system memory falls below critical thresholds (typically 300MB ~ 500MB). AMV-BitNet protects against LMK aborts via:</p>
   <ul style="margin-left: 20px; line-height: 1.8;">
     <li><strong>Zero-Copy Memory Mapping (<code>mmap</code>)</strong>: Model weights remain mapped directly from disk into read-only virtual address space, sharing pages with the OS cache.</li>
     <li><strong>Pre-Allocated KV Cache Ring Buffers</strong>: Prevents continuous heap allocation and fragmentation during autoregressive generation.</li>
@@ -338,10 +338,10 @@ changelog:
     type: "Latest Production Release"
     changes:
       - "<strong>pip-build-env CMake 소스 컴파일 병목 완전 제거</strong>: <code>pyproject.toml</code>의 <code>build-system.requires</code>에서 <code>cmake</code> 의존성을 제거하여 pip 빌드 격리 환경 내 수십 분 소요 C++ 컴파일 시도를 원천 차단하고 Termux 네이티브 <code>cmake</code>를 직접 바이패스 참조"
-      - "<strong>npm <code>EEXIST</code> 글로벌 심볼릭 링크 충돌 해결</strong>: Node.js 패키지의 실행 파일명을 <code>termux-bitnet-js</code> 및 <code>termux-bitnet-node</code>로 분리 정의하여 Python <code>termux-bitnet</code> 바이너리와 충돌 없이 독립 공존"
+      - "<strong>npm <code>EEXIST</code> 글로벌 심볼릭 링크 충돌 해결</strong>: Node.js 패키지의 실행 파일명을 <code>amv-bitnet-js</code> 및 <code>amv-bitnet-node</code>로 분리 정의하여 Python <code>amv-bitnet</code> 바이너리와 충돌 없이 독립 공존"
       - "<strong>원터치 인스톨러(<code>install.sh</code>) 최적화</strong>: 선행 <code>setuptools</code>/<code>wheel</code> 프로비저닝 및 <code>pip install --no-build-isolation -e .</code> 적용으로 2중 컴파일 비효율 제거 (빌드 시간 14s -&gt; 3s 단축)"
       - "<strong>Samsung Galaxy S20 / ARM64 실기기 정밀 검증</strong>: <code>granular-scoring</code> 0-Point Baseline 기반 4대 핵심 기능 100/100 만점 획득 (하드웨어 SIMD 진단, 모델 레지스트리 파싱, Sub-5s 온디바이스 추론, 듀얼 엔진 API)"
-      - "<strong>PyPI 및 npm 배포 아티팩트 동기화</strong>: <code>termux-bitnet</code> v1.0.6 sdist/wheel 및 npm tarball 패키징 완료"
+      - "<strong>PyPI 및 npm 배포 아티팩트 동기화</strong>: <code>amv-bitnet</code> v1.0.6 sdist/wheel 및 npm tarball 패키징 완료"
 
   - version: "v1.1.3"
     date: "2026-08-25"

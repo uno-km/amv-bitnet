@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""Zero-dependency, OpenAI-compatible local HTTP server for termux-bitnet."""
+"""Zero-dependency, OpenAI-compatible local HTTP server for amv-bitnet."""
 
 import json
 import time
@@ -9,8 +9,8 @@ import threading
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from typing import Optional
 
-from termux_bitnet.engine import BitNetEngine
-from termux_bitnet.config import BitNetConfig
+from amv_bitnet.engine import BitNetEngine
+from amv_bitnet.config import BitNetConfig
 
 ENGINE_LOCK = threading.Lock()
 
@@ -32,7 +32,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/health":
             self._set_headers(200)
-            self.wfile.write(json.dumps({"status": "healthy", "service": "termux-bitnet"}).encode("utf-8"))
+            self.wfile.write(json.dumps({"status": "healthy", "service": "amv-bitnet"}).encode("utf-8"))
         elif self.path in ("/v1/models", "/models"):
             self._set_headers(200)
             data = {
@@ -57,15 +57,15 @@ class OpenAIHandler(BaseHTTPRequestHandler):
         try:
             content_length = int(self.headers.get("Content-Length", 0))
         except (ValueError, TypeError):
-            self._send_json_error(400, "[termux-bitnet ERROR] Invalid Content-Length header.", "invalid_request_error")
+            self._send_json_error(400, "[amv-bitnet ERROR] Invalid Content-Length header.", "invalid_request_error")
             return
 
         if content_length > self.MAX_REQUEST_SIZE:
-            self._send_json_error(413, f"[termux-bitnet ERROR] Payload Too Large. Maximum allowed size is {self.MAX_REQUEST_SIZE} bytes.", "payload_too_large")
+            self._send_json_error(413, f"[amv-bitnet ERROR] Payload Too Large. Maximum allowed size is {self.MAX_REQUEST_SIZE} bytes.", "payload_too_large")
             return
 
         if content_length < 0:
-            self._send_json_error(400, "[termux-bitnet ERROR] Content-Length cannot be negative.", "invalid_request_error")
+            self._send_json_error(400, "[amv-bitnet ERROR] Content-Length cannot be negative.", "invalid_request_error")
             return
 
         body = self.rfile.read(content_length)
@@ -73,7 +73,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
         try:
             req_data = json.loads(body.decode("utf-8"))
         except Exception:
-            self._send_json_error(400, "[termux-bitnet ERROR] Invalid JSON body", "invalid_request_error")
+            self._send_json_error(400, "[amv-bitnet ERROR] Invalid JSON body", "invalid_request_error")
             return
 
         if self.path in ("/v1/chat/completions", "/chat/completions"):
@@ -99,9 +99,9 @@ class OpenAIHandler(BaseHTTPRequestHandler):
         if not OpenAIHandler.engine:
             self._send_json_error(
                 503,
-                "[termux-bitnet ERROR] BitNet engine is not initialized.\n"
-                "Please start the server with a valid model: termux-bitnet serve -m <model_path>\n"
-                "Or download a model: termux-bitnet download bitnet-2b",
+                "[amv-bitnet ERROR] BitNet engine is not initialized.\n"
+                "Please start the server with a valid model: amv-bitnet serve -m <model_path>\n"
+                "Or download a model: amv-bitnet download bitnet-2b",
                 "service_unavailable"
             )
             return
@@ -110,7 +110,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
         if not messages or not isinstance(messages, list):
             self._send_json_error(
                 400,
-                "[termux-bitnet ERROR] 'messages' field is required and must be a non-empty array of message objects.",
+                "[amv-bitnet ERROR] 'messages' field is required and must be a non-empty array of message objects.",
                 "invalid_request_error"
             )
             return
@@ -137,7 +137,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
         if not has_content:
             self._send_json_error(
                 400,
-                "[termux-bitnet ERROR] Messages cannot be all empty. Please provide valid message text.",
+                "[amv-bitnet ERROR] Messages cannot be all empty. Please provide valid message text.",
                 "invalid_request_error"
             )
             return
@@ -232,12 +232,12 @@ class OpenAIHandler(BaseHTTPRequestHandler):
             except (BrokenPipeError, ConnectionResetError) as _client_disc:
                 # Client disconnected prematurely
                 import logging
-                logging.getLogger("termux_bitnet.server").debug(
+                logging.getLogger("amv_bitnet.server").debug(
                     "[server] Client disconnected during streaming: %s", _client_disc
                 )
             except Exception as e:
                 if not headers_sent:
-                    self._send_json_error(500, f"[termux-bitnet ERROR] Inference execution failed: {e}", "internal_error")
+                    self._send_json_error(500, f"[amv-bitnet ERROR] Inference execution failed: {e}", "internal_error")
                 else:
                     try:
                         err_chunk = {"error": {"message": str(e), "type": "internal_error", "code": 500}}
@@ -247,7 +247,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
                         # 클라이언트가 이미 연결 해제 — 오류 chunk 전송 불가.
                         # 메인 오류(e)는 이미 로깅된 상태이므로 연결 실패만 debug 기록.
                         import logging
-                        logging.getLogger("termux_bitnet.server").debug(
+                        logging.getLogger("amv_bitnet.server").debug(
                             "[server] Cannot flush error chunk to client (disconnected): %s", _flush_err
                         )
 
@@ -281,14 +281,14 @@ class OpenAIHandler(BaseHTTPRequestHandler):
                 }
                 self.wfile.write(json.dumps(resp_obj).encode("utf-8"))
             except Exception as e:
-                self._send_json_error(500, f"[termux-bitnet ERROR] Inference execution failed: {e}", "internal_error")
+                self._send_json_error(500, f"[amv-bitnet ERROR] Inference execution failed: {e}", "internal_error")
 
     def _handle_completions(self, data):
         if not OpenAIHandler.engine:
             self._send_json_error(
                 503,
-                "[termux-bitnet ERROR] BitNet engine is not initialized.\n"
-                "Please start the server with a valid model: termux-bitnet serve -m <model_path>",
+                "[amv-bitnet ERROR] BitNet engine is not initialized.\n"
+                "Please start the server with a valid model: amv-bitnet serve -m <model_path>",
                 "service_unavailable"
             )
             return
@@ -297,7 +297,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
         if not prompt or not str(prompt).strip():
             self._send_json_error(
                 400,
-                "[termux-bitnet ERROR] 'prompt' field cannot be empty. Please provide valid text input.",
+                "[amv-bitnet ERROR] 'prompt' field cannot be empty. Please provide valid text input.",
                 "invalid_request_error"
             )
             return
@@ -396,7 +396,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
                     prod_thread.join(timeout=2.0)
             except Exception as e:
                 if not headers_sent:
-                    self._send_json_error(500, f"[termux-bitnet ERROR] Streaming failure: {e}", "internal_error")
+                    self._send_json_error(500, f"[amv-bitnet ERROR] Streaming failure: {e}", "internal_error")
                 else:
                     try:
                         err_chunk = {"error": {"message": str(e), "type": "internal_error", "code": 500}}
@@ -418,7 +418,7 @@ class OpenAIHandler(BaseHTTPRequestHandler):
                 self._set_headers(200)
                 self.wfile.write(json.dumps(resp_obj).encode("utf-8"))
             except Exception as e:
-                self._send_json_error(500, f"[termux-bitnet ERROR] Inference execution failed: {e}", "internal_error")
+                self._send_json_error(500, f"[amv-bitnet ERROR] Inference execution failed: {e}", "internal_error")
 
 
 def run_server(
@@ -454,7 +454,7 @@ def run_server(
     httpd = ThreadingHTTPServer(server_address, OpenAIHandler)
 
     print("=========================================================")
-    print(f"  termux-bitnet OpenAI API Server running on {host}:{port}")
+    print(f"  amv-bitnet OpenAI API Server running on {host}:{port}")
     print(f"  Backend: {config.device} (layers: {config.n_gpu_layers}) | Threads: {config.n_threads} | Context: {config.n_ctx}")
     print(f"  Concurrency: Multi-threaded (ThreadingHTTPServer + Engine Lock)")
     print(f"  Endpoints:")
@@ -466,7 +466,7 @@ def run_server(
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\n[termux-bitnet] Shutting down server...")
+        print("\n[amv-bitnet] Shutting down server...")
     finally:
         engine.close()
         httpd.server_close()

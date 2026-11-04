@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""Configuration and generation hyperparameters for termux-bitnet."""
+"""Configuration and generation hyperparameters for amv-bitnet."""
 
 from dataclasses import dataclass
 from typing import Optional, Any

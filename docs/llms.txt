@@ -1,15 +1,15 @@
-# Termux-BitNet (v1.0.6)
+# AMV-BitNet (v1.0.6)
 > ARM64 NEON DotProd SIMD Accelerated 1.58-bit On-Device LLM Inference Engine
 
 ## Quick Specification for AI Coding Agents
-- Official Repo: https://github.com/uno-km/termux-bitnet
-- Installation: `pip install termux-bitnet
-# or: npm install -g termux-bitnet`
+- Official Repo: https://github.com/uno-km/amv-bitnet
+- Installation: `pip install amv-bitnet
+# or: npm install -g amv-bitnet`
 - Architecture: Executes 1.58-bit ternary quantized weights {-1, 0, +1} directly via hand-vectorized ARM64 NEON assembly kernels, reducing matrix multiplications to integer additions and subtractions with under 350MB RAM footprint.
 
 ## Canonical Code Pattern
 ```python
-from termux_bitnet import BitNetEngine, BitNetConfig
+from amv_bitnet import BitNetEngine, BitNetConfig
 
 # 1. Initialize engine with model & thread configuration
 config = BitNetConfig(

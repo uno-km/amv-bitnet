@@ -10,7 +10,7 @@ import socket
 import logging
 from typing import List, Optional, Union, Dict, Any, Tuple
 
-from termux_bitnet.exceptions import (
+from amv_bitnet.exceptions import (
     ClusterConnectionError,
     ClusterConfigurationError,
     ClusterLicenseRequiredError,
@@ -163,7 +163,7 @@ def resolve_auto_tensor_split(
 
     if tensor_split and str(tensor_split).strip().lower() == "auto":
         try:
-            from termux_ai_orchestrator.auto_split import resolve_auto_tensor_split as orch_resolve
+            from amv_ai_orchestrator.auto_split import resolve_auto_tensor_split as orch_resolve
             return orch_resolve(servers, min_guardband_mb=min_guardband_mb)
         except Exception as exc:
             logger.warning("[AMEVA-BITNET-CLUSTER] Auto-TS fallback to equal distribution: %s", exc)

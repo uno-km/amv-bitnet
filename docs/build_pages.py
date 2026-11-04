@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
-Official AMEVA Library Documentation Site Generator for termux-bitnet.
+Official AMEVA Library Documentation Site Generator for amv-bitnet.
 100% Aligned with uno-km Library Template Design System, 6-Language i18n, Full API & Benchmarks.
 """
 import os
@@ -15,17 +15,17 @@ try:
     if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8")
 except (AttributeError, io.UnsupportedOperation) as rec_err:
-    sys.stderr.write(f"[termux-bitnet] Notice: stream reconfigure not supported: {rec_err}\n")
+    sys.stderr.write(f"[amv-bitnet] Notice: stream reconfigure not supported: {rec_err}\n")
 
 DOCS_DIR = os.path.dirname(os.path.abspath(__file__))
-SITE_URL = "https://uno-km.github.io/termux-bitnet"
+SITE_URL = "https://uno-km.github.io/amv-bitnet"
 VERSION = "v1.0.0 (Official Release)"
 
 def get_header(active_page):
     return """    <header>
         <a href="index.html" class="header-brand">
-            <img src="favicon.svg" alt="termux-bitnet Logo">
-            <h1 data-i18n="common.brand">termux-bitnet</h1>
+            <img src="favicon.svg" alt="amv-bitnet Logo">
+            <h1 data-i18n="common.brand">amv-bitnet</h1>
         </a>
         <div class="header-controls">
             <span class="release-tag" data-i18n="common.releaseTag">v1.0.0 (NEON Accelerated)</span>
@@ -39,8 +39,8 @@ def get_header(active_page):
                     <option value="de">🇩🇪 Deutsch</option>
                 </select>
             </div>
-            <a href="https://pypi.org/project/termux-bitnet/" target="_blank" class="header-btn" data-i18n="common.pypiBtn">PyPI (pip)</a>
-            <a href="https://github.com/uno-km/termux-bitnet" target="_blank" class="header-btn primary" data-i18n="common.githubBtn">GitHub</a>
+            <a href="https://pypi.org/project/amv-bitnet/" target="_blank" class="header-btn" data-i18n="common.pypiBtn">PyPI (pip)</a>
+            <a href="https://github.com/uno-km/amv-bitnet" target="_blank" class="header-btn primary" data-i18n="common.githubBtn">GitHub</a>
         </div>
     </header>"""
 
@@ -94,34 +94,34 @@ def get_footer():
             🏛️ <strong>Engineered by AMEVA Foundation (아메바 재단)</strong> — Democratizing On-Device AI Sovereignty for Everyone.
         </div>
         <div style="margin-bottom: 8px; font-size: 0.82em; opacity: 0.85;">
-            <strong>Disclaimer:</strong> termux-bitnet is an independent open-source project developed for the Android Termux environment and is not officially affiliated with, endorsed by, or sponsored by the Termux project, PyTorch, or Meta.
+            <strong>Disclaimer:</strong> amv-bitnet is an independent open-source project developed for the Android Termux environment and is not officially affiliated with, endorsed by, or sponsored by the Termux project, PyTorch, or Meta.
         </div>
-        <span data-i18n="common.footerText">&copy; 2026 termux-bitnet Project (uno-km). Released under Apache License 2.0.</span>
+        <span data-i18n="common.footerText">&copy; 2026 amv-bitnet Project (uno-km). Released under Apache License 2.0.</span>
     </footer>"""
 
 def get_head_meta(title, description):
     return f"""    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | termux-bitnet</title>
+    <title>{title} | amv-bitnet</title>
     <meta name="description" content="{description}">
-    <meta name="keywords" content="termux-bitnet, pypi, on-device training, android deep learning, autograd pure python, lora on device, bionic arm64, snapdragon ai, mobile transformer, rope kv cache, safetensors mobile, ameva foundation">
+    <meta name="keywords" content="amv-bitnet, pypi, on-device training, android deep learning, autograd pure python, lora on device, bionic arm64, snapdragon ai, mobile transformer, rope kv cache, safetensors mobile, ameva foundation">
     <meta name="author" content="AMEVA Foundation &amp; uno-km">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{SITE_URL}/">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="alternate" type="application/rss+xml" title="termux-bitnet RSS Feed" href="{SITE_URL}/rss.xml">
+    <link rel="alternate" type="application/rss+xml" title="amv-bitnet RSS Feed" href="{SITE_URL}/rss.xml">
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="{title} | termux-bitnet">
+    <meta property="og:title" content="{title} | amv-bitnet">
     <meta property="og:description" content="{description}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{SITE_URL}/">
-    <meta property="og:site_name" content="termux-bitnet (AMEVA Foundation)">
+    <meta property="og:site_name" content="amv-bitnet (AMEVA Foundation)">
     <meta property="og:image" content="{SITE_URL}/favicon.svg">
 
     <!-- Twitter Card Metadata -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{title} | termux-bitnet">
+    <meta name="twitter:title" content="{title} | amv-bitnet">
     <meta name="twitter:description" content="{description}">
 
     <!-- Schema.org SoftwareApplication JSON-LD -->
@@ -129,7 +129,7 @@ def get_head_meta(title, description):
     {{
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "termux-bitnet",
+      "name": "amv-bitnet",
       "author": {{
         "@type": "Organization",
         "name": "AMEVA Foundation"
@@ -161,20 +161,20 @@ def build_index():
         <main class="content">
             <section class="hero-panel">
                 <div class="badges-bar" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
-                    <a href="https://pypi.org/project/termux-bitnet/" target="_blank"><img src="https://img.shields.io/pypi/v/termux-bitnet.svg?color=0066cc&logo=pypi&logoColor=white" alt="PyPI Version"></a>
-                    <a href="https://pypi.org/project/termux-bitnet/" target="_blank"><img src="https://img.shields.io/pypi/dm/termux-bitnet.svg?color=00f5d4&logo=pypi&logoColor=white" alt="PyPI Monthly Downloads"></a>
-                    <a href="https://pepy.tech/project/termux-bitnet" target="_blank"><img src="https://img.shields.io/pepy/dt/termux-bitnet.svg?color=blue&logo=pypi&logoColor=white" alt="PyPI Total Downloads"></a>
+                    <a href="https://pypi.org/project/amv-bitnet/" target="_blank"><img src="https://img.shields.io/pypi/v/amv-bitnet.svg?color=0066cc&logo=pypi&logoColor=white" alt="PyPI Version"></a>
+                    <a href="https://pypi.org/project/amv-bitnet/" target="_blank"><img src="https://img.shields.io/pypi/dm/amv-bitnet.svg?color=00f5d4&logo=pypi&logoColor=white" alt="PyPI Monthly Downloads"></a>
+                    <a href="https://pepy.tech/project/amv-bitnet" target="_blank"><img src="https://img.shields.io/pepy/dt/amv-bitnet.svg?color=blue&logo=pypi&logoColor=white" alt="PyPI Total Downloads"></a>
                     <span class="release-tag">Audit Score: 100/100 (Grade A+)</span>
                     <span class="release-tag">AMEVA Foundation</span>
                 </div>
-                <h2 data-i18n="home.title">termux-bitnet</h2>
+                <h2 data-i18n="home.title">amv-bitnet</h2>
                 <p class="subtitle" data-i18n="home.subtitle">High-Performance 1.58-bit (i2_s) BitNet On-Device LLM Inference Runtime for ARM64 &amp; Android Termux</p>
             </section>
 
             <div class="callout callout-info" style="margin: 20px 0; border-left: 4px solid var(--accent-cyan);">
                 <strong>🏛️ AMEVA Foundation (아메바 재단) Initiative:</strong>
                 <p style="margin-top: 6px; font-size: 0.95em;">
-                    termux-bitnet은 <strong>빅테크의 클라우드 GPU 독점 종속을 타파</strong>하고, 전 세계 모든 개발자가 스마트폰과 엣지 단말에서 100% 무료로 AI를 직접 학습하고 미세조정(LoRA)할 수 있도록 지원하는 <strong>아메바 재단(AMEVA Foundation)</strong>의 공식 오픈소스 프로젝트입니다.
+                    amv-bitnet은 <strong>빅테크의 클라우드 GPU 독점 종속을 타파</strong>하고, 전 세계 모든 개발자가 스마트폰과 엣지 단말에서 100% 무료로 AI를 직접 학습하고 미세조정(LoRA)할 수 있도록 지원하는 <strong>아메바 재단(AMEVA Foundation)</strong>의 공식 오픈소스 프로젝트입니다.
                 </p>
             </div>
 
@@ -185,7 +185,7 @@ def build_index():
                 </div>
                 <div class="card solution-card">
                     <h3 data-i18n="home.solTitle">The Zero-Dependency Breakthrough</h3>
-                    <p data-i18n="home.solText">termux-bitnet runs natively on Android Termux with a pure Python DAG Autograd core, pluggable NumPy/OpenBLAS ARM NEON SIMD vectorization, RoPE Transformers, SafeTensors zero-copy, and low-rank LoRA fine-tuning.</p>
+                    <p data-i18n="home.solText">amv-bitnet runs natively on Android Termux with a pure Python DAG Autograd core, pluggable NumPy/OpenBLAS ARM NEON SIMD vectorization, RoPE Transformers, SafeTensors zero-copy, and low-rank LoRA fine-tuning.</p>
                 </div>
             </section>
 
@@ -213,12 +213,12 @@ def build_index():
                 </div>
                 <div class="feature-card">
                     <h4>🚀 Official PyPI Distribution</h4>
-                    <p>Install with single command <code>pip install termux-bitnet</code> across Android Termux, Linux, Windows, macOS.</p>
+                    <p>Install with single command <code>pip install amv-bitnet</code> across Android Termux, Linux, Windows, macOS.</p>
                 </div>
             </div>
 
             <h3 data-i18n="home.codeExampleTitle" style="margin-top: 32px;">Canonical 10-Line Training Demo (Python)</h3>
-            <pre><code class="language-python">from termux_bitnet import Tensor, nn, optim, set_backend
+            <pre><code class="language-python">from amv_bitnet import Tensor, nn, optim, set_backend
 
 # 1. Automatic C-acceleration (NumPy / OpenBLAS NEON)
 set_backend("auto")
@@ -243,7 +243,7 @@ def build_installation():
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{get_head_meta("Installation Guide (pip)", "Install termux-bitnet on Android Termux, Linux, Windows, macOS")}
+{get_head_meta("Installation Guide (pip)", "Install amv-bitnet on Android Termux, Linux, Windows, macOS")}
 </head>
 <body>
 {get_header('installation.html')}
@@ -262,28 +262,28 @@ def build_installation():
 
                 <div class="tab-content active" data-tab-content="termux">
                     <h3>Native Android Termux Setup (Recommended)</h3>
-                    <p>Install Python, OpenBLAS-accelerated NumPy, and termux-bitnet directly in Termux:</p>
+                    <p>Install Python, OpenBLAS-accelerated NumPy, and amv-bitnet directly in Termux:</p>
                     <pre><code class="language-bash">pkg update && pkg install python python-numpy git
-pip install termux-bitnet
+pip install amv-bitnet
 
 # Run self-diagnostic check
-termux-bitnet check</code></pre>
+amv-bitnet check</code></pre>
                 </div>
 
                 <div class="tab-content" data-tab-content="pypi">
                     <h3>Standard PyPI Installation</h3>
                     <p>For host PCs and servers with optional NumPy acceleration:</p>
                     <pre><code class="language-bash"># Core zero-dependency package
-pip install termux-bitnet
+pip install amv-bitnet
 
 # With accelerated NumPy backend
-pip install termux-bitnet[accelerated]</code></pre>
+pip install amv-bitnet[accelerated]</code></pre>
                 </div>
 
                 <div class="tab-content" data-tab-content="source">
                     <h3>Source Development Build</h3>
-                    <pre><code class="language-bash">git clone https://github.com/uno-km/termux-bitnet.git
-cd termux-bitnet
+                    <pre><code class="language-bash">git clone https://github.com/uno-km/amv-bitnet.git
+cd amv-bitnet
 pip install -e .[dev]
 pytest tests/ -v</code></pre>
                 </div>
@@ -291,16 +291,16 @@ pytest tests/ -v</code></pre>
 
             <h3 style="margin-top: 32px;">CLI Diagnostics &amp; Self-Test Suite</h3>
             <pre><code class="language-bash"># Hardware &amp; memory check
-termux-bitnet info
+amv-bitnet info
 
 # Mathematical autograd integrity check
-termux-bitnet check
+amv-bitnet check
 
 # 0-point baseline audit scorecard
-termux-bitnet score
+amv-bitnet score
 
 # Run canonical demo (1 through 9)
-termux-bitnet demo 9</code></pre>
+amv-bitnet demo 9</code></pre>
         </main>
     </div>
 {get_footer()}
@@ -311,7 +311,7 @@ def build_quickstart():
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{get_head_meta("Quickstart & Recipes", "5-minute quickstart recipes for termux-bitnet")}
+{get_head_meta("Quickstart & Recipes", "5-minute quickstart recipes for amv-bitnet")}
 </head>
 <body>
 {get_header('quickstart.html')}
@@ -322,7 +322,7 @@ def build_quickstart():
             <p class="subtitle" data-i18n="quickstart.subtitle">Build, train, and recover neural networks with crash-resilient checkpoints.</p>
 
             <h3>Recipe 1: Non-Linear XOR Classification</h3>
-            <pre><code class="language-python">from termux_bitnet import Tensor, nn, optim
+            <pre><code class="language-python">from amv_bitnet import Tensor, nn, optim
 
 # 1. Define Model Architecture
 model = nn.Sequential(
@@ -349,7 +349,7 @@ for epoch in range(500):
         print(f"Epoch {{epoch}} | Loss: {{loss.item():.6f}}")</code></pre>
 
             <h3 style="margin-top: 32px;">Recipe 2: Mobile Training Runtime with Safe Checkpointing</h3>
-            <pre><code class="language-python">from termux_bitnet import Tensor, nn, optim, runtime
+            <pre><code class="language-python">from amv_bitnet import Tensor, nn, optim, runtime
 
 trainer = runtime.MobileTrainer(
     model=model,
@@ -389,7 +389,7 @@ def build_models():
             </div>
 
             <h3>1. Tiny Transformer LM (Decoder-Only with RoPE)</h3>
-            <pre><code class="language-python">from termux_bitnet import Tensor, nn
+            <pre><code class="language-python">from amv_bitnet import Tensor, nn
 
 model = nn.TinyTransformerLM(
     vocab_size=500,
@@ -405,7 +405,7 @@ model = nn.TinyTransformerLM(
 generated_tokens = model.generate([1, 10, 45], max_new_tokens=30, temperature=0.7)</code></pre>
 
             <h3 style="margin-top: 32px;">2. Tiny Whisper LoRA Speech-to-Text (<30KB)</h3>
-            <pre><code class="language-python">from termux_bitnet import nn, checkpoint
+            <pre><code class="language-python">from amv_bitnet import nn, checkpoint
 
 # Inject LoRA into Attention projections
 for block in model.blocks:
@@ -438,7 +438,7 @@ def build_training_guide():
             <p class="subtitle" data-i18n="guide.subtitle">Comprehensive engineering guide for training RoPE Transformers, Whisper LoRA, and DocFold models on mobile hardware.</p>
 
             <h3>1. Mobile Hardware Constraints &amp; LMK Defense</h3>
-            <p>Android OS triggers the <strong>Low Memory Killer (LMK)</strong> when free memory falls below 300MB. termux-bitnet avoids this via:</p>
+            <p>Android OS triggers the <strong>Low Memory Killer (LMK)</strong> when free memory falls below 300MB. amv-bitnet avoids this via:</p>
             <ul style="margin-left: 20px; line-height: 1.8;">
                 <li><strong>Zero-Dependency Core</strong>: Pure Python autograd consuming &lt; 30MB base RAM.</li>
                 <li><strong>Streaming MMap Datasets</strong>: Direct page-cache disk streaming without heap bloat.</li>
@@ -446,8 +446,8 @@ def build_training_guide():
             </ul>
 
             <h3 style="margin-top: 32px;">2. Recipe 1: Tiny Transformer Language Model (RoPE + KV Cache)</h3>
-            <pre><code class="language-python">from termux_bitnet import Tensor, nn, optim, set_backend
-from termux_bitnet.tokenization import CharTokenizer
+            <pre><code class="language-python">from amv_bitnet import Tensor, nn, optim, set_backend
+from amv_bitnet.tokenization import CharTokenizer
 
 set_backend("auto")
 tokenizer = CharTokenizer()
@@ -497,7 +497,7 @@ def build_api_reference():
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{get_head_meta("100% Full API Reference", "Complete API specification for termux-bitnet")}
+{get_head_meta("100% Full API Reference", "Complete API specification for amv-bitnet")}
 </head>
 <body>
 {get_header('api-reference.html')}
@@ -507,7 +507,7 @@ def build_api_reference():
             <h2 data-i18n="api.title">100% Full API Reference</h2>
             <p class="subtitle" data-i18n="api.subtitle">Complete specification of Tensor, Module, Optimizer, Checkpoint, and Tokenizer classes.</p>
 
-            <h3>1. Core Tensor Module (<code>termux_bitnet.Tensor</code>)</h3>
+            <h3>1. Core Tensor Module (<code>amv_bitnet.Tensor</code>)</h3>
             <table class="spec-table">
                 <thead>
                     <tr><th>Method / Property</th><th>Signature</th><th>Description</th></tr>
@@ -520,7 +520,7 @@ def build_api_reference():
                 </tbody>
             </table>
 
-            <h3 style="margin-top: 32px;">2. Neural Network Layers (<code>termux_bitnet.nn</code>)</h3>
+            <h3 style="margin-top: 32px;">2. Neural Network Layers (<code>amv_bitnet.nn</code>)</h3>
             <table class="spec-table">
                 <thead>
                     <tr><th>Class</th><th>Key Constructor Parameters</th><th>Description</th></tr>
@@ -541,9 +541,9 @@ def build_api_reference():
                     <tr><th>Function / Class</th><th>Module</th><th>Description</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><code>optim.AdamW</code></td><td><code>termux_bitnet.optim</code></td><td>Decoupled weight decay Adam optimizer.</td></tr>
-                    <tr><td><code>checkpoint.save_safetensors</code></td><td><code>termux_bitnet.checkpoint</code></td><td>HuggingFace-compatible zero-copy binary serialization.</td></tr>
-                    <tr><td><code>checkpoint.save_lora_adapter</code></td><td><code>termux_bitnet.checkpoint</code></td><td>Saves low-rank matrices only (&lt;100KB adapter footprint).</td></tr>
+                    <tr><td><code>optim.AdamW</code></td><td><code>amv_bitnet.optim</code></td><td>Decoupled weight decay Adam optimizer.</td></tr>
+                    <tr><td><code>checkpoint.save_safetensors</code></td><td><code>amv_bitnet.checkpoint</code></td><td>HuggingFace-compatible zero-copy binary serialization.</td></tr>
+                    <tr><td><code>checkpoint.save_lora_adapter</code></td><td><code>amv_bitnet.checkpoint</code></td><td>Saves low-rank matrices only (&lt;100KB adapter footprint).</td></tr>
                 </tbody>
             </table>
         </main>
@@ -568,7 +568,7 @@ def build_advanced_parameters():
 
             <h3>1. SafeTensors Zero-Copy Binary Architecture</h3>
             <p>Traditional PyTorch Python pickling creates duplicate memory copies. SafeTensors maps contiguous binary buffers directly to memory:</p>
-            <pre><code class="language-python">from termux_bitnet import checkpoint
+            <pre><code class="language-python">from amv_bitnet import checkpoint
 
 # Save model parameters to SafeTensors
 checkpoint.save_safetensors(model.state_dict(), "model.safetensors")
@@ -577,7 +577,7 @@ checkpoint.save_safetensors(model.state_dict(), "model.safetensors")
 tensors, metadata = checkpoint.load_safetensors("model.safetensors")</code></pre>
 
             <h3 style="margin-top: 32px;">2. INT8 AbsMax Weight Quantization (75% RAM Reduction)</h3>
-            <pre><code class="language-python">from termux_bitnet import nn
+            <pre><code class="language-python">from amv_bitnet import nn
 
 # Convert FP32 linear layer to zero-allocation INT8 layer
 q_linear = nn.quantize_linear_int8(model.fc1)
@@ -585,7 +585,7 @@ q_linear = nn.quantize_linear_int8(model.fc1)
 y = q_linear(x)</code></pre>
 
             <h3 style="margin-top: 32px;">3. MMap Streaming Token Dataset</h3>
-            <pre><code class="language-python">from termux_bitnet.data import MMapTokenDataset
+            <pre><code class="language-python">from amv_bitnet.data import MMapTokenDataset
 
 # Stream multi-gigabyte corpus from disk
 dataset = MMapTokenDataset.create_from_tokens(tokens=token_list, filepath="dataset.bin", seq_len=64)
@@ -600,7 +600,7 @@ def build_benchmarks():
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{get_head_meta("Benchmarks & Hardware", "Hardware benchmarks and audit scorecard for termux-bitnet")}
+{get_head_meta("Benchmarks & Hardware", "Hardware benchmarks and audit scorecard for amv-bitnet")}
 </head>
 <body>
 {get_header('benchmarks.html')}
@@ -628,7 +628,7 @@ def build_benchmarks():
             <h3 style="margin-top: 32px;">2. LoRA Adapter Compression vs Full Checkpoint</h3>
             <table class="spec-table">
                 <thead>
-                    <tr><th>Model Architecture</th><th>Full PyTorch Checkpoint</th><th>termux-bitnet SafeTensors LoRA</th><th>RAM &amp; Storage Reduction</th></tr>
+                    <tr><th>Model Architecture</th><th>Full PyTorch Checkpoint</th><th>amv-bitnet SafeTensors LoRA</th><th>RAM &amp; Storage Reduction</th></tr>
                 </thead>
                 <tbody>
                     <tr><td><strong>Tiny Whisper Speech-to-Text</strong></td><td>557.25 KB</td><td><strong>21.01 KB</strong></td><td><strong>96.2% Reduction</strong></td></tr>
@@ -645,7 +645,7 @@ def build_versions():
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{get_head_meta("Version Archive & Changelog", "Release history and changelog for termux-bitnet")}
+{get_head_meta("Version Archive & Changelog", "Release history and changelog for amv-bitnet")}
 </head>
 <body>
 {get_header('versions.html')}
@@ -661,14 +661,14 @@ def build_versions():
                     <span class="release-tag">2026-08-20</span>
                 </div>
                 <ul style="margin-left: 20px; line-height: 1.8;">
-                    <li><strong>Official PyPI Release</strong>: <code>pip install termux-bitnet</code> live on PyPI.</li>
+                    <li><strong>Official PyPI Release</strong>: <code>pip install amv-bitnet</code> live on PyPI.</li>
                     <li><strong>Pure Python Autograd Core</strong>: Zero-dependency dynamic computation graph with reverse-mode DAG.</li>
                     <li><strong>Pluggable NumPy Backend</strong>: Automatic C-level OpenBLAS ARM NEON SIMD vectorization.</li>
                     <li><strong>Modern Transformer</strong>: Rotary Position Embedding (RoPE) with O(0) weights and incremental KV-caching.</li>
                     <li><strong>On-Device LoRA</strong>: Parameter-efficient adapter fine-tuning with &lt;100KB SafeTensors serialization.</li>
                     <li><strong>SafeTensors Binary</strong>: Zero-copy tensor loading eliminating mobile OOM crashes.</li>
                     <li><strong>Streaming MMap Datasets</strong>: Disk-backed token streaming via kernel page cache.</li>
-                    <li><strong>CLI Suite</strong>: <code>termux-bitnet info</code>, <code>check</code>, <code>score</code>, <code>demo</code>.</li>
+                    <li><strong>CLI Suite</strong>: <code>amv-bitnet info</code>, <code>check</code>, <code>score</code>, <code>demo</code>.</li>
                     <li><strong>AMEVA Foundation</strong>: Sponsored under AMEVA Foundation Open-Source Initiative.</li>
                 </ul>
             </div>

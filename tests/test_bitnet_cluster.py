@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
-AMEVA Unified Distributed RPC Cluster Orchestration Cold Tests for termux-bitnet.
+AMEVA Unified Distributed RPC Cluster Orchestration Cold Tests for amv-bitnet.
 Strict Protocol: Zero-Silent-Fallback & Fail-Fast Verification.
 Component: [BITNET-CLUSTER]
 """
@@ -11,19 +11,19 @@ import sys
 import pytest
 from unittest.mock import patch, MagicMock
 
-import termux_bitnet as tb
-from termux_bitnet.exceptions import (
+import amv_bitnet as tb
+from amv_bitnet.exceptions import (
     ClusterConnectionError,
     ClusterConfigurationError,
 )
-from termux_bitnet.cluster import (
+from amv_bitnet.cluster import (
     parse_cluster_rpc_spec,
     verify_rpc_cluster_nodes,
     verify_rpc_cluster_health,
 )
-from termux_bitnet.config import BitNetConfig
-from termux_bitnet.engine import BitNetEngine
-from termux_bitnet.cli import main
+from amv_bitnet.config import BitNetConfig
+from amv_bitnet.engine import BitNetEngine
+from amv_bitnet.cli import main
 
 
 def test_parse_cluster_rpc_spec_valid():
@@ -125,8 +125,8 @@ def test_bitnet_engine_cluster_args_and_preflight(tmp_path):
     engine = BitNetEngine(config=config)
     engine.count_tokens = MagicMock(return_value=2)
 
-    with patch("termux_bitnet.engine.verify_rpc_cluster_nodes") as mock_verify, \
-         patch("termux_bitnet.engine.subprocess.Popen") as mock_popen:
+    with patch("amv_bitnet.engine.verify_rpc_cluster_nodes") as mock_verify, \
+         patch("amv_bitnet.engine.subprocess.Popen") as mock_popen:
         mock_proc = MagicMock()
         mock_proc.poll.return_value = 0
         mock_proc.stdout.read.side_effect = ["Prompt: Output\n", ""]
@@ -153,7 +153,7 @@ def test_cli_cluster_rpc_flag_parsing(tmp_path, monkeypatch):
     dummy_model.write_text("model_header")
 
     test_args = [
-        "termux-bitnet",
+        "amv-bitnet",
         "run",
         "-m",
         str(dummy_model),
@@ -166,7 +166,7 @@ def test_cli_cluster_rpc_flag_parsing(tmp_path, monkeypatch):
     ]
     monkeypatch.setattr(sys, "argv", test_args)
 
-    with patch("termux_bitnet.cli.BitNetEngine") as MockEngine:
+    with patch("amv_bitnet.cli.BitNetEngine") as MockEngine:
         mock_instance = MagicMock()
         mock_instance.__enter__.return_value = mock_instance
         mock_instance.__exit__.return_value = None
@@ -174,7 +174,7 @@ def test_cli_cluster_rpc_flag_parsing(tmp_path, monkeypatch):
         mock_instance.get_last_metrics.return_value = MagicMock(tokens_per_second=10.0, total_tokens=5, generation_time_s=0.5)
         MockEngine.return_value = mock_instance
 
-        with patch("termux_bitnet.cli.detect_hardware"):
+        with patch("amv_bitnet.cli.detect_hardware"):
             try:
                 main()
             except SystemExit as e:

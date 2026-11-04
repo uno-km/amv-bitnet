@@ -49,7 +49,7 @@ DEFAULT_CACHE_DIR = Path.home() / ".cache" / "termux-bitnet" / "models"
 def list_available_models():
     """Display all verified BitNet GGUF models in the registry."""
     print("=========================================================================")
-    print("       termux-bitnet Verified 1.58-bit GGUF Model Registry               ")
+    print("       amv-bitnet Verified 1.58-bit GGUF Model Registry               ")
     print("=========================================================================")
     for alias, info in AVAILABLE_MODELS.items():
         print(f"  * {alias:15s} : {info['description']}")
@@ -83,7 +83,7 @@ verify_model_file = verify_gguf_magic_header
 
 
 def verify_file_sha256(file_path: Union[str, Path], expected_sha256: str, block_size: int = 65536) -> bool:
-    """Standard Unified SHA-256 Checksum Verifier for termux-bitnet."""
+    """Standard Unified SHA-256 Checksum Verifier for amv-bitnet."""
     p = Path(file_path)
     if not p.is_file() or not expected_sha256:
         return False
@@ -103,9 +103,9 @@ def download_model(model_name: str = "bitnet-2b", output_dir: Optional[Path] = N
     """Download 1.58-bit quantized GGUF model with streaming progress bar and resume support."""
     if not model_name or not model_name.strip():
         raise ValueError(
-            "[termux-bitnet ERROR] Model name cannot be empty.\n"
+            "[amv-bitnet ERROR] Model name cannot be empty.\n"
             f"Available verified models: {list(AVAILABLE_MODELS.keys())}\n"
-            "Example: termux-bitnet download bitnet-2b"
+            "Example: amv-bitnet download bitnet-2b"
         )
 
     clean_name = model_name.strip()
@@ -113,15 +113,15 @@ def download_model(model_name: str = "bitnet-2b", output_dir: Optional[Path] = N
         closest = difflib.get_close_matches(clean_name.lower(), AVAILABLE_MODELS.keys(), n=1, cutoff=0.35)
         if closest:
             raise ValueError(
-                f"[termux-bitnet ERROR] Model name typo detected: '{clean_name}'. Did you mean '{closest[0]}'?\n"
+                f"[amv-bitnet ERROR] Model name typo detected: '{clean_name}'. Did you mean '{closest[0]}'?\n"
                 f"Available verified models: {list(AVAILABLE_MODELS.keys())}\n"
-                f"Run: termux-bitnet download {closest[0]}"
+                f"Run: amv-bitnet download {closest[0]}"
             )
         else:
             raise ValueError(
-                f"[termux-bitnet ERROR] Unknown model '{clean_name}'.\n"
+                f"[amv-bitnet ERROR] Unknown model '{clean_name}'.\n"
                 f"Available verified models: {list(AVAILABLE_MODELS.keys())}\n"
-                "Run 'termux-bitnet models' to inspect all verified models."
+                "Run 'amv-bitnet models' to inspect all verified models."
             )
 
     model_info = AVAILABLE_MODELS[clean_name]
@@ -132,18 +132,18 @@ def download_model(model_name: str = "bitnet-2b", output_dir: Optional[Path] = N
 
     if not force and target_path.exists() and verify_model_file(target_path):
         sz_mb = target_path.stat().st_size / (1024 * 1024)
-        print(f"[termux-bitnet] Valid model already cached at: {target_path} ({sz_mb:.1f} MB)")
+        print(f"[amv-bitnet] Valid model already cached at: {target_path} ({sz_mb:.1f} MB)")
         return target_path
 
     url = model_info["url"]
-    print(f"[termux-bitnet] Downloading {model_info['description']}...")
-    print(f"[termux-bitnet] Remote URL : {url}")
+    print(f"[amv-bitnet] Downloading {model_info['description']}...")
+    print(f"[amv-bitnet] Remote URL : {url}")
     try:
-        from termux_bitnet import __version__
+        from amv_bitnet import __version__
         ua_version = __version__
     except Exception:
         ua_version = "1.4.0"
-    headers = {"User-Agent": f"termux-bitnet/{ua_version} (Android; ARM64)"}
+    headers = {"User-Agent": f"amv-bitnet/{ua_version} (Android; ARM64)"}
     downloaded = 0
     mode = "wb"
 
@@ -162,7 +162,7 @@ def download_model(model_name: str = "bitnet-2b", output_dir: Optional[Path] = N
                 downloaded = 0
                 mode = "wb"
                 headers.pop("Range", None)
-                response = requests.get(url, headers={"User-Agent": f"termux-bitnet/{ua_version} (Android; ARM64)"}, stream=True, timeout=30)
+                response = requests.get(url, headers={"User-Agent": f"amv-bitnet/{ua_version} (Android; ARM64)"}, stream=True, timeout=30)
 
         if response.status_code not in (200, 206):
             err_snip = response.text[:200].strip()
@@ -202,7 +202,7 @@ def download_model(model_name: str = "bitnet-2b", output_dir: Optional[Path] = N
             )
 
         os.replace(part_path, target_path)
-        print(f"\n[termux-bitnet] Download successfully verified and completed: {target_path}")
+        print(f"\n[amv-bitnet] Download successfully verified and completed: {target_path}")
         return target_path
     except Exception as e:
         if part_path.exists() and not verify_model_file(part_path):
@@ -212,7 +212,7 @@ def download_model(model_name: str = "bitnet-2b", output_dir: Optional[Path] = N
 
 
 def resolve_model_path(model_name: str = "bitnet-2b") -> Path:
-    """Standard Unified Model Path Resolver for termux-bitnet."""
+    """Standard Unified Model Path Resolver for amv-bitnet."""
     from .hardware import get_unified_model_search_dirs
     clean = model_name.lower().strip()
     f_info = AVAILABLE_MODELS.get(clean)

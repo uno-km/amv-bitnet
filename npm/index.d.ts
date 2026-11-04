@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0 OR Commercial-License
  */
 /**
- * TypeScript definitions for termux-bitnet Node.js Gateway.
+ * TypeScript definitions for amv-bitnet Node.js Gateway.
  */
 
 export interface BitNetOptions {

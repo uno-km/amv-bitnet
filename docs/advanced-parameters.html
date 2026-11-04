@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Parameters & Tuning | Termux-BitNet</title>
+  <title>Advanced Parameters & Tuning | AMV-BitNet</title>
   <meta name="description" content="Executes 1.58-bit ternary quantized weights {-1, 0, +1} directly via hand-vectorized ARM64 NEON assembly kernels, reducing matrix multiplications to integer additions and subtractions with under 350MB RAM footprint.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="assets/style.css">
@@ -14,16 +14,16 @@
 <body>
   <header>
     <a href="index.html" class="header-brand">
-      <img src="favicon.svg" alt="Termux-BitNet Logo">
-      <h1 data-i18n="common.brand">Termux-BitNet</h1>
+      <img src="favicon.svg" alt="AMV-BitNet Logo">
+      <h1 data-i18n="common.brand">AMV-BitNet</h1>
     </a>
     <div class="header-controls">
       <span class="release-tag" data-i18n="common.releaseTag">v1.0.6</span>
       <div class="lang-selector-wrapper"></div>
       <a href="/foundation/index.html" class="header-btn" style="border-color:#2563eb;color:#2563eb;font-weight:600;" data-i18n="common.foundationBtn">Foundation</a>
-      <a href="https://pypi.org/project/termux-bitnet/" target="_blank" class="header-btn" title="PyPI: termux-bitnet | npm: termux-bitnet" data-i18n="common.pkgBtn">pip / npm</a>
+      <a href="https://pypi.org/project/amv-bitnet/" target="_blank" class="header-btn" title="PyPI: amv-bitnet | npm: amv-bitnet" data-i18n="common.pkgBtn">pip / npm</a>
       <a href="https://github.com/sponsors/uno-km" target="_blank" class="header-btn" style="border-color: #ea4aaa; color: #ea4aaa; font-weight: 700;">Sponsor</a>
-      <a href="https://github.com/uno-km/termux-bitnet" target="_blank" class="header-btn primary" data-i18n="common.githubBtn">GitHub</a>
+      <a href="https://github.com/uno-km/amv-bitnet" target="_blank" class="header-btn primary" data-i18n="common.githubBtn">GitHub</a>
       <a href="/" class="header-btn" style="border-color:#004499;color:#004499;font-weight:600;" data-i18n="common.founderBtn">Founder CV</a>
     </div>
   </header>
@@ -46,12 +46,12 @@
     <ul>
       <li><a href="/lib/sentinel/">AMEVA-Sentinel (Security SDK)</a></li>
       <li><a href="/lib/mcp/">AMEVA-MCP-Hub (Polyglot WASM)</a></li>
-      <li><a href="/lib/aichain/">Termux-AIChain (Zero-Dep Agent)</a></li>
-      <li><a href="/lib/bitnet/" class="active">Termux-BitNet (1.58-bit LLM)</a></li>
-      <li><a href="/lib/diffusion/">Termux-Diffusion (Image AI)</a></li>
-      <li><a href="/lib/playwright/">Termux-Playwright (Automation)</a></li>
-      <li><a href="/lib/stt/">Termux-STT (Voice STT)</a></li>
-      <li><a href="/lib/train/">Termux-Train (LoRA Engine)</a></li>
+      <li><a href="/lib/aichain/">AMV-AIChain (Zero-Dep Agent)</a></li>
+      <li><a href="/lib/bitnet/" class="active">AMV-BitNet (1.58-bit LLM)</a></li>
+      <li><a href="/lib/diffusion/">AMV-Diffusion (Image AI)</a></li>
+      <li><a href="/lib/playwright/">AMV-Playwright (Automation)</a></li>
+      <li><a href="/lib/stt/">AMV-STT (Voice STT)</a></li>
+      <li><a href="/lib/train/">AMV-Train (LoRA Engine)</a></li>
       <li><a href="/lib/forge/">AMEVA-Forge (WebGPU Autograd)</a></li>
       <li><a href="https://ameva-workstation-web-core.vercel.app/" target="_blank">AMEVA Workstation (Web App)</a></li>
     </ul>
@@ -74,7 +74,7 @@
 <p>Matrix multiplication $Y = W \cdot X$ is converted into vectorized additions and subtractions of activation vectors. The ARM64 NEON Dot-Product engine executes these operations via <code>vdotq_s32</code> instructions, maximizing throughput while minimizing transistor switching energy.</p>
 
 <h3>2. Memory Footprint &amp; Android LMK Defense</h3>
-<p>Android OS executes the <strong>Low Memory Killer (LMK)</strong> when free system memory falls below critical thresholds (typically 300MB ~ 500MB). Termux-BitNet protects against LMK aborts via:</p>
+<p>Android OS executes the <strong>Low Memory Killer (LMK)</strong> when free system memory falls below critical thresholds (typically 300MB ~ 500MB). AMV-BitNet protects against LMK aborts via:</p>
 <ul style="margin-left: 20px; line-height: 1.8;">
   <li><strong>Zero-Copy Memory Mapping (<code>mmap</code>)</strong>: Model weights remain mapped directly from disk into read-only virtual address space, sharing pages with the OS cache.</li>
   <li><strong>Pre-Allocated KV Cache Ring Buffers</strong>: Prevents continuous heap allocation and fragmentation during autoregressive generation.</li>

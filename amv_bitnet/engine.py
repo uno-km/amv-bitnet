@@ -10,10 +10,10 @@ import logging
 from typing import Generator, Optional, List, Tuple, Any
 from pathlib import Path
 
-from termux_bitnet.config import BitNetConfig, GenerationMetrics
-from termux_bitnet.hardware import detect_hardware, resolve_device_backend, bind_bitnet_hardware
-from termux_bitnet.exceptions import BitNetEngineNotFound, RuntimeNotFoundError, PlatformNotSupportedError
-from termux_bitnet.cluster import parse_cluster_rpc_spec, verify_rpc_cluster_nodes
+from amv_bitnet.config import BitNetConfig, GenerationMetrics
+from amv_bitnet.hardware import detect_hardware, resolve_device_backend, bind_bitnet_hardware
+from amv_bitnet.exceptions import BitNetEngineNotFound, RuntimeNotFoundError, PlatformNotSupportedError
+from amv_bitnet.cluster import parse_cluster_rpc_spec, verify_rpc_cluster_nodes
 
 logger = logging.getLogger(__name__)
 
@@ -77,11 +77,11 @@ class BitNetEngine:
             expanded = os.path.abspath(os.path.expanduser(self.config.model_path))
             if not os.path.isfile(expanded):
                 raise FileNotFoundError(
-                    f"[termux-bitnet] Model file not found at: '{expanded}'.\n"
+                    f"[amv-bitnet] Model file not found at: '{expanded}'.\n"
                     f"Download a verified BitNet model using:\n"
-                    f"  termux-bitnet download bitnet-2b       (Microsoft BitNet 2B-4T, 1.13 GB)\n"
-                    f"  termux-bitnet download bitnet-large    (BitNet Large 0.7B, 700 MB)\n"
-                    f"  termux-bitnet download bitnet-3b       (BitNet 3B, 2.4 GB)\n"
+                    f"  amv-bitnet download bitnet-2b       (Microsoft BitNet 2B-4T, 1.13 GB)\n"
+                    f"  amv-bitnet download bitnet-large    (BitNet Large 0.7B, 700 MB)\n"
+                    f"  amv-bitnet download bitnet-3b       (BitNet 3B, 2.4 GB)\n"
                     f"Or visit Hugging Face: https://huggingface.co/1bitLLM/bitnet_b1_58-large-GGUF"
                 )
             self.config.model_path = expanded
@@ -129,7 +129,7 @@ class BitNetEngine:
         lib_path = self._find_library_path()
         if not lib_path or not lib_path.exists():
             try:
-                from termux_bitnet.installer import install_prebuilt_library
+                from amv_bitnet.installer import install_prebuilt_library
                 if install_prebuilt_library():
                     lib_path = self._find_library_path()
             except Exception:
@@ -139,7 +139,7 @@ class BitNetEngine:
             try:
                 return ctypes.CDLL(str(lib_path))
             except Exception as e:
-                print(f"[termux-bitnet] Warning: Failed to load native library '{lib_path}': {e}")
+                print(f"[amv-bitnet] Warning: Failed to load native library '{lib_path}': {e}")
         return None
 
     def _setup_bindings(self) -> None:
@@ -208,8 +208,8 @@ class BitNetEngine:
         """Instantiate C context from config with strict Decoupled AMEVA Gateway routing."""
         if not self.config.model_path:
             raise ValueError(
-                "[termux-bitnet] Cannot initialize BitNet engine context without a valid model_path. "
-                "Specify config.model_path or run 'termux-bitnet download bitnet-2b'."
+                "[amv-bitnet] Cannot initialize BitNet engine context without a valid model_path. "
+                "Specify config.model_path or run 'amv-bitnet download bitnet-2b'."
             )
 
         # Check binary GPU capabilities vs requested device configuration
@@ -218,18 +218,18 @@ class BitNetEngine:
 
         if requested_gpu and not native_has_vk:
             if getattr(self, "_requested_device", "auto") in ("vulkan", "gpu"):
-                from termux_bitnet.exceptions import PlatformNotSupportedError
+                from amv_bitnet.exceptions import PlatformNotSupportedError
                 raise PlatformNotSupportedError(
                     f"[ERROR: AMEVA-BITNET-E002] Explicit GPU backend ('--device {self._requested_device}') requested, "
                     f"but native core library ('{self._find_library_path()}') was compiled without Vulkan support.\n"
                     f"Cause: Binary was built with pure CPU NEON configuration (GGML_VULKAN=OFF).\n"
-                    f"Action Required: Run with CPU backend: termux-bitnet run --device cpu ...\n"
+                    f"Action Required: Run with CPU backend: amv-bitnet run --device cpu ...\n"
                     f"Or compile native library with Vulkan: cmake -B build -DGGML_VULKAN=ON"
                 )
             else:
                 # Original requested device was "auto": Graceful fallback to CPU NEON (Rule: auto시 gpu -> cpu풀백)
                 import sys
-                sys.stdout.write("[INFO] [termux-bitnet] Vulkan GPU acceleration not compiled into core binary. "
+                sys.stdout.write("[INFO] [amv-bitnet] Vulkan GPU acceleration not compiled into core binary. "
                                  "Falling back to ARM64 NEON CPU backend.\n")
                 sys.stdout.flush()
                 self.config.device = "cpu"
@@ -278,7 +278,7 @@ class BitNetEngine:
         self._ctx = self._lib.bitnet_init(ctypes.byref(c_params))
         if not self._ctx and c_params.n_gpu_layers > 0 and getattr(self, "_requested_device", "auto") == "auto":
             import sys
-            sys.stdout.write("[INFO] [termux-bitnet] Vulkan GPU initialization failed. "
+            sys.stdout.write("[INFO] [amv-bitnet] Vulkan GPU initialization failed. "
                              "Falling back to ARM64 NEON CPU backend.\n")
             sys.stdout.flush()
             self.config.device = "cpu"
@@ -288,7 +288,7 @@ class BitNetEngine:
 
         if not self._ctx:
             raise RuntimeError(
-                f"[termux-bitnet] Failed to initialize native model context from '{self.config.model_path}'. "
+                f"[amv-bitnet] Failed to initialize native model context from '{self.config.model_path}'. "
                 f"Verify that the model file is a valid 1.58-bit GGUF binary."
             )
 
@@ -325,7 +325,7 @@ class BitNetEngine:
     def generate_stream(self, prompt: str, max_tokens: Optional[int] = None, **kwargs: Any) -> Generator[str, None, None]:
         """Stream generation tokens produced directly by the BitNet neural network."""
         if not prompt or not prompt.strip():
-            raise ValueError("[termux-bitnet] Prompt cannot be empty. Please provide a valid prompt string.")
+            raise ValueError("[amv-bitnet] Prompt cannot be empty. Please provide a valid prompt string.")
 
         target_max_tokens = self.config.n_predict if max_tokens is None else max_tokens
         safe_max_tokens = max(1, min(int(target_max_tokens), 8192))
@@ -348,9 +348,9 @@ class BitNetEngine:
             yield from self._generate_stream_cli(prompt, safe_max_tokens, cli_bin)
         else:
             raise BitNetEngineNotFound(
-                "[termux-bitnet] [FAIL-FAST] Native BitNet C++ runtime library is not loaded.\n"
+                "[amv-bitnet] [FAIL-FAST] Native BitNet C++ runtime library is not loaded.\n"
                 "No usable BitNet inference runtime detected (neither 'libtermux_bitnet.so' shared library nor 'llama-cli' binary found).\n"
-                "Please compile/install the native engine by running: termux-bitnet install\n"
+                "Please compile/install the native engine by running: amv-bitnet install\n"
                 "Or verify your ARM64 device environment."
             )
 
@@ -501,18 +501,18 @@ class BitNetEngine:
                     proc.wait(timeout=2)
                 except OSError as _kill_err:
                     import logging
-                    logging.getLogger("termux_bitnet").warning(
-                        "[termux-bitnet] Failed to kill inference process pid=%s: %s",
+                    logging.getLogger("amv_bitnet").warning(
+                        "[amv-bitnet] Failed to kill inference process pid=%s: %s",
                         getattr(proc, 'pid', 'unknown'), _kill_err,
                     )
 
             # 토큰이 이미 yield된 경우 부분 결과 오염 방지를 위해 즉시 실패
             if has_yielded:
                 raise RuntimeError(
-                    f"[termux-bitnet] CLI inference stream failed mid-generation: {e}"
+                    f"[amv-bitnet] CLI inference stream failed mid-generation: {e}"
                 ) from e
 
-            raise RuntimeError(f"[termux-bitnet] [FAIL-FAST] CLI inference failed: {e}") from e
+            raise RuntimeError(f"[amv-bitnet] [FAIL-FAST] CLI inference failed: {e}") from e
 
 
 
@@ -605,7 +605,7 @@ class BitNetEngine:
             self._active_stream_cb = None
 
         if worker_error:
-            raise RuntimeError(f"[termux-bitnet] Native inference stream error: {worker_error[0]}") from worker_error[0]
+            raise RuntimeError(f"[amv-bitnet] Native inference stream error: {worker_error[0]}") from worker_error[0]
 
         t1 = time.time()
         elapsed_sec = max(t1 - t0, 0.001)
@@ -635,7 +635,7 @@ class BitNetEngine:
         # 1. Execute true native C++ bitnet_tokenize with auto-initialized context
         if not self._lib:
             raise BitNetEngineNotFound(
-                "[termux-bitnet] [FAIL-FAST] Native C ABI library is not loaded. Cannot tokenize without native engine."
+                "[amv-bitnet] [FAIL-FAST] Native C ABI library is not loaded. Cannot tokenize without native engine."
             )
 
         if not self._ctx and self.config.model_path and os.path.isfile(self.config.model_path):
@@ -643,7 +643,7 @@ class BitNetEngine:
 
         if not self._ctx:
             raise RuntimeError(
-                "[termux-bitnet] [FAIL-FAST] Engine context is uninitialized. A valid model_path is required for tokenization."
+                "[amv-bitnet] [FAIL-FAST] Engine context is uninitialized. A valid model_path is required for tokenization."
             )
 
         import unicodedata
@@ -658,7 +658,7 @@ class BitNetEngine:
 
         if count < 0:
             raise RuntimeError(
-                f"[termux-bitnet] [FAIL-FAST] Native BPE tokenization failed with error code {count} for text: '{text[:40]}...'"
+                f"[amv-bitnet] [FAIL-FAST] Native BPE tokenization failed with error code {count} for text: '{text[:40]}...'"
             )
         return [buf[i] for i in range(count)]
 
@@ -673,13 +673,13 @@ class BitNetEngine:
         """Convert a single token ID into its UTF-8 string representation."""
         if not self._lib:
             raise BitNetEngineNotFound(
-                "[termux-bitnet] [FAIL-FAST] Native C ABI library is not loaded. Cannot convert token without native engine."
+                "[amv-bitnet] [FAIL-FAST] Native C ABI library is not loaded. Cannot convert token without native engine."
             )
         if not self._ctx and self.config.model_path and os.path.isfile(self.config.model_path):
             self._init_context()
         if not self._ctx:
             raise RuntimeError(
-                "[termux-bitnet] [FAIL-FAST] Engine context is uninitialized. A valid model_path is required for token conversion."
+                "[amv-bitnet] [FAIL-FAST] Engine context is uninitialized. A valid model_path is required for token conversion."
             )
         buf = ctypes.create_string_buffer(512)
         n = self._lib.bitnet_token_to_str(self._ctx, int(token), buf, 512)

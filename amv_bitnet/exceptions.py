@@ -16,7 +16,7 @@ class AmevaTermuxError(RuntimeError):
         self.code = code or self.DEFAULT_CODE
         self.details = details
         self.raw_message = message
-        super().__init__(message if message.startswith("[BITNET]") or message.startswith("[termux-bitnet]") else f"{self.COMPONENT_TAG} [{self.code}] {message}")
+        super().__init__(message if message.startswith("[BITNET]") or message.startswith("[amv-bitnet]") else f"{self.COMPONENT_TAG} [{self.code}] {message}")
 
 
 TermuxBitNetError = AmevaTermuxError

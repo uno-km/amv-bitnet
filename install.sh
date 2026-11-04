@@ -2,23 +2,23 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 # ==============================================================================
-# termux-bitnet: Universal Dynamic One-Line Bootstrap Installer (v1.4.4)
+# amv-bitnet: Universal Dynamic One-Line Bootstrap Installer (v1.4.4)
 # Open-Source under Apache License 2.0 (AMEVA Foundation)
-# Usage: curl -sL https://raw.githubusercontent.com/uno-km/termux-bitnet/main/install.sh | bash
+# Usage: curl -sL https://raw.githubusercontent.com/uno-km/amv-bitnet/main/install.sh | bash
 # ==============================================================================
 set -euo pipefail
 
 if [ -z "${TERMUX_BITNET_VERSION:-}" ]; then
-    VERSION="$(curl -sL https://api.github.com/repos/uno-km/termux-bitnet/releases/latest 2>/dev/null | grep '"tag_name":' | head -n 1 | cut -d '"' -f 4 | sed 's/^v//')"
+    VERSION="$(curl -sL https://api.github.com/repos/uno-km/amv-bitnet/releases/latest 2>/dev/null | grep '"tag_name":' | head -n 1 | cut -d '"' -f 4 | sed 's/^v//')"
     VERSION="${VERSION:-latest}"
 else
     VERSION="${TERMUX_BITNET_VERSION}"
 fi
-REPO="uno-km/termux-bitnet"
+REPO="uno-km/amv-bitnet"
 ARCH="$(uname -m)"
 
 echo "================================================================="
-echo " [AMEVA Foundation] termux-bitnet Universal Installer (${VERSION})"
+echo " [AMEVA Foundation] amv-bitnet Universal Installer (${VERSION})"
 echo "================================================================="
 echo "-> Detected Architecture: ${ARCH}"
 
@@ -67,15 +67,15 @@ if [ -n "${MISSING_PKGS}" ]; then
 fi
 
 # 4. Standard Python SDK Installation
-echo "-> [2/4] Installing termux-bitnet Python SDK..."
+echo "-> [2/4] Installing amv-bitnet Python SDK..."
 if [ -f "pyproject.toml" ]; then
     python -m pip install --no-build-isolation -e .
 else
-    python -m pip install --upgrade termux-bitnet
+    python -m pip install --upgrade amv-bitnet
 fi
 
 # 5. Native Pure-CPU Compute Engine & 1-Click Stream Extraction
-TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/termux-bitnet-inst.XXXXXXXX")"
+TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/amv-bitnet-inst.XXXXXXXX")"
 trap 'rm -rf "${TMP_DIR}"' EXIT INT TERM HUP
 
 echo "-> [3/4] Provisioning 100% Zero-Compilation Pure-CPU ARM64 Native Engine..."
@@ -139,24 +139,24 @@ if command -v npm >/dev/null 2>&1; then
     elif [ -f "package.json" ]; then
         npm install -g . || npm link || true
     else
-        npm install -g termux-bitnet 2>/dev/null || true
+        npm install -g amv-bitnet 2>/dev/null || true
     fi
 fi
 
 echo "================================================================="
-echo "  [SUCCESS] termux-bitnet v${VERSION} successfully installed!"
+echo "  [SUCCESS] amv-bitnet v${VERSION} successfully installed!"
 echo "================================================================="
 echo "  Dual-Engine Verification:"
-echo "    * Python CLI:   termux-bitnet doctor"
+echo "    * Python CLI:   amv-bitnet doctor"
 echo "    * Native CLI:   termux-bitnet-cli --help"
-echo "    * Node.js CLI:  termux-bitnet-js info"
+echo "    * Node.js CLI:  amv-bitnet-js info"
 echo "================================================================="
 
 # 8. Run Hardware Diagnostics Probe
-if command -v termux-bitnet >/dev/null 2>&1; then
+if command -v amv-bitnet >/dev/null 2>&1; then
     echo "-> Running Hardware Diagnostics Probe (ARM SIMD & Acceleration)..."
-    termux-bitnet doctor || true
+    amv-bitnet doctor || true
 fi
 
 echo ""
-echo "termux-bitnet is ready for 1.58-bit on-device LLM inference."
+echo "amv-bitnet is ready for 1.58-bit on-device LLM inference."

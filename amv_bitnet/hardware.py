@@ -106,8 +106,8 @@ def detect_hardware() -> HardwareProfile:
                     soc_name = "ARM Cortex Core"
         except Exception as e:
             import logging
-            logging.getLogger("termux_bitnet.hardware").warning(
-                "[termux-bitnet] /proc/cpuinfo 파싱 실패 — SoC/SIMD 감지 건너뜀: %s", e
+            logging.getLogger("amv_bitnet.hardware").warning(
+                "[amv-bitnet] /proc/cpuinfo 파싱 실패 — SoC/SIMD 감지 건너뜀: %s", e
             )
 
     # Recommendation heuristic: On 8-core mobile Big.LITTLE (4 Big + 4 Little), 4 big cores prevent thermal throttling
@@ -133,7 +133,7 @@ def print_hardware_summary() -> None:
     """Print formatted hardware summary to console."""
     profile = detect_hardware()
     print("=========================================================")
-    print("           termux-bitnet Hardware Diagnostic             ")
+    print("           amv-bitnet Hardware Diagnostic             ")
     print("=========================================================")
     print(f"  Architecture:         {profile.arch}")
     print(f"  SoC Family:           {profile.soc_name}")
@@ -171,12 +171,12 @@ def _require_gpu_runtime(requested_device: str) -> None:
     Every explicit GPU request goes through here. There is no CPU fallback: the caller gets
     RuntimeRequiredError and the CLI exits with status 69.
     """
-    from termux_bitnet.exceptions import RuntimeRequiredError
+    from amv_bitnet.exceptions import RuntimeRequiredError
     try:
         from ameva_device import AmevaRuntimeRequiredError, require_ameva_runtime
     except ImportError as exc:
         raise RuntimeRequiredError(
-            "[AMU_ERR_RUNTIME_REQUIRED] termux-bitnet: GPU execution (device='%s') needs ameva-runtime (AMUDA), "
+            "[AMU_ERR_RUNTIME_REQUIRED] amv-bitnet: GPU execution (device='%s') needs ameva-runtime (AMUDA), "
             "and the shared check library 'ameva-device-sdk' is missing from this installation.\n"
             "Nothing was run, and no CPU fallback was used.\n"
             "Install:\n"
@@ -187,7 +187,7 @@ def _require_gpu_runtime(requested_device: str) -> None:
         ) from exc
     try:
         require_ameva_runtime(
-            "termux-bitnet", "GPU execution (device='%s')" % requested_device,
+            "amv-bitnet", "GPU execution (device='%s')" % requested_device,
             min_version=GPU_RUNTIME_MIN_VERSION,
         )
     except AmevaRuntimeRequiredError as exc:
@@ -197,7 +197,7 @@ def _require_gpu_runtime(requested_device: str) -> None:
 def _note_cpu_instead(reason: str) -> None:
     """auto mode: say on stderr that the GPU was not used, so the CPU run is never silent."""
     import sys
-    sys.stderr.write("[termux-bitnet] GPU not used: %s. This run uses the CPU. "
+    sys.stderr.write("[amv-bitnet] GPU not used: %s. This run uses the CPU. "
                      "To enable the GPU: pip install ameva-runtime (https://github.com/uno-km/ameva-runtime-releases)\n" % reason)
     sys.stderr.flush()
 
@@ -212,7 +212,7 @@ def resolve_device_backend(requested_device: str, requested_ngl: Optional[int] =
     3. 'vulkan' / 'gpu': Requires ameva-runtime. Emits Fail-Fast error [AMEVA-BITNET-E001] if absent.
     """
     import sys
-    from termux_bitnet.exceptions import PlatformNotSupportedError
+    from amv_bitnet.exceptions import PlatformNotSupportedError
 
     req = str(requested_device or "auto").lower().strip()
     ameva_mod = _resolve_ameva_runtime()
@@ -251,7 +251,7 @@ def resolve_device_backend(requested_device: str, requested_ngl: Optional[int] =
                 raise PlatformNotSupportedError(
                     f"[ERROR: AMEVA-BITNET-E002] Vulkan GPU probe failed on device '{report.device_name}'.\n"
                     f"Cause: {getattr(report, 'failure_reason', 'Vulkan hardware validation did not pass')}.\n"
-                    "Action Required: Use CPU inference: termux-bitnet run --device cpu ..."
+                    "Action Required: Use CPU inference: amv-bitnet run --device cpu ..."
                 )
             return "vulkan", ngl_target
         except Exception as e:
@@ -259,7 +259,7 @@ def resolve_device_backend(requested_device: str, requested_ngl: Optional[int] =
                 raise
             raise PlatformNotSupportedError(
                 f"[ERROR: AMEVA-BITNET-E002] Vulkan GPU acceleration failed: {e}\n"
-                "Action Required: Use CPU inference: termux-bitnet run --device cpu ..."
+                "Action Required: Use CPU inference: amv-bitnet run --device cpu ..."
             ) from e
 
     raise ValueError(f"Unknown device: '{requested_device}'. Supported options: 'auto', 'cpu', 'gpu', 'vulkan'.")
@@ -277,7 +277,7 @@ def bind_bitnet_hardware(engine: Any, requested_device: str) -> Optional[Any]:
         return binding
     except Exception as e:
         import logging
-        logging.getLogger("termux_bitnet.hardware").debug("Hardware adapter binding skipped: %s", e)
+        logging.getLogger("amv_bitnet.hardware").debug("Hardware adapter binding skipped: %s", e)
         return None
 
 
@@ -298,7 +298,7 @@ def doctor() -> Dict[str, Any]:
             }
         except Exception as e:
             import logging
-            logging.getLogger("termux_bitnet.hardware").debug("AMEVA Doctor invocation exception: %s", e)
+            logging.getLogger("amv_bitnet.hardware").debug("AMEVA Doctor invocation exception: %s", e)
 
     profile = detect_hardware()
     return {
@@ -340,7 +340,7 @@ def get_optimal_threads() -> int:
 
 
 def bind_hardware(engine: Any, requested_device: str = "auto", **kwargs) -> Optional[Any]:
-    """Standard Unified Hardware Binding Interface for termux-bitnet."""
+    """Standard Unified Hardware Binding Interface for amv-bitnet."""
     return bind_bitnet_hardware(engine, requested_device)
 
 

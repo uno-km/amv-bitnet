@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""Automated Installer and Prebuilt Binary Dispatcher for termux-bitnet."""
+"""Automated Installer and Prebuilt Binary Dispatcher for amv-bitnet."""
 
 import os
 import sys
@@ -20,11 +20,11 @@ def _resolve_package_version() -> Optional[str]:
         pass
     try:
         import importlib.metadata
-        return importlib.metadata.version("termux-bitnet")
+        return importlib.metadata.version("amv-bitnet")
     except Exception:
         return None
 
-GITHUB_REPO = "uno-km/termux-bitnet"
+GITHUB_REPO = "uno-km/amv-bitnet"
 
 
 def get_candidate_library_urls() -> list[str]:
@@ -89,24 +89,24 @@ def install_prebuilt_library(force: bool = False, dedicate: bool = False) -> boo
     if dedicate:
         state = inspect_engine_state(target_so, ver)
         if state == "AMEVA_MANAGED":
-            print(f"  [termux-bitnet] [DEDICATE] AMEVA Runtime managed engine detected. Preserving co-existence (<0.002s).")
+            print(f"  [amv-bitnet] [DEDICATE] AMEVA Runtime managed engine detected. Preserving co-existence (<0.002s).")
             return True
         elif state == "LEGACY_STANDALONE":
-            print(f"  [termux-bitnet] [DEDICATE] Legacy standalone engine detected. Upgrading to latest...")
+            print(f"  [amv-bitnet] [DEDICATE] Legacy standalone engine detected. Upgrading to latest...")
             force = True
 
     # "있어? 넘어가" - Skip if verified ELF shared library exists (<0.002s)
     if not force and is_valid_elf(target_so):
-        print(f"  [termux-bitnet] [OK] Verified native ARM64 engine already present: {target_so}. Skipping download (<0.002s).")
+        print(f"  [amv-bitnet] [OK] Verified native ARM64 engine already present: {target_so}. Skipping download (<0.002s).")
         return True
 
     xdg_cache = Path(os.environ.get("XDG_CACHE_HOME") or (Path.home() / ".cache"))
-    staging_dir = xdg_cache / "termux-bitnet" / ".staging"
+    staging_dir = xdg_cache / "amv-bitnet" / ".staging"
     staging_dir.mkdir(parents=True, exist_ok=True)
     staging_so = staging_dir / "libtermux_bitnet.so"
 
     print("=========================================================")
-    print(f"  termux-bitnet Pure-CPU Engine Provisioning (v{ver})")
+    print(f"  amv-bitnet Pure-CPU Engine Provisioning (v{ver})")
     print("=========================================================")
     print(f"  Target: {target_so}")
 
@@ -116,7 +116,7 @@ def install_prebuilt_library(force: bool = False, dedicate: bool = False) -> boo
         try:
             req = urllib.request.Request(
                 url,
-                headers={"User-Agent": f"termux-bitnet-installer/{ver} (Android; ARM64)"}
+                headers={"User-Agent": f"amv-bitnet-installer/{ver} (Android; ARM64)"}
             )
             with urllib.request.urlopen(req, timeout=15) as resp:
                 if resp.status == 200:
@@ -144,7 +144,7 @@ def install_prebuilt_library(force: bool = False, dedicate: bool = False) -> boo
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="termux-bitnet native library provisioner")
+    parser = argparse.ArgumentParser(description="amv-bitnet native library provisioner")
     parser.add_argument("--force", "-f", action="store_true", help="Force clean re-download and installation")
     parser.add_argument("--dedicate", action="store_true", help="Smart inspection mode: preserve AMEVA runtime symlinks, auto-upgrade legacy binaries")
     args = parser.parse_args()

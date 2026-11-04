@@ -1,9 +1,9 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""Simple streaming inference example using termux-bitnet Python SDK."""
+"""Simple streaming inference example using amv-bitnet Python SDK."""
 
 import sys
-from termux_bitnet import BitNetEngine, BitNetConfig, detect_hardware
+from amv_bitnet import BitNetEngine, BitNetConfig, detect_hardware
 
 def main():
     hw = detect_hardware()

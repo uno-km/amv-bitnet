@@ -5,9 +5,9 @@ import sys
 from unittest.mock import patch, MagicMock
 import pytest
 
-from termux_bitnet.config import BitNetConfig
-from termux_bitnet.engine import BitNetEngine
-from termux_bitnet.cli import main
+from amv_bitnet.config import BitNetConfig
+from amv_bitnet.engine import BitNetEngine
+from amv_bitnet.cli import main
 
 
 def test_bitnet_config_rpc_fields():
@@ -25,7 +25,7 @@ def test_bitnet_cli_arg_parsing(tmp_path, monkeypatch):
     dummy_model.write_text("model_header")
 
     test_args = [
-        "termux-bitnet",
+        "amv-bitnet",
         "run",
         "-m",
         str(dummy_model),
@@ -38,7 +38,7 @@ def test_bitnet_cli_arg_parsing(tmp_path, monkeypatch):
     ]
     monkeypatch.setattr(sys, "argv", test_args)
 
-    with patch("termux_bitnet.cli.BitNetEngine") as MockEngine:
+    with patch("amv_bitnet.cli.BitNetEngine") as MockEngine:
         mock_instance = MagicMock()
         mock_instance.__enter__.return_value = mock_instance
         mock_instance.__exit__.return_value = None
@@ -46,7 +46,7 @@ def test_bitnet_cli_arg_parsing(tmp_path, monkeypatch):
         mock_instance.get_last_metrics.return_value = MagicMock(tokens_per_second=12.5, total_tokens=10, generation_time_s=0.8)
         MockEngine.return_value = mock_instance
 
-        with patch("termux_bitnet.cli.detect_hardware"):
+        with patch("amv_bitnet.cli.detect_hardware"):
             try:
                 main()
             except SystemExit as e:
@@ -71,8 +71,8 @@ def test_bitnet_engine_cli_rpc_cmd_injection(tmp_path):
     engine = BitNetEngine(config=config)
     engine.count_tokens = MagicMock(return_value=2)
 
-    with patch("termux_bitnet.engine.verify_rpc_cluster_nodes"), \
-         patch("termux_bitnet.engine.subprocess.Popen") as mock_popen:
+    with patch("amv_bitnet.engine.verify_rpc_cluster_nodes"), \
+         patch("amv_bitnet.engine.subprocess.Popen") as mock_popen:
         mock_proc = MagicMock()
         mock_proc.poll.return_value = 0
         mock_proc.stdout.read.side_effect = ["Prompt: Hello distributed BitNet\n", ""]

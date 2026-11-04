@@ -1,8 +1,8 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
-termux_bitnet.control.errors
-termux-bitnet 전용 오류 계층
+amv_bitnet.control.errors
+amv-bitnet 전용 오류 계층
 
 BitNet 고유 오류는 AmevaError를 상속합니다.
 측정 실패를 정상으로 위장하지 않습니다.
@@ -30,7 +30,7 @@ class BitNetBinaryNotFound(AmevaError):
     def __init__(self) -> None:
         super().__init__(
             "BitNet engine binary (libtermux_bitnet.so / llama-cli) not found. "
-            "Run 'termux-bitnet install' to build the native engine.",
+            "Run 'amv-bitnet install' to build the native engine.",
         )
 
 

@@ -7,7 +7,7 @@ if (window.i18nManager) {
   window.i18nManager.registerTranslations({
   "en": {
     "common": {
-      "brand": "Termux-BitNet",
+      "brand": "AMV-BitNet",
       "releaseTag": "v1.0.6",
       "pkgBtn": "pip / npm",
       "pypiBtn": "PyPI",
@@ -33,7 +33,7 @@ if (window.i18nManager) {
   },
   "ko": {
     "common": {
-      "brand": "Termux-BitNet",
+      "brand": "AMV-BitNet",
       "releaseTag": "v1.0.6",
       "pkgBtn": "패키지 (pip / npm)",
       "pypiBtn": "PyPI 패키지",

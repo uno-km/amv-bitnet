@@ -13,7 +13,7 @@
   const translations = {
   "en": {
     "proj.bitnetDesc": "High-performance 1.58-bit (i2_s) BitNet on-device LLM inference engine with ARM64 NEON DotProd acceleration, pure C++ core, and dual Python/Node.js thin gateways.",
-    "proj.bitnetTitle": "Termux-BitNet",
+    "proj.bitnetTitle": "AMV-BitNet",
     "common": {
       "brand": "AMEVA Open-Source Foundation",
       "releaseTag": "AOSF v2.0 (Active)",
@@ -56,13 +56,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "Client-side WebGPU local AI (Qwen2.5), spatial map and canvas node sharing, nested documents-in-document hierarchy, MapReduce large-document summarization, and autonomous AI multi-agent orchestration.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Non-root Chromium browser automation on Android Termux (ARM64). Direct CDP control for scraping and automated web pipelines.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Native on-device Stable Diffusion runtime for Android ARM64. Generates images locally without cloud servers or root permissions.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Unified on-device Speech-to-Text framework combining Whisper.cpp, Vosk, and Sherpa-ONNX with pure Python speaker diarization.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Ultra-lightweight on-device Tensor & DAG Autograd deep learning framework with SafeTensors zero-copy and LoRA fine-tuning.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Client-compute offloaded architecture Browser-Native WebGPU Autograd Engine with PyTorch compatibility, WGSL compute shaders, and zero memory waste buffer pool.",
@@ -87,7 +87,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -213,12 +213,12 @@
       "sec5Sub1": "5.1 Anti-Bot 55-Item Audit Script (bot_audit.py)",
       "sec5Sub2": "5.2 24/7 Doze Defense & 30-Cycle LMK Stress Benchmark (lmk_stress_test.py)",
       "sec6Title": "6. Conclusion & Production Readiness Verdict",
-      "sec6Desc": "Based on comprehensive physical hardware evaluation on the Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>termux-playwright</code> (v1.61.4) satisfies all engineering requirements for <strong>zero-root execution, Bionic libc syscall compatibility, anti-bot evasion, and persistent process reaping</strong>."
+      "sec6Desc": "Based on comprehensive physical hardware evaluation on the Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>amv-playwright</code> (v1.61.4) satisfies all engineering requirements for <strong>zero-root execution, Bionic libc syscall compatibility, anti-bot evasion, and persistent process reaping</strong>."
     }
   },
   "ko": {
     "proj.bitnetDesc": "ARM64 NEON DotProd 가속 기반 C++ 단일 코어 및 Python/Node.js 듀얼 게이트웨이를 통한 1.58비트(i2_s) 온디바이스 LLM 추론 프레임워크.",
-    "proj.bitnetTitle": "Termux-BitNet",
+    "proj.bitnetTitle": "AMV-BitNet",
     "common": {
       "brand": "AMEVA 오픈소스 재단",
       "releaseTag": "AOSF v2.0 (Active)",
@@ -254,13 +254,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "WebGPU 기반 클라이언트 로컬 AI(Qwen2.5), 캔버스 공간 내 지도 및 노드 실시간 공유, 문서 속의 문서(Nested Documents) 계층 뷰어, MapReduce 대용량 문서 요약 및 자율 AI 멀티 에이전트 오케스트레이션 탑재.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "안드로이드 Termux(ARM64) 환경을 위한 비루팅 크로미움 브라우저 자동화 프레임워크. CDP 제어를 통해 모바일 상에서 무인 크롤링 및 웹 자동화 파이프라인 구동.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "안드로이드 ARM64 네이티브 온디바이스 Stable Diffusion 런타임. 클라우드 서버나 루팅 없이 모바일 단말기 로컬 하드웨어에서 직접 AI 이미지 생성.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Whisper.cpp, Vosk, Sherpa-ONNX를 통합하고 온디바이스 화자 분리(Diarization)를 지원하는 온디바이스 음성인식 통합 프레임워크.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "SafeTensors 인코딩 및 LoRA 어댑터 미세조정을 지원하는 Bionic C 기반 초경량 온디바이스 텐서 연산 & DAG 자동미분 딥러닝 엔진.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "서버 비용 없는 브라우저 네이티브 WebGPU 딥러닝 & 자동미분(Autograd) 엔진. PyTorch 호환 텐서 API 및 WGSL 셰이더 메모리 최적화 지원.",
@@ -285,7 +285,7 @@
       "thObj": "주요 개발 목표",
       "r1Domain": "모바일 & 엣지 런타임",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "비루팅 브라우저 자동화 (termux-playwright), 온디바이스 이미지 생성 (termux-diffusion), 네이티브 텐서 학습 (termux-train).",
+      "r1Obj": "비루팅 브라우저 자동화 (amv-playwright), 온디바이스 이미지 생성 (amv-diffusion), 네이티브 텐서 학습 (amv-train).",
       "r2Domain": "브라우저 & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "브라우저 네이티브 딥러닝 엔진 (AMEVA-Forge) 및 100% 격리 샌드박스 (AMEVA-MCP-Hub).",
@@ -411,7 +411,7 @@
       "sec5Sub1": "5.1 안티봇 55항목 감사 스크립트 (bot_audit.py)",
       "sec5Sub2": "5.2 24/7 Doze 방어 및 30회 LMK 스트레스 벤치마크 (lmk_stress_test.py)",
       "sec6Title": "6. 최종 결론 및 프로덕션 적합성 판정",
-      "sec6Desc": "삼성 갤럭시 S20(Android 13 / Termux aarch64) 실기기 종합 평가 결과, <code>termux-playwright</code> (v1.61.4)는 <strong>비루팅 실행, Bionic libc 시스템콜 호환성, 안티봇 우회 및 프로세스 자원 완벽 회수</strong>를 모두 충족하여 프로덕션 배포에 완전히 적합함을 인증합니다."
+      "sec6Desc": "삼성 갤럭시 S20(Android 13 / Termux aarch64) 실기기 종합 평가 결과, <code>amv-playwright</code> (v1.61.4)는 <strong>비루팅 실행, Bionic libc 시스템콜 호환성, 안티봇 우회 및 프로세스 자원 완벽 회수</strong>를 모두 충족하여 프로덕션 배포에 완전히 적합함을 인증합니다."
     }
   },
   "hi": {
@@ -450,13 +450,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "क्लाइंट-साइड WebGPU स्थानीय AI (Qwen2.5), स्थानिक मानचित्र और कैनवास नोड साझाकरण, नेस्टेड दस्तावेज़ व्यूअर, MapReduce बड़े दस्तावेज़ सारांश और स्वायत्त AI मल्टी-एजेंट ऑर्केस्ट्रेशन।",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Android Termux (ARM64) पर नॉन-रूट क्रोमियम ब्राउज़र ऑटोमेशन। स्क्रैपिंग और ऑटोमेशन के लिए डायरेक्ट CDP नियंत्रण।",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Android ARM64 के लिए नेटिव ऑन-डिवाइस Stable Diffusion रनटाइम। क्लाउड सर्वर के बिना छवियां उत्पन्न करता है।",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Whisper.cpp, Vosk और 128d स्पीकर डायराइजेशन के साथ ऑन-डिवाइस स्पीच-टू-टेक्स्ट फ्रेमवर्क।",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Android ARM64 के लिए अल्ट्रा-लाइटवेट ऑन-डिवाइस टेंसर और DAG ऑटोग्रैड डीप लर्निंग फ्रेमवर्क।",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "क्लाइंट-कंप्यूट ऑफलोडेड आर्किटेक्चर ब्राउज़र-मूल WebGPU ऑटोग्रैड डीप लर्निंग इंजन।",
@@ -481,7 +481,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -607,12 +607,12 @@
       "sec5Sub1": "5.1 एंटी-बॉट 55-आइटम ऑडिट स्क्रिप्ट (bot_audit.py)",
       "sec5Sub2": "5.2 24/7 डोज़ रक्षा और 30-चक्र LMK तनाव बेंचमार्क (lmk_stress_test.py)",
       "sec6Title": "6. निष्कर्ष और उत्पादन तत्परता निर्णय",
-      "sec6Desc": "Samsung Galaxy S20 (Android 13 / Termux aarch64) पर व्यापक मूल्यांकन के आधार पर, <code>termux-playwright</code> (v1.61.4) <strong>नॉन-रूट निष्पादन, Bionic libc संगतता, एंटी-बॉट बचाव और सुरक्षित प्रक्रिया पुनर्प्राप्ति</strong> की सभी आवश्यकताओं को पूरा करता है।"
+      "sec6Desc": "Samsung Galaxy S20 (Android 13 / Termux aarch64) पर व्यापक मूल्यांकन के आधार पर, <code>amv-playwright</code> (v1.61.4) <strong>नॉन-रूट निष्पादन, Bionic libc संगतता, एंटी-बॉट बचाव और सुरक्षित प्रक्रिया पुनर्प्राप्ति</strong> की सभी आवश्यकताओं को पूरा करता है।"
     }
   },
   "ja": {
     "proj.bitnetDesc": "ARM64 NEON DotProdアクセラレーションとデュアルPython/Node.jsゲートウェイを備えた1.58ビット(i2_s)オンデバイスLLM推論エンジン。",
-    "proj.bitnetTitle": "Termux-BitNet",
+    "proj.bitnetTitle": "AMV-BitNet",
     "common": {
       "brand": "AMEVA オープンソース財団",
       "releaseTag": "AOSF v2.0 (Active)",
@@ -648,13 +648,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "WebGPUベースのクライアントローカルAI (Qwen2.5)、マップ・キャンバス空間ノード共有、ネストされた文書階層ビューア、MapReduce大規模文書要約、自律型AIマルチエージェントオーケストレーションを搭載。",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Android Termux (ARM64) 向け非ルートChromiumブラウザ自動化。スクレイピングと自動化のためのダイレクトCDP制御。",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Android ARM64向けネイティブオンデバイスStable Diffusionランタイム。クラウド不要で画像を生成。",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Whisper.cpp、Vosk、Sherpa-ONNXを統合したオンデバイス音声認識および話者分離フレームワーク。",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Android ARM64向けの超軽量オンバイステンソル演算＆DAG自動微分深層学習フレームワーク。",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "サーバー不要のブラウザネイティブWebGPU深層学習＆自動微分（Autograd）エンジン。",
@@ -679,7 +679,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -805,12 +805,12 @@
       "sec5Sub1": "5.1 アンチボット 55項目監査スクリプト (bot_audit.py)",
       "sec5Sub2": "5.2 24/7 Doze 防御および 30回 LMK ストレスベンチマーク (lmk_stress_test.py)",
       "sec6Title": "6. 最終結論およびプロダクション適合性判定",
-      "sec6Desc": "Samsung Galaxy S20 (Android 13 / Termux aarch64) 実機での総合評価の結果、<code>termux-playwright</code> (v1.61.4) は<strong>非ルート実行、Bionic libc システムコール互換性、アンチボット回避およびプロセスクリーンアップ</strong>のすべての基準を満たし、本番環境への導入に完全に適合していることを認定します。"
+      "sec6Desc": "Samsung Galaxy S20 (Android 13 / Termux aarch64) 実機での総合評価の結果、<code>amv-playwright</code> (v1.61.4) は<strong>非ルート実行、Bionic libc システムコール互換性、アンチボット回避およびプロセスクリーンアップ</strong>のすべての基準を満たし、本番環境への導入に完全に適合していることを認定します。"
     }
   },
   "zh": {
     "proj.bitnetDesc": "基于ARM64 NEON DotProd硬件加速与Python/Node.js双轻量网关的1.58比特(i2_s)端侧LLM推理框架。",
-    "proj.bitnetTitle": "Termux-BitNet",
+    "proj.bitnetTitle": "AMV-BitNet",
     "common": {
       "brand": "AMEVA 开源基金会",
       "releaseTag": "AOSF v2.0 (活跃)",
@@ -846,13 +846,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "基于 WebGPU 的客户端本地 AI (Qwen2.5)、空间地图与画布节点共享、嵌套文档查看器、MapReduce 大文档智能摘要以及自主 AI 多智能体编排。",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "适用于 Android Termux (ARM64) 的免 Root Chromium 自动化。直接 CDP 控制，赋能移动爬虫与自动化流水线。",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Android ARM64 原生端侧 Stable Diffusion 运行时。无需云端服务器即可本地生成图像。",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "集成 Whisper.cpp、Vosk 与 128 维声纹说话人分离的端侧语音转文本框架。",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "适用于 Android ARM64 的超轻量端侧张量运算与 DAG 自动求导深度学习框架。",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "零服务器成本的浏览器原生 WebGPU 自动求导与深度学习引擎。",
@@ -877,7 +877,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -1003,7 +1003,7 @@
       "sec5Sub1": "5.1 反爬 55 项审计脚本 (bot_audit.py)",
       "sec5Sub2": "5.2 24/7 Doze 防御与 30 轮 LMK 压力基准 (lmk_stress_test.py)",
       "sec6Title": "6. 最终结论与生产环境就绪判定",
-      "sec6Desc": "基于在三星 Galaxy S20 (Android 13 / Termux aarch64) 上的全方位物理硬件评估，<code>termux-playwright</code> (v1.61.4) 满足<strong>免 Root 运行、Bionic libc 系统调用兼容性、反爬规避以及进程资源可靠回收</strong>的全部要求，完全具备生产环境投产条件。"
+      "sec6Desc": "基于在三星 Galaxy S20 (Android 13 / Termux aarch64) 上的全方位物理硬件评估，<code>amv-playwright</code> (v1.61.4) 满足<strong>免 Root 运行、Bionic libc 系统调用兼容性、反爬规避以及进程资源可靠回收</strong>的全部要求，完全具备生产环境投产条件。"
     }
   },
   "ar": {
@@ -1042,13 +1042,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "ذكاء اصطناعي محلي WebGPU على جانب العميل (Qwen2.5)، ومشاركة الخرائط والعقد في مساحة اللوحة، وعارض المستندات المتداخلة، وتلخيص المستندات الكبيرة عبر MapReduce، وتنسيق الوكلاء المتعددين الذاتيين.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "أتمتة متصفح Chromium بدون روت لنظام Android Termux (ARM64) مع تحكم مباشر عبر CDP.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "بيئة تشغيل Stable Diffusion الأصلية على أجهزة Android ARM64 لإنشاء الصور محلياً.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "إطار عمل موحد لتحويل الصوت إلى نص وفصل المتحدثين على الأجهزة المحمولة.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "إطار عمل فائق الخفة لحساب المشتقات التلقائية وتدريب النماذج على Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "محرك التعلم العميق والمشتقات التلقائية WebGPU الأصلي في المتصفح بدون تكلفة خادم.",
@@ -1073,7 +1073,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -1199,7 +1199,7 @@
       "sec5Sub1": "5.1 نص تدقيق مكافحة الروبوتات المكون من 55 عنصرًا (bot_audit.py)",
       "sec5Sub2": "5.2 دفاع Doze على مدار الساعة واختبار LMK لـ 30 دورة (lmk_stress_test.py)",
       "sec6Title": "6. الاستنتاج النهائي وقرار الجاهزية للإنتاج",
-      "sec6Desc": "بناءً على التقييم الشامل على Samsung Galaxy S20 (Android 13 / Termux aarch64)، يلبي <code>termux-playwright</code> (v1.61.4) جميع المتطلبات الهندسية لـ <strong>التشغيل بدون روت، وتوافق Bionic libc، وتجاوز الروبوتات، واستعادة العمليات بأمان</strong>."
+      "sec6Desc": "بناءً على التقييم الشامل على Samsung Galaxy S20 (Android 13 / Termux aarch64)، يلبي <code>amv-playwright</code> (v1.61.4) جميع المتطلبات الهندسية لـ <strong>التشغيل بدون روت، وتوافق Bionic libc، وتجاوز الروبوتات، واستعادة العمليات بأمان</strong>."
     }
   },
   "fr": {
@@ -1238,13 +1238,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "IA locale WebGPU côté client (Qwen2.5), partage de cartes et de nœuds sur canevas spatial, visualiseur de documents imbriqués, résumé de documents volumineux par MapReduce et orchestration d'agents IA autonomes.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Automatisation du navigateur Chromium sans root sur Android Termux (ARM64) avec contrôle direct CDP.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Runtime Stable Diffusion natif sur appareil pour Android ARM64 générant des images sans serveur cloud.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Framework unifié de transcription vocale et de diarisation des locuteurs sur appareil.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Framework d'apprentissage profond et d'autodifférenciation DAG ultra-léger pour Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Moteur d'apprentissage profond et d'autodifférenciation WebGPU natif pour navigateur à coût serveur nul.",
@@ -1269,7 +1269,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -1395,12 +1395,12 @@
       "sec5Sub1": "5.1 Script d'audit anti-bot à 55 éléments (bot_audit.py)",
       "sec5Sub2": "5.2 Défense Doze 24/7 et benchmark de stress LMK sur 30 cycles (lmk_stress_test.py)",
       "sec6Title": "6. Conclusion et verdict de préparation pour la production",
-      "sec6Desc": "Sur la base de l'évaluation complète sur Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>termux-playwright</code> (v1.61.4) satisfait à toutes les exigences d'ingénierie pour <strong>l'exécution sans root, la compatibilité Bionic libc, l'évasion anti-bot et la récupération des processus</strong>."
+      "sec6Desc": "Sur la base de l'évaluation complète sur Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>amv-playwright</code> (v1.61.4) satisfait à toutes les exigences d'ingénierie pour <strong>l'exécution sans root, la compatibilité Bionic libc, l'évasion anti-bot et la récupération des processus</strong>."
     }
   },
   "de": {
     "proj.bitnetDesc": "Hochleistungsfähige 1,58-Bit (i2_s) BitNet On-Device-LLM-Inferenz-Engine mit ARM64 NEON DotProd-Beschleunigung und dualen Python/Node.js-Gateways.",
-    "proj.bitnetTitle": "Termux-BitNet",
+    "proj.bitnetTitle": "AMV-BitNet",
     "common": {
       "brand": "AMEVA Open-Source-Stiftung",
       "releaseTag": "AOSF v2.0 (Aktiv)",
@@ -1436,13 +1436,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "Client-seitige WebGPU-Lokale KI (Qwen2.5), Teilen von Karten und Canvas-Knoten, hierarchischer Betrachter für verschachtelte Dokumente, MapReduce-Dokumentenzusammenfassung und autonome KI-Multi-Agenten-Orchestrierung.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Root-lose Chromium-Browserautomatisierung auf Android Termux (ARM64) mit direkter CDP-Steuerung.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Natives On-Device Stable Diffusion Runtime für Android ARM64 ohne Cloud-Server.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "On-Device Speech-to-Text- und Sprecher-Diarisierungs-Framework.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Ultraleichtes On-Device-Tensor- und DAG-Autograd-Deep-Learning-Framework für Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Serverlose Browser-native WebGPU-Autograd-Deep-Learning-Engine.",
@@ -1467,7 +1467,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -1593,12 +1593,12 @@
       "sec5Sub1": "5.1 Anti-Bot 55-Punkte-Auditskript (bot_audit.py)",
       "sec5Sub2": "5.2 24/7 Doze-Abwehr & 30-Zyklen-LMK-Stresstest (lmk_stress_test.py)",
       "sec6Title": "6. Fazit & Urteil zur Produktionsreife",
-      "sec6Desc": "Basierend auf der Evaluierung auf dem Samsung Galaxy S20 (Android 13 / Termux aarch64) erfüllt <code>termux-playwright</code> (v1.61.4) alle Anforderungen für <strong>Root-freie Ausführung, Bionic libc-Kompatibilität, Anti-Bot-Umgehung und saubere Prozessbereinigung</strong>."
+      "sec6Desc": "Basierend auf der Evaluierung auf dem Samsung Galaxy S20 (Android 13 / Termux aarch64) erfüllt <code>amv-playwright</code> (v1.61.4) alle Anforderungen für <strong>Root-freie Ausführung, Bionic libc-Kompatibilität, Anti-Bot-Umgehung und saubere Prozessbereinigung</strong>."
     }
   },
   "es": {
     "proj.bitnetDesc": "Motor de inferencia LLM en dispositivo BitNet de 1.58 bits (i2_s) con aceleración ARM64 NEON DotProd y puertas de enlace dobles Python/Node.js.",
-    "proj.bitnetTitle": "Termux-BitNet",
+    "proj.bitnetTitle": "AMV-BitNet",
     "common": {
       "brand": "Fundación Open-Source AMEVA",
       "releaseTag": "AOSF v2.0 (Activo)",
@@ -1634,13 +1634,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "IA local WebGPU del lado del cliente (Qwen2.5), uso compartido de mapas y nodos en lienzo espacial, visor de documentos anidados, resumen de documentos grandes mediante MapReduce y orquestación de multiagentes de IA autónomos.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Automatización de Chromium sin root en Android Termux (ARM64) con control CDP directo.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Runtime nativo de Stable Diffusion en el dispositivo para Android ARM64 sin servidores en la nube.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Framework unificado de voz a texto y diarización de interlocutores en el dispositivo.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Framework de aprendizaje profundo y autograd de tensores ultraligero para Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Motor de aprendizaje profundo y autograd WebGPU nativo del navegador sin costo de servidor.",
@@ -1665,7 +1665,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -1791,7 +1791,7 @@
       "sec5Sub1": "5.1 Script de auditoría anti-bot de 55 elementos (bot_audit.py)",
       "sec5Sub2": "5.2 Defensa Doze 24/7 y benchmark de estrés LMK de 30 ciclos (lmk_stress_test.py)",
       "sec6Title": "6. Conclusión y veredicto de preparación para producción",
-      "sec6Desc": "Basado en la evaluación integral en Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>termux-playwright</code> (v1.61.4) cumple con todos los requisitos para <strong>ejecución sin root, compatibilidad con Bionic libc, evasión anti-bot y recolección limpia de procesos</strong>."
+      "sec6Desc": "Basado en la evaluación integral en Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>amv-playwright</code> (v1.61.4) cumple con todos los requisitos para <strong>ejecución sin root, compatibilidad con Bionic libc, evasión anti-bot y recolección limpia de procesos</strong>."
     }
   },
   "ru": {
@@ -1830,13 +1830,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "Локальный ИИ WebGPU на стороне клиента (Qwen2.5), совместное использование карт и узлов на холсте, иерархический просмотрщик вложенных документов, суммаризация больших документов MapReduce и оркестрация автономных ИИ-агентов.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Автоматизация Chromium без root на Android Termux (ARM64) с прямым управлением через CDP.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Нативная среда Stable Diffusion для Android ARM64, создающая изображения без облака.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Фреймворк распознавания речи и диаризации говорящих на устройстве.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Сверхлегкий фреймворк глубокого обучения и автографа тензоров для Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Браузерный движок глубокого обучения WebGPU без затрат на сервер.",
@@ -1861,7 +1861,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -1987,7 +1987,7 @@
       "sec5Sub1": "5.1 Скрипт проверки анти-бота из 55 пунктов (bot_audit.py)",
       "sec5Sub2": "5.2 Стресс-тест 24/7 Doze и 30 циклов LMK (lmk_stress_test.py)",
       "sec6Title": "6. Заключение и вердикт о готовности к продакшену",
-      "sec6Desc": "На основе комплексной оценки на Samsung Galaxy S20 (Android 13 / Termux aarch64) пакет <code>termux-playwright</code> (v1.61.4) полностью удовлетворяет требованиям <strong>запуска без root-прав, совместимости с системными вызовами Bionic libc, обхода бот-детекторов и корректной очистки процессов</strong>."
+      "sec6Desc": "На основе комплексной оценки на Samsung Galaxy S20 (Android 13 / Termux aarch64) пакет <code>amv-playwright</code> (v1.61.4) полностью удовлетворяет требованиям <strong>запуска без root-прав, совместимости с системными вызовами Bionic libc, обхода бот-детекторов и корректной очистки процессов</strong>."
     }
   },
   "vi": {
@@ -2026,13 +2026,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "AI cục bộ WebGPU phía máy khách (Qwen2.5), chia sẻ bản đồ và nút canvas không gian, trình xem tài liệu lồng nhau, tóm tắt tài liệu lớn MapReduce và điều phối đa tác nhân AI tự trị.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Tự động hóa trình duyệt Chromium không cần root trên Android Termux (ARM64) với điều khiển CDP trực tiếp.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Môi trường thực thi Stable Diffusion gốc trên thiết bị Android ARM64 tạo hình ảnh không cần đám mây.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Khung nhận dạng giọng nói và phân tách người nói trên thiết bị.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Khung học sâu Tensor & DAG Autograd siêu nhẹ trên thiết bị cho Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Công cụ học sâu WebGPU Autograd gốc trên trình duyệt không tốn chi phí máy chủ.",
@@ -2057,7 +2057,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -2183,7 +2183,7 @@
       "sec5Sub1": "5.1 Tập lệnh kiểm toán chống bot 55 mục (bot_audit.py)",
       "sec5Sub2": "5.2 Phòng thủ Doze 24/7 & chuẩn căng thẳng LMK 30 chu kỳ (lmk_stress_test.py)",
       "sec6Title": "6. Kết luận & phán quyết sẵn sàng sản xuất",
-      "sec6Desc": "Dựa trên đánh giá toàn diện trên Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>termux-playwright</code> (v1.61.4) đáp ứng đầy đủ tất cả yêu cầu kỹ thuật về <strong>thực thi không cần root, tương thích Bionic libc, vượt rào chống bot và dọn dẹp tiến trình an toàn</strong>."
+      "sec6Desc": "Dựa trên đánh giá toàn diện trên Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>amv-playwright</code> (v1.61.4) đáp ứng đầy đủ tất cả yêu cầu kỹ thuật về <strong>thực thi không cần root, tương thích Bionic libc, vượt rào chống bot và dọn dẹp tiến trình an toàn</strong>."
     }
   },
   "pl": {
@@ -2222,13 +2222,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "Lokalna sztuczna inteligencja WebGPU po stronie klienta (Qwen2.5), udostępnianie map i węzłów na płótnie, przeglądarka zagnieżdżonych dokumentów, podsumowywanie dużych dokumentów metodą MapReduce i orkiestracja autonomicznych multi-agentów AI.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Automatyzacja Chromium bez roota na Android Termux (ARM64) z bezpośrednią kontrolą CDP.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Natywne środowisko Stable Diffusion na urządzenia Android ARM64 generujące obrazy bez chmury.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Zunifikowany framework rozpoznawania mowy i diaryzacji mówców na urządzeniu.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Ultralekki framework uczenia głębokiego i autogradu tensorów dla Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Natywny silnik uczenia głębokiego WebGPU i autogradu w przeglądarce bez kosztów serwera.",
@@ -2253,7 +2253,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -2379,7 +2379,7 @@
       "sec5Sub1": "5.1 Skrypt audytu antybotowego na 55 pozycji (bot_audit.py)",
       "sec5Sub2": "5.2 Obrona 24/7 Doze i 30-cyklowy benchmark LMK (lmk_stress_test.py)",
       "sec6Title": "6. Wnioski i werdykt gotowości produkcyjnej",
-      "sec6Desc": "Na podstawie kompleksowej oceny na Samsung Galaxy S20 (Android 13 / Termux aarch64) <code>termux-playwright</code> (v1.61.4) spełnia wszystkie wymagania inżynieryjne w zakresie <strong>wykonywania bez roota, zgodności z Bionic libc, omijania botów i czyszczenia procesów</strong>."
+      "sec6Desc": "Na podstawie kompleksowej oceny na Samsung Galaxy S20 (Android 13 / Termux aarch64) <code>amv-playwright</code> (v1.61.4) spełnia wszystkie wymagania inżynieryjne w zakresie <strong>wykonywania bez roota, zgodności z Bionic libc, omijania botów i czyszczenia procesów</strong>."
     }
   },
   "la": {
@@ -2418,13 +2418,13 @@
     "proj": {
       "workstationTitle": "AMEVA Workstation (Web/Desktop)",
       "workstationDesc": "Intelligentia Artificialis WebGPU in cliente (Qwen2.5), communicatio tabularum et nodorum in spatio, prospectus documentorum insertorum, compendium documentorum per MapReduce et ordinatio agentium AI autonomorum.",
-      "playwrightTitle": "Termux-Playwright",
+      "playwrightTitle": "AMV-Playwright",
       "playwrightDesc": "Automatio navigatri Chromium sine privilegiis radicis in Android Termux (ARM64) per directum CDP.",
-      "diffusionTitle": "Termux-Diffusion",
+      "diffusionTitle": "AMV-Diffusion",
       "diffusionDesc": "Syntaxis nativa Stable Diffusion pro Android ARM64 imagines sine nube formans.",
-      "sttTitle": "Termux-STT",
+      "sttTitle": "AMV-STT",
       "sttDesc": "Syntaxis vocis in textum et secretio locutorum in apparatu mobili.",
-      "trainTitle": "Termux-Train",
+      "trainTitle": "AMV-Train",
       "trainDesc": "Syntaxis levissima tensurae et autograd pro Android ARM64.",
       "forgeTitle": "AMEVA-Forge",
       "forgeDesc": "Machina WebGPU nativa in navigatro sine pretio ministri.",
@@ -2449,7 +2449,7 @@
       "thObj": "Primary Objectives",
       "r1Domain": "Mobile & Edge Runtimes",
       "r1Tech": "Android Bionic ARM64, Termux, NEON SIMD",
-      "r1Obj": "Non-root browser automation (termux-playwright), on-device Stable Diffusion (termux-diffusion), and tensor autograd (termux-train).",
+      "r1Obj": "Non-root browser automation (amv-playwright), on-device Stable Diffusion (amv-diffusion), and tensor autograd (amv-train).",
       "r2Domain": "Browser & WebGPU AI",
       "r2Tech": "WebGPU, WGSL, Pyodide WASM",
       "r2Obj": "Browser-native autograd engine (AMEVA-Forge) and 100% isolated sandboxes (AMEVA-MCP-Hub).",
@@ -2575,7 +2575,7 @@
       "sec5Sub1": "5.1 Scriptum inspectionis contra automata (bot_audit.py)",
       "sec5Sub2": "5.2 Defensio Doze 24/7 et 30 cycli LMK (lmk_stress_test.py)",
       "sec6Title": "6. Conclusio et decretum aptitudinis",
-      "sec6Desc": "Ex probationibus in Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>termux-playwright</code> (v1.61.4) <strong>sine privilegiis root, compatibilitatem Bionic libc et salutem processuum</strong> plene confirmat."
+      "sec6Desc": "Ex probationibus in Samsung Galaxy S20 (Android 13 / Termux aarch64), <code>amv-playwright</code> (v1.61.4) <strong>sine privilegiis root, compatibilitatem Bionic libc et salutem processuum</strong> plene confirmat."
     }
   }
 };

@@ -1,75 +1,55 @@
-# Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
-# SPDX-License-Identifier: Apache-2.0 OR Commercial-License
-"""termux-bitnet: High-performance 1.58-bit BitNet Inference SDK for Android Termux & ARM64."""
+# SPDX-License-Identifier: Apache-2.0
+"""Deprecated alias of :mod:`amv_bitnet`.
 
-__version__ = "2.2.0"
+WHAT: ``import termux_bitnet`` (and ``import termux_bitnet.<sub>``) keeps working and returns the
+      very same module objects as ``amv_bitnet``.
+WHY:  the package was renamed from termux-bitnet to amv-bitnet in 3.0.0; user code
+      written against the old import name should not break on upgrade.
+HOW:  a meta-path finder maps every ``termux_bitnet.*`` name to ``amv_bitnet.*`` and this
+      package replaces itself in ``sys.modules`` with ``amv_bitnet``.
 
-from termux_bitnet.config import BitNetConfig, GenerationMetrics
-from termux_bitnet.engine import BitNetEngine
-from termux_bitnet.hardware import (
-    detect_hardware,
-    print_hardware_summary,
-    resolve_device_backend,
-    resolve_device,
-    HardwareProfile,
-    bind_bitnet_hardware,
-    doctor,
-)
-from termux_bitnet.downloader import download_model, list_models, resolve_model_path, AVAILABLE_MODELS
-from termux_bitnet.exceptions import (
-    AmevaTermuxError,
-    PlatformNotSupportedError,
-    BitNetEngineNotFound,
-    ClusterConnectionError,
-    ClusterConfigurationError,
-)
-from termux_bitnet import cluster
-from termux_bitnet.cluster import (
-    parse_cluster_rpc_spec,
-    verify_rpc_cluster_nodes,
-    verify_rpc_cluster_health,
+This alias will be removed in a future major release. Import ``amv_bitnet`` instead.
+"""
+import importlib
+import importlib.abc
+import importlib.util
+import sys
+import warnings
+
+_OLD = "termux_bitnet"
+_NEW = "amv_bitnet"
+
+warnings.warn(
+    f"'{_OLD}' was renamed to '{_NEW}'; import '{_NEW}' instead. "
+    "The old name will be removed in a future major release.",
+    DeprecationWarning,
+    stacklevel=2,
 )
 
-__version__ = "2.2.0"
-__author__ = "uno-km"
 
-__all__ = [
-    "BitNetConfig",
-    "GenerationMetrics",
-    "BitNetEngine",
-    "detect_hardware",
-    "print_hardware_summary",
-    "resolve_device_backend",
-    "resolve_device",
-    "HardwareProfile",
-    "bind_bitnet_hardware",
-    "doctor",
-    "download_model",
-    "list_models",
-    "resolve_model_path",
-    "AVAILABLE_MODELS",
-    "AmevaTermuxError",
-    "PlatformNotSupportedError",
-    "BitNetEngineNotFound",
-    "ClusterConnectionError",
-    "ClusterConfigurationError",
-    "cluster",
-    "parse_cluster_rpc_spec",
-    "verify_rpc_cluster_nodes",
-    "verify_rpc_cluster_health",
-]
+class _AliasLoader(importlib.abc.Loader):
+    def create_module(self, spec):
+        return importlib.import_module(_NEW + spec.name[len(_OLD):])
+
+    def exec_module(self, module):
+        return None
 
 
+class _AliasFinder(importlib.abc.MetaPathFinder):
+    _loader = _AliasLoader()
 
-# Standard Unified Engine Factory
-def load(model: str = "bitnet-2b", device: str = "auto", threads: int | None = None, **kwargs) -> BitNetEngine:
-    """Standard Unified Engine Factory for termux-bitnet."""
-    from termux_bitnet.config import BitNetConfig
-    from termux_bitnet.downloader import resolve_model_path
-    m_path = ""
-    try:
-        m_path = str(resolve_model_path(model))
-    except Exception:
-        pass
-    cfg = BitNetConfig(model_path=m_path, device=device, n_threads=threads or 4, **kwargs)
-    return BitNetEngine(cfg)
+    def find_spec(self, fullname, path=None, target=None):
+        if not fullname.startswith(_OLD + "."):
+            return None
+        if fullname.endswith(".__main__"):
+            # Let runpy load amv_bitnet/__main__.py through the normal path finder.
+            return None
+        return importlib.util.spec_from_loader(fullname, self._loader)
+
+
+if not any(getattr(f, "_amv_alias_of", None) == _OLD for f in sys.meta_path):
+    _finder = _AliasFinder()
+    _finder._amv_alias_of = _OLD
+    sys.meta_path.insert(0, _finder)
+
+sys.modules[_OLD] = importlib.import_module(_NEW)

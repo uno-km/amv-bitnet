@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Uno Kim / AMEVA Foundation. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """
-termux_bitnet.adapter
+amv_bitnet.adapter
 ======================
 AMEVA Component Protocol v1 — Orchestrator Adapter (v0.8.1 호환)
 Native C ABI and CLI streaming inference bridge.
@@ -12,9 +12,9 @@ import asyncio
 from typing import Any, AsyncIterator
 
 from ameva_component.adapter_base import BaseOrchestratorAdapter
-from termux_bitnet.control.component import BitNetControl
-from termux_bitnet.engine import BitNetEngine
-from termux_bitnet.downloader import resolve_model_path, download_model
+from amv_bitnet.control.component import BitNetControl
+from amv_bitnet.engine import BitNetEngine
+from amv_bitnet.downloader import resolve_model_path, download_model
 
 
 class BitNetOrchestratorAdapter(BaseOrchestratorAdapter):
@@ -23,7 +23,7 @@ class BitNetOrchestratorAdapter(BaseOrchestratorAdapter):
     Fully implements native streaming inference without throwing OperationNotSupported.
     """
 
-    COMPONENT_ID = "termux-bitnet"
+    COMPONENT_ID = "amv-bitnet"
 
     def __init__(self, control: BitNetControl | None = None) -> None:
         self._control = control or BitNetControl()
@@ -37,7 +37,7 @@ class BitNetOrchestratorAdapter(BaseOrchestratorAdapter):
                     m_path = str(resolve_model_path(model_id))
                 except Exception:
                     m_path = str(download_model(model_id))
-            from termux_bitnet.config import BitNetConfig
+            from amv_bitnet.config import BitNetConfig
             cfg = BitNetConfig(model_path=m_path or "", device=device)
             self._engine = BitNetEngine(cfg)
         return self._engine

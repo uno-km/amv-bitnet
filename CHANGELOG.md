@@ -1,3 +1,16 @@
+# v3.0.0 (2026-11-04) — Python import name follows the amv-bitnet package name
+
+### Changed
+- The Python package is now `amv_bitnet` (previously `termux_bitnet`). Code, CLI entry points, scripts, docs and cross-package references use the amv-* names.
+- `import termux_bitnet` keeps working through a deprecated alias that returns the same module objects and emits a `DeprecationWarning`. The alias will be removed in a future major release.
+
+### Unchanged
+- On-disk cache and data directories (for example `~/.cache/termux-*`) keep their names, so models already downloaded on devices stay in use.
+- Termux platform commands (`termux-tts-speak`, `termux-wake-lock`, `termux-api`, ...) keep their names.
+- Native artifact and release asset names (`libtermux_bitnet.so`, `termux-bitnet-cli`, `termux-bitnet-v*-android-aarch64.tar.gz`) are unchanged, so existing installs and release downloads keep working.
+
+---
+
 # v2.2.0 (2026-10-13) — Zero-Compilation Prebuilt Provisioning & Unified Runtime
 
 Added zero-compilation auto-provisioning of prebuilt ARM64 native binaries on first load, aligned with Microsoft BitNet PR #633, and unified GPU dispatch via ameva-runtime HAL.

@@ -6,8 +6,8 @@ import os
 import unittest
 from pathlib import Path
 
-from termux_bitnet.config import BitNetConfig
-from termux_bitnet.engine import BitNetEngine
+from amv_bitnet.config import BitNetConfig
+from amv_bitnet.engine import BitNetEngine
 
 
 class TestLiveBitNetInference(unittest.TestCase):
