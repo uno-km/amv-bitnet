@@ -27,7 +27,7 @@
   };
 
   const DEFAULT_LANG = 'en';
-  const STORAGE_KEYS = ['ameva_global_lang', 'uno_km_lang', 'ameva_lib_doc_lang', 'forge_lang'];
+  const STORAGE_KEYS = ['ameva_global_lang', 'amv_lang', 'ameva_lib_doc_lang', 'forge_lang'];
   const PHRASE_MAP = {
 
   "AMEVA Ecosystem": {
