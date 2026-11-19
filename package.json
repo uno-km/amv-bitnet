@@ -1,6 +1,6 @@
 {
   "name": "amv-bitnet",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "1.58-bit (i2_s) BitNet on-device inference SDK with verified ARM NEON & DotProd kernels for Node.js on Android Termux & ARM64",
   "main": "index.js",
   "types": "index.d.ts",
@@ -32,7 +32,7 @@
   "bugs": {
     "url": "https://github.com/uno-km/amv-bitnet/issues"
   },
-  "homepage": "https://uno-km.vercel.app/lib/bitnet/",
+  "homepage": "https://ameva.pro/lib/bitnet/",
   "engines": {
     "node": ">=16.0.0"
   }

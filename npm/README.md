@@ -48,7 +48,7 @@ main();
 Executes 1.58-bit ternary quantized weights {-1, 0, +1} directly via hand-vectorized ARM64 NEON assembly kernels and native Vulkan compute shaders powered by AMEVA-Runtime. Features hallucination-prevention prompt wrapping, a dynamic zero-overhead activation dispatcher supporting Squared ReLU (Microsoft 2B) and SwiGLU (Falcon-E-1B / Falcon3-7B), GPU watchdog fence chunking, and Zero-Copy mmap streaming for 7.45B model execution on 6GB RAM smartphones.
 
 ## Documentation
-- [Official Documentation & API Reference](https://uno-km.vercel.app/lib/bitnet/)
+- [Official Documentation & API Reference](https://ameva.pro/lib/bitnet/)
 - [GitHub Repository](https://github.com/uno-km/amv-bitnet)
 
 ## License

@@ -10,7 +10,7 @@
   <a href="https://pypi.org/project/amv-bitnet/"><img src="https://img.shields.io/pypi/v/amv-bitnet?color=3775A9&logo=pypi&logoColor=white&label=PyPI" alt="PyPI Version"></a>
   <a href="https://www.npmjs.com/package/amv-bitnet"><img src="https://img.shields.io/npm/v/amv-bitnet?color=CB3837&logo=npm&logoColor=white&label=npm" alt="npm Version"></a>
   <a href="https://github.com/uno-km/amv-bitnet/releases/tag/v2.0.1"><img src="https://img.shields.io/github/v/release/uno-km/amv-bitnet?color=0969da&logo=github&logoColor=white&label=Release" alt="GitHub Release"></a>
-  <a href="https://uno-km.vercel.app/lib/bitnet/"><img src="https://img.shields.io/badge/Docs-Official%20Portal-004499.svg?logo=googlechrome&logoColor=white" alt="Documentation Portal"></a>
+  <a href="https://ameva.pro/lib/bitnet/"><img src="https://img.shields.io/badge/Docs-Official%20Portal-004499.svg?logo=googlechrome&logoColor=white" alt="Documentation Portal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?logo=apache&logoColor=white" alt="License"></a>
   <img src="https://img.shields.io/badge/Core-ARM64%20NEON%20%7C%20DotProd%20%7C%20Vulkan-brightgreen.svg?logo=cplusplus&logoColor=white" alt="Core Acceleration">
   <img src="https://img.shields.io/badge/Models-BitNet%20%7C%20Falcon--E%20%7C%20Falcon3--7B-purple.svg" alt="Supported Models">
@@ -33,7 +33,7 @@
 `amv-bitnet v2.0.1` extends the sovereign ternary architecture with **hallucination-prevention prompt wrapping**, **hardware-level GPU watchdog defense**, and **dynamic LM Head memory slicing**, delivering fully calibrated conversational generation across diverse 1.58-bit models.
 
 #### 📚 Official Academic & Upstream Credibility
-* **Foundation Technical Whitepaper**: [AOSF-TR-2026-BITNET-TERNARY-02: Root Cause Analysis of Ternary Numerical Collapse and Dynamic Activation Engine](https://uno-km.vercel.app/labs/?menu=research-papers)
+* **Foundation Technical Whitepaper**: [AOSF-TR-2026-BITNET-TERNARY-02: Root Cause Analysis of Ternary Numerical Collapse and Dynamic Activation Engine](https://ameva.pro/labs/?menu=research-papers)
 * **Upstream Contributions to Microsoft**:
   * [microsoft/BitNet #551](https://github.com/microsoft/BitNet/pull/551): Resolved ARM QK=128 stride memory layout desynchronization and word salad.
   * [microsoft/BitNet #624](https://github.com/microsoft/BitNet/pull/624): Completed 1x4_32W parallel NEON `sdot` hardware acceleration kernel and automated Android Termux tooling.
@@ -165,7 +165,7 @@ amv-bitnet run -m models/falcon3-7b-instruct-1.58bit-i2_s.gguf \
 
 ## 🌐 Ecosystem Links & Documentation
 
-* **Official Documentation Portal**: [https://uno-km.vercel.app/lib/bitnet/](https://uno-km.vercel.app/lib/bitnet/)
-* **Foundation Research Lab**: [https://uno-km.vercel.app/labs/](https://uno-km.vercel.app/labs/)
+* **Official Documentation Portal**: [https://ameva.pro/lib/bitnet/](https://ameva.pro/lib/bitnet/)
+* **Foundation Research Lab**: [https://ameva.pro/labs/](https://ameva.pro/labs/)
 * **License**: Apache-2.0
 * **Governance**: AMEVA Open-Source Foundation (AOSF) & @uno-km
