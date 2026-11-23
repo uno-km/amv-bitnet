@@ -1,6 +1,6 @@
 {
   "name": "amv-bitnet",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "1.58-bit (i2_s) BitNet on-device inference SDK with verified ARM NEON & DotProd kernels for Node.js on Android Termux & ARM64",
   "main": "index.js",
   "types": "index.d.ts",
@@ -23,7 +23,7 @@
   "author": "uno-km (dev@amevafoundation.org)",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ameva/runtime": ">=2.0.0"
+    "amv-runtime": ">=2.9.0"
   },
   "repository": {
     "type": "git",

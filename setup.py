@@ -4,12 +4,12 @@ from setuptools import setup, find_packages
 
 setup(
     name="amv-bitnet",
-    version="3.0.1",
+    version="3.0.2",
     packages=find_packages(),
     install_requires=[
         "requests>=2.28.0",
-        "ameva-runtime>=2.0.0",
-        "ameva-component-sdk>=0.1.0,<2.0",
+        "amv-runtime>=2.9.0",
+        "amv-component-sdk>=0.1.0,<2.0",
     ],
     entry_points={
         "console_scripts": [

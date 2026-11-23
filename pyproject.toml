@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amv-bitnet"
-version = "3.0.1"
+version = "3.0.2"
 description = "1.58-bit (i2_s) BitNet on-device inference SDK with verified ARM NEON & DotProd kernels for Android Termux & ARM64"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -42,7 +42,7 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 
 [project.optional-dependencies]
-gpu = ["ameva-runtime>=2.0.0"]
+gpu = ["amv-runtime>=2.9.0"]
 
 
 [project.urls]
