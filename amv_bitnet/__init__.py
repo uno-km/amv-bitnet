@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0 OR Commercial-License
 """amv-bitnet: High-performance 1.58-bit BitNet Inference SDK for Android Termux & ARM64."""
 
-__version__ = "3.0.0"
+__version__ = "3.0.3"
 
 from amv_bitnet.config import BitNetConfig, GenerationMetrics
 from amv_bitnet.engine import BitNetEngine
@@ -30,7 +30,7 @@ from amv_bitnet.cluster import (
     verify_rpc_cluster_health,
 )
 
-__version__ = "3.0.0"
+__version__ = "3.0.3"
 __author__ = "uno-km"
 
 __all__ = [

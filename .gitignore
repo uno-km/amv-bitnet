@@ -6,7 +6,13 @@ __pycache__/
 
 # C / C++ build outputs
 build/
-bin/
+/bin/*
+!/bin/*.js
+!npm/bin/
+!npm/bin/*.js
+/npm/bin/termux-bitnet.js
+!npm/lib/
+!npm/lib/*.js
 *.so
 *.dylib
 *.dll
@@ -26,8 +32,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+/lib/
+/lib64/
 parts/
 sdist/
 var/

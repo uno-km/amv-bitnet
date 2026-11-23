@@ -20,7 +20,7 @@ from amv_bitnet import BitNetEngine, BitNetConfig
 # 1. Initialize engine with model wrapping and GPU acceleration options
 config = BitNetConfig(
     model_path="~/.cache/termux-bitnet/models/falcon-e-1b-instruct-i2_s.gguf",
-    device="gpu",           # "auto", "cpu", or "gpu" (Vulkan via ameva-runtime)
+    device="gpu",           # "auto", "cpu", or "gpu" (Vulkan via amv-runtime)
     n_gpu_layers=24,        # Offload 24 layers to GPU
     chat_template="falcon", # Auto-wrapping: ChatML, Falcon, or Raw
     chunk_layers=4,         # Prevent Mali GPU watchdog timeout
@@ -46,7 +46,7 @@ with BitNetEngine(config) as engine:
 Executes 1.58-bit ternary quantized weights {-1, 0, +1} directly via hand-vectorized ARM64 NEON assembly kernels and native Vulkan compute shaders powered by AMEVA-Runtime. Features hallucination-prevention prompt wrapping, a dynamic zero-overhead activation dispatcher supporting Squared ReLU (Microsoft 2B) and SwiGLU (Falcon-E-1B / Falcon3-7B), GPU watchdog fence chunking, and Zero-Copy mmap streaming for 7.45B model execution on 6GB RAM smartphones.
 
 ## Documentation
-- [Official Documentation & API Reference](https://uno-km.vercel.app/lib/bitnet/)
+- [Official Documentation & API Reference](https://ameva.pro/lib/bitnet/)
 - [GitHub Repository](https://github.com/uno-km/amv-bitnet)
 
 ## License
